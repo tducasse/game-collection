@@ -46,7 +46,7 @@ function generateHtmlTable(data) {
         html += '<thead>';
         html += '<tr>';
         html += '<th>';
-        html += "name";
+        html += "Name";
         html += '</th>';
         html += '</tr>';
         html += '</thead>';
@@ -63,10 +63,6 @@ function generateHtmlTable(data) {
     html += '</table>';
     $('#table').append(html);
     $('#table>table').DataTable({
-      columnDefs: [
-        { searchable: false, targets: [1, 2, 3, 4] },
-        { visible: false, targets: [1, 2, 3, 4] }
-      ]
     });
   }
 }
