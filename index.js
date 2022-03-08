@@ -42,31 +42,20 @@ function generateHtmlTable(data) {
       if (index === 0) {
         return;
       }
-      //bind header
       if (index == 1) {
         html += '<thead>';
         html += '<tr>';
-        $.each(row, function (j, colData) {
-          html += '<th>';
-          html += colData;
-          html += '</th>';
-        });
+        html += '<th>';
+        html += "name";
+        html += '</th>';
         html += '</tr>';
         html += '</thead>';
         html += '<tbody>';
       } else {
         html += '<tr>';
-        $.each(row, function (k, colData) {
-          if (k === 3) {
-            html += `<td data-order="${Number(colData)}">`;
-            html += formatSecondsDuration(colData);
-            html += '</td>';
-          } else {
-            html += '<td>';
-            html += colData;
-            html += '</td>';
-          }
-        });
+        html += '<td>';
+        html += row[0];
+        html += '</td>';
         html += '</tr>';
       }
     });
@@ -74,10 +63,9 @@ function generateHtmlTable(data) {
     html += '</table>';
     $('#table').append(html);
     $('#table>table').DataTable({
-      responsive: true,
       columnDefs: [
-        { searchable: false, targets: [2] },
-        { visible: false, targets: [2] }
+        { searchable: false, targets: [1, 2, 3, 4] },
+        { visible: false, targets: [1, 2, 3, 4] }
       ]
     });
   }
