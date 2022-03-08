@@ -74,7 +74,6 @@ function generateHtmlTable(data) {
     html += '</table>';
     $('#table').append(html);
     $('#table>table').DataTable({
-      "paging": false,
       columnDefs: [
         { searchable: false, targets: [2] },
         { visible: false, targets: [2] }
