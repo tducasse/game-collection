@@ -62,8 +62,7 @@ function generateHtmlTable(data) {
     html += '</tbody>';
     html += '</table>';
     $('#table').append(html);
-    $('#table>table').DataTable({
-    });
+    $('#table>table').DataTable();
   }
 }
 
