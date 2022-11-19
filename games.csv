@@ -1,1535 +1,1500 @@
-﻿#TYPE Selected.Playnite.SDK.Models.Game
-"Name","Source","ReleaseDate","Playtime","IsInstalled"
-"FurnCap","itch.io","15/04/2021","0","False"
-"Peace of Mind","itch.io",,"0","False"
-"El Gancho","itch.io","9/02/2022","0","False"
-"And Yet It Moves","itch.io","2/04/2009","0","False"
-"Rising Hell","Epic","17/10/2019","0","False"
-"Unrailed","Epic",,"0","False"
-"Elden: Path of the Forgotten","itch.io","9/07/2020","0","False"
-"The Search","itch.io","13/04/2017","0","False"
-"The Crystal Golem","itch.io","2/11/2020","0","False"
-"Windbound","Epic","21/08/2020","0","False"
-"Crying Suns","Steam","18/09/2019","0","False"
-"Supraland","Steam","5/04/2019","0","False"
-"Wandersong","itch.io","27/09/2018","0","False"
-"The Wratch's Den 👹","itch.io","10/08/2021","0","False"
-"Half-Life 2: Lost Coast","Steam","27/10/2005","0","False"
-"Mafia","Steam","28/08/2002","0","False"
-"Torchlight II","Epic","20/09/2012","0","False"
-"Shell Out Showdown","itch.io","30/07/2021","0","False"
-"Grow Big (or Go Home): Ultimate Edition","itch.io",,"0","False"
-"[ENDLESS_OVERDRIVE]","itch.io","8/01/2021","0","False"
-"Tabletop Simulator","Steam","5/06/2015","301","False"
-"Panic Factory","itch.io",,"0","False"
-"Dota 2 Test","Steam","9/07/2013","0","False"
-"Demetrios - The BIG Cynical Adventure","itch.io","30/05/2016","0","False"
-"CROSSNIQ+","itch.io","4/10/2019","0","False"
-"Cloud Gardens","itch.io","9/09/2020","0","False"
-"Memories of East Coast","itch.io","21/02/2021","0","False"
-"Why You Do This To Me?","itch.io","19/10/2019","0","False"
-"Pico-8 Multicart","itch.io",,"0","False"
-"Cat Tower","itch.io",,"0","False"
-"Harvest Island","itch.io",,"0","False"
-"PARTICLE MACE","itch.io","20/05/2016","0","False"
-"Muffin Fight","itch.io","19/02/2021","0","False"
-"Spritedow Animator","itch.io",,"0","False"
-"FroggieChat","itch.io",,"0","False"
-"Paper Boats","itch.io","12/01/2021","0","False"
-"Rusty Lake Hotel","itch.io","14/12/2015","0","False"
-"the worm game (SOUP 1.0)","itch.io",,"0","False"
-"Dark Sheep","itch.io","23/04/2021","0","False"
-"O   O   O","itch.io","3/08/2016","0","False"
-"Half-Life 2: Deathmatch","Steam","1/11/2004","0","False"
-"Can Androids Pray: Blue","itch.io","10/07/2019","0","False"
-"Flashback","GOG","3/12/2018","0","False"
-"Auto Chess Experimental","Epic","4/01/2019","0","False"
-"Nauticrawl","itch.io","16/09/2019","0","False"
-"An American Werewolf in LA (EN)","itch.io","15/11/2019","0","False"
-"After The End: The Harvest","itch.io","2/06/2017","0","False"
-"Yoku's Island Express","Steam","29/05/2018","0","False"
-"Dragon Drop","itch.io","27/09/2021","0","False"
-"Multilytheus","itch.io","23/09/2013","0","False"
-"Nokia World","itch.io","7/02/2021","0","False"
-"She Who Fights Monsters: Choice Edition","itch.io",,"0","False"
-"Back 4 Blood","Steam","12/10/2021","0","False"
-"In The Hollow of the Valley","itch.io",,"0","False"
-"Don't Starve Together","Steam","21/04/2016","6480","False"
-"Chronology: Time Changes Everything","itch.io",,"0","False"
-"PLAYERUNKNOWN'S BATTLEGROUNDS","Steam","21/12/2017","490693","True"
-"Borb the Birb","itch.io","26/11/2015","0","False"
-"Ossuary","itch.io","27/05/2015","0","False"
-"Blast Rush","itch.io","14/11/2017","0","False"
-"VIRTUA BLINDS","itch.io","1/04/2016","0","False"
-"Jazz Jackrabbit 2: The Secret Files","GOG","7/06/1998","0","False"
-"TOMATO CLINIC","itch.io","13/04/2020","0","False"
-"Dawn of a Soul","itch.io","30/09/2017","0","False"
-"Orion Video Player","itch.io",,"0","False"
-"Amethyst Hearth","itch.io","24/12/2021","0","False"
-"The Change Architect","itch.io","12/11/2020","0","False"
-"10 Flights of Ballooning","itch.io",,"0","False"
-"eat-it-all","itch.io",,"0","False"
-"Counter-Strike: Global Offensive","Steam","21/08/2012","723496","True"
-"Plant Down","itch.io",,"0","False"
-"Candylight","itch.io",,"0","False"
-"BROCCOLI QUEST","itch.io","16/05/2021","0","False"
-"The Pig: Money is Time","itch.io","30/10/2019","0","False"
-"Tannenberg","Epic","13/02/2019","0","False"
-"A Good Snowman Is Hard To Build","itch.io","25/02/2015","0","False"
-"Lost Ark","Steam","11/02/2022","0","False"
-"Bouncy Cars","itch.io","27/04/2021","0","False"
-"A Snake's Tale","itch.io","2/05/2017","0","False"
-"Eyad and Hala","itch.io","31/10/2020","0","False"
-"No Wheels Racing","itch.io","23/03/2018","0","False"
-"Captain Backwater","itch.io","1/09/2017","0","False"
-"Super Raft Boat","Steam","21/02/2021","0","False"
-"In Extremis","itch.io","31/12/1993","0","False"
-"Imaginaria","itch.io","21/06/2021","0","False"
-"Divinity: Original Sin 2 - Definitive Edition","GOG","14/09/2017","29126","True"
-"Bunnies vs. Bunnies: Ukraine Edition","itch.io","9/12/2009","0","False"
-"Tee-riffic Golf.","itch.io",,"0","False"
-"The Law","itch.io","29/11/2018","0","False"
-"Starbound","Steam","22/07/2016","0","False"
-"Sun Dogs","itch.io","29/10/2015","0","False"
-"Calico","itch.io","15/12/2020","0","False"
-"Minion Masters","Steam","24/05/2019","960","False"
-"Martian Space Blaster","itch.io","24/08/2020","0","False"
-"Macbat 64","itch.io","17/03/2017","0","False"
-"QUACK ATTACK 1985: TURBO DX EDITION","itch.io","19/12/2016","0","False"
-"The Fall of Lazarus","itch.io","31/07/2016","0","False"
-"Torchlight","GOG","27/10/2009","0","False"
-"Antigas Constelações (sobre a Vila Itororó)","itch.io",,"0","False"
-"Insurmountable","Epic","29/04/2021","0","False"
-"Choice Chamber","itch.io","16/07/2015","0","False"
-"Other Minds","itch.io",,"0","False"
-"Sly Panda","itch.io",,"0","False"
-"Motel 666","itch.io","1/11/2016","0","False"
-"Solar Blaster: Challenge Stage","itch.io",,"0","False"
-"Gloria Victis","Steam","9/06/2016","0","False"
-"Limiter!","itch.io","1/07/2020","0","False"
-"TRAINBOW","itch.io","10/06/2021","0","False"
-"Quantum Break","Steam","29/09/2016","0","False"
-"Last Train To Tranz-Central (ZX Spectrum)","itch.io","8/08/2020","0","False"
-"Starbound - Unstable","Steam",,"0","False"
-"The Textorcist","Epic","14/02/2019","0","False"
-"Fable Anniversary","Steam","12/09/2014","0","False"
-"Catlateral Damage","itch.io","27/05/2015","0","False"
-"Pikuniku","itch.io","24/01/2019","1278","False"
-"Self-Checkout Unlimited","itch.io","1/10/2020","0","False"
-"Letters Long Lost","itch.io","13/02/2021","0","False"
-"Adventures of a Radish(Full)","itch.io","14/02/2019","0","False"
-"Lust from Beyond: M Edition","Steam","10/02/2022","0","False"
-"Fury Unleashed","Steam","8/05/2020","0","False"
-"Dub Dash","Steam","16/02/2016","0","False"
-"Baby Labor","itch.io","20/11/2020","0","False"
-"Awesome Mix Tape","itch.io",,"0","False"
-"Izil's Adventures: Blackfeather's Legacy","itch.io","6/04/2021","0","False"
-"Notebook Artillery","itch.io","5/11/2020","0","False"
-"Shantae and the Pirate's Curse","GOG","22/04/2015","0","False"
-"Liyla and The Shadows Of War","itch.io","8/07/2017","0","False"
-"Runbow","Epic","27/08/2015","0","False"
-"Heartbeat","itch.io","14/09/2018","0","False"
-"EMUUROM","itch.io","2/02/2020","0","False"
-"Sanitarium","GOG","10/05/1998","0","False"
-"Retromancer","itch.io","6/06/2019","0","False"
-"Hacknet","Steam","12/08/2015","900","False"
-"Freaky Fish DX","itch.io","28/08/2020","0","False"
-"Combo Postage","itch.io","6/07/2019","0","False"
-"Arcade Spirits","itch.io","12/02/2019","0","False"
-"Steam Marines 2","itch.io","20/11/2019","0","False"
-"Head AS Code","itch.io","6/10/2020","0","False"
-"The Last Librarian","itch.io","19/10/2019","0","False"
-"Monstrata Fracture","itch.io","11/12/2017","0","False"
-"Mini's Magic World","itch.io","12/05/2016","0","False"
-"INDEPENDANT VIDEO VIDEO GAME","itch.io",,"0","False"
-"Ynglet","itch.io","3/02/2020","0","False"
-"The Devil","itch.io","1/09/2020","0","False"
-"Aye Aye Captain","itch.io",,"0","False"
-"Cleansuit","itch.io","1/11/2017","0","False"
-"Space Gladiators","Steam","10/03/2021","0","False"
-"Moon and Lou","itch.io","5/07/2020","0","False"
-"The Tall Wall Falls: The Inner Gate's Last Stand","itch.io","21/02/2021","0","False"
-"EVADER","itch.io","22/06/2017","0","False"
-"PhasR","itch.io","16/02/2021","0","False"
-"New Spirits","itch.io","25/10/2019","0","False"
-"Hakuen Studio Minimap for RPG Maker MV MZ","itch.io","17/06/2021","0","False"
-"Indigo Child","itch.io","14/05/2015","0","False"
-"Diver","itch.io","31/07/2017","0","False"
-"LYNE","itch.io","1/01/2014","0","False"
-"A Dance of Fire and Ice","itch.io","24/01/2019","0","False"
-"Tales of the Neon Sea","Epic","30/04/2019","0","False"
-"Grapple Force Rena","itch.io","4/12/2018","0","False"
-"They Bleed Pixels","itch.io","29/08/2012","0","False"
-"Easy Credits for Unity","itch.io",,"0","False"
-"Shu's Garden","itch.io","12/08/2015","0","False"
-"It's Six Random Characters and a Single Floor Dungeon, That's the Whole Game","itch.io","2/11/2020","0","False"
-"We Met in May","itch.io","30/09/2019","0","False"
-"Hazard","itch.io","1/09/1998","0","False"
-"A Hole New World","itch.io","19/05/2017","0","False"
-"Moving (On)","itch.io",,"0","False"
-"Light of Darkness","itch.io","24/05/2021","0","False"
-"OMEGANAUT","itch.io","2/05/2019","0","False"
-"Record Store Nightmare","itch.io","22/10/2017","0","False"
-"Zero Hour","itch.io","31/12/1980","0","False"
-"Super Hexagon","itch.io","31/08/2012","0","False"
-"Lizzi Crossing","itch.io","7/06/2020","0","False"
-"Septiny","itch.io","18/04/2021","0","False"
-"Last Fleet","itch.io",,"0","False"
-"Sector 781","itch.io","7/05/2021","0","False"
-"Car Mechanic Simulator 2018","Steam","28/07/2017","0","False"
-"Jazz Jackrabbit 2: The Christmas Chronicles","GOG","31/12/2000","0","False"
-"Inside | Out","itch.io",,"0","False"
-"Tropico 5","Epic","23/05/2014","0","False"
-"The Testimony of Trixie Glimmer Smith","itch.io","25/10/2018","0","False"
-"DEMON'S TILT","Epic","6/12/2019","0","False"
-"LouveSystems'  TrackMasters","itch.io","3/09/2020","0","False"
-"Summoner's Mess","itch.io","29/10/2021","0","False"
-"PepaFatal","itch.io","29/03/2020","0","False"
-"The Quiet Lonely House","itch.io","6/04/2021","0","False"
-"StarFighter R&D HD Edition","itch.io",,"0","False"
-"Staxter","itch.io","28/05/2021","0","False"
-"Broken Age","Steam","28/01/2014","0","False"
-"Grumpy Librarian","itch.io","29/03/2020","0","False"
-"Destruction Rocks","itch.io","28/05/2021","0","False"
-"Geneforge 1: Mutagen","Epic","24/02/2021","0","False"
-"Pixel Session Vol.1","itch.io","21/10/2016","0","False"
-"Road Trip","itch.io","10/01/2002","0","False"
-"An Outcry, prelude","itch.io","9/04/2020","0","False"
-"Thea 2: The Shattering","GOG","13/05/2019","0","False"
-"Shredded Secrets","itch.io","26/11/2020","0","False"
-"Zombusters","itch.io","26/10/2020","0","False"
-"And All Would Cry Beware!","itch.io","24/06/2019","0","False"
-"Calico","itch.io","15/12/2020","0","False"
-"Partition Sector","itch.io","29/01/2021","0","False"
-"Stalingrad","Steam","25/03/2015","0","False"
-"Paint Game","itch.io","2/08/2019","0","False"
-"Drew and the Floating Labyrinth","itch.io","3/05/2021","0","False"
-"Battlefield 3","Origin","28/10/2011","16","False"
-"Village Apothecary","itch.io","14/06/2020","0","False"
-"Asteroids, Inc.","itch.io","8/12/2020","0","False"
-"Arachnowopunk","itch.io","29/09/2019","0","False"
-"GalaxSeed","itch.io","22/04/2017","0","False"
-"Neverinth","Steam","17/06/2020","0","False"
-"Fallout 3: Game of the Year Edition","Epic","13/10/2009","0","False"
-"Destructivator 2","itch.io","3/04/2020","0","False"
-"We are alright (Wszystko z nami w porządku)","Steam","21/05/2018","0","False"
-"Second Extinction","Epic","13/10/2020","0","False"
-"Gig Life","itch.io",,"0","False"
-"Haiduc","itch.io",,"0","False"
-"Yi and the Thousand Moons","itch.io","24/11/2017","0","False"
-"Un Pas Fragile","itch.io","25/06/2019","0","False"
-"Cities: Skylines","Epic","10/03/2015","0","False"
-"To Ash and Ember","itch.io",,"0","False"
-"Treasure Adventure Game","GOG","26/11/2011","0","False"
-"​RELEVƎ⅃ƎЯ","itch.io","19/04/2020","0","False"
-"Sidewords","itch.io","7/09/2017","0","False"
-"LIL' DRONE","itch.io","28/04/2020","0","False"
-"Amelie","itch.io",,"0","False"
-"Grand Theft Auto V","Epic","17/09/2013","0","False"
-"RITE","itch.io","6/07/2020","0","False"
-"The Three Musketeers","itch.io","31/12/1987","0","False"
-"Spyro Reignited Trilogy","Steam","3/09/2019","0","False"
-"Good Morning Drifter","itch.io","14/09/2018","0","False"
-"Out For Delivery","itch.io","21/12/2020","0","False"
-"Submerged Hidden Depths","Epic","3/12/2020","0","False"
-"Last Knight: Rogue Rider Edition","itch.io","5/09/2014","0","False"
-"Portal 2","Steam","18/04/2011","0","False"
-"Bloomblebee","itch.io","3/12/2020","0","False"
-"Klang 2","itch.io","20/10/2021","0","False"
-"The Sun Will Set","itch.io","19/06/2019","0","False"
-"Slain: Back from Hell","Steam","24/03/2016","0","False"
-"Lore Distance Relationship","itch.io",,"0","False"
-"Titanfall 2","Steam","18/06/2020","0","False"
-"Unobelisk","itch.io","29/04/2020","0","False"
-"Self.destroy()","itch.io",,"0","False"
-"Galactic Civilizations III","Epic","27/03/2014","0","False"
-"Spell Casting","itch.io","2/09/2016","0","False"
-"Possession","itch.io","20/07/2019","0","False"
-"La maleta","itch.io","22/05/2021","0","False"
-"Frick, Inc.","itch.io","9/10/2020","0","False"
-"Cosmic Courier: Trapped in Limbo","itch.io","6/03/2021","0","False"
-"ALL @ ONCE","itch.io","27/10/2020","0","False"
-"2ECONDS TO STΔRLIVHT: Forever My Diamond","itch.io","2/09/2020","0","False"
-"Revolver and Co","itch.io","2/07/2021","0","False"
-"Super Win the Game","itch.io","1/10/2014","0","False"
-"Future Unfolding","itch.io","15/03/2017","0","False"
-"Koto","itch.io","10/09/2019","0","False"
-"Left 4 Dead","Steam","17/11/2008","6060","False"
-"Adventure for a Bit","itch.io","10/03/2021","0","False"
-"Midnight Scenes: The Nanny","itch.io","27/10/2021","0","False"
-"Skuiggle","itch.io","5/02/2018","0","False"
-"Cellular Harvest: Purple","itch.io","20/06/2020","0","False"
-"The First Greek Odyssey","itch.io","19/08/2019","0","False"
-"Only One Burn","itch.io",,"0","False"
-"Doujins and Dragons","itch.io","21/06/2020","0","False"
-"Resynth","itch.io","28/06/2017","0","False"
-"Mutiny Island","itch.io","19/10/2019","0","False"
-"Changes","itch.io","12/10/2021","0","False"
-"Source SDK Base 2007","Steam",,"0","True"
-"Among Us","Steam","16/11/2018","300","False"
-"Cuckoo Castle","itch.io","19/08/2015","0","False"
-"Murder at the Cat Show","itch.io",,"0","False"
-"GourMelee","itch.io","6/06/2019","0","False"
-"Schildmaid MX","itch.io",,"0","False"
-"BioShock 2 Remastered","Epic","13/09/2016","0","False"
-"BEAUTIFUL DESOLATION","GOG","26/02/2020","0","False"
-"Supreme Ruler Cold War","Steam","29/07/2011","0","False"
-"Shrine to Anubis","itch.io","14/05/2020","0","False"
-"Danger Scavenger","itch.io","22/06/2020","0","False"
-"Space Hole 2016","itch.io","2/09/2016","0","False"
-"Il Filo Conduttore","itch.io","12/11/2019","0","False"
-"Oh Jeez, Oh No, My Rabbits Are Gone!!!","itch.io","19/12/2019","0","False"
-"You Can Pet The Dog VR","itch.io",,"0","False"
-"Decommissioner - GBJAM8 2020","itch.io",,"0","False"
-"Penance","itch.io",,"0","False"
-"Dungeon Escape","itch.io","2/06/2021","0","False"
-"Agoraphobia","itch.io",,"0","False"
-"Pullfrog","itch.io","4/07/2020","0","False"
-"Rising Dusk","itch.io","26/07/2018","0","False"
-"When We First Met","itch.io","9/08/2020","0","False"
-"LongStory","itch.io","3/05/2018","0","False"
-"Move 'n' Bloom","itch.io","12/10/2020","0","False"
-"Surviving Mars","Epic","15/03/2018","0","False"
-"Good Mourning","itch.io",,"0","False"
-"TIC-80","itch.io",,"0","False"
-"Fortune-499","itch.io","11/05/2018","0","False"
-"Kingdom Two Crowns","itch.io","11/12/2018","0","False"
-"The Majesty of Colors","itch.io","28/02/2018","0","False"
-"SlipSpeed","itch.io","16/04/2020","0","False"
-"Shipwreck","itch.io","25/02/2014","0","False"
-"WARSAW","Steam","2/10/2019","0","False"
-"soundStrider","itch.io","10/07/2020","0","False"
-"An Oath In Kind","itch.io",,"0","False"
-"Potion Prodigy","itch.io","26/05/2021","0","False"
-"VaporLight: Drifter","itch.io","27/03/2021","0","False"
-"Maudelyn's Quest","itch.io","11/05/2018","0","False"
-"Old Man's Journey","itch.io","18/05/2017","0","False"
-"Ring of Pain","Steam","15/10/2020","0","False"
-"Pawndemonium","itch.io",,"0","False"
-"DW","itch.io","27/05/1986","0","False"
-"Mother Island","itch.io",,"0","False"
-"Alone With You","itch.io","23/08/2016","0","False"
-"KAIMA","itch.io","24/07/2016","0","False"
-"Nonsense Soccer","itch.io",,"0","False"
-"LiveScream","itch.io","27/10/2020","0","False"
-"Speed Dating for Ghosts","itch.io","14/02/2018","0","False"
-"from view","itch.io","11/08/2021","0","False"
-"Tic Tac Together","itch.io","11/05/2021","0","False"
-"Alien Life Lab","itch.io","21/10/2019","0","False"
-"Homing","itch.io","13/03/2020","0","False"
-"Fortnite","Epic","25/07/2017","5448","True"
-"Death and Taxes","itch.io","20/02/2020","0","False"
-"My Little Pony: Super Ethical Shipping Climax!","itch.io","7/07/2019","0","False"
-"YBit","itch.io","2/07/2017","0","False"
-"Satisfactory","Steam","8/06/2020","0","False"
-"Pippu - Bauble Quest","itch.io","3/09/2021","0","False"
-"AFTER SCHOOL","itch.io","6/05/2021","0","False"
-"A Normal Lost Phone","itch.io","26/01/2017","0","False"
-"6 pack of craft games","itch.io",,"0","False"
-"BLOOD VOID MASS","itch.io","14/04/2021","0","False"
-"Nectar of the Gods: Offline Edition","itch.io","27/01/2021","0","False"
-"Cats are Liquid - A Better Place","itch.io","12/12/2019","0","False"
-"The First Tree","Epic","14/09/2017","0","False"
-"Bringris","itch.io","15/10/2020","0","False"
-"Cattails","Steam","1/12/2017","0","False"
-"Detective Case and Clown Bot in: Murder in The Hotel Lisbon","itch.io","5/12/2013","0","False"
-"Glittermitten Grove","itch.io","24/12/2016","0","False"
-"StarCraft II","Battle.net","27/07/2010","0","False"
-"Toy Kingdom 2","itch.io","18/03/2021","0","False"
-"AcChen - Tile matching the Arcade way","itch.io","20/12/2017","0","False"
-"Parcels And Pollen","itch.io",,"0","False"
-"Super Skull Smash GO! 2 Turbo","itch.io","17/07/2018","0","False"
-"GoldenEye: Source (v5.0)","Steam","1/02/2005","0","True"
-"Sky Rogue","itch.io","4/08/2017","0","False"
-"I don't belong - A visual Novel","itch.io",,"0","False"
-"Double Turn","itch.io","6/11/2020","0","False"
-"GUROBU","itch.io","14/08/2020","0","False"
-"PALACE OF WOE","itch.io","14/06/2019","0","False"
-"DragonRuby Game Toolkit","itch.io",,"0","False"
-"Mending Wall","itch.io","4/01/2021","0","False"
-"The lost artifacts","itch.io",,"0","False"
-"Spelunky","Steam","8/08/2013","0","True"
-"The Last Survey","itch.io","7/08/2020","0","False"
-"The Church of Cheesus Crisp: An All You can Pray Buffet","itch.io","16/08/2020","0","False"
-"Sketchy Racing","itch.io","1/10/2015","0","False"
-"Hypnagogia 無限の夢 Boundless Dreams","itch.io","29/10/2021","0","False"
-"Hellcraze","itch.io","13/04/2021","0","False"
-"Somewhere Better","itch.io","3/04/2021","0","False"
-"Good Dog","itch.io","19/05/2021","0","False"
-"GB Studio","itch.io",,"0","False"
-"Lara Croft and the Temple of Osiris","Steam","8/12/2014","0","False"
-"Mortal Kombat 11: Ultimate","Steam","17/11/2020","36801","False"
-"Space Hole 2020","itch.io",,"0","False"
-"Hyperplex 3D","itch.io","23/07/2019","0","False"
-"The Adventurer - Action platformer","itch.io",,"0","False"
-"WATER'S FINE","itch.io","12/05/2018","0","False"
-"Simple Complex Puzzle","itch.io","3/07/2016","0","False"
-"Elephantasy","itch.io","7/12/2020","0","False"
-"Gebo","itch.io","6/06/2021","0","False"
-"Wizard's Adventure","itch.io","21/12/2020","0","False"
-"Monster Pub Chapter 2","itch.io",,"0","False"
-"Control","Epic","27/08/2019","0","False"
-"Serendipity","itch.io","11/02/2016","0","False"
-"Sunrise","itch.io","27/07/2017","0","False"
-"T.A.R.S","itch.io","25/01/2022","0","False"
-"SPARE","itch.io",,"0","False"
-"Fake Illusions - Brainbreaker Update","itch.io","20/08/2020","0","False"
-"Cathode Ray Tube VR","itch.io",,"0","False"
-"Rettend - File #1","itch.io","6/03/2020","0","False"
-"Starlight Shores","itch.io","30/10/2020","0","False"
-"Riverbond","Epic","9/06/2019","0","False"
-"Can Androids Pray: Red","itch.io","10/07/2019","0","False"
-"Rose & Time","itch.io","15/04/2012","0","False"
-"Sagebrush","itch.io","18/09/2018","0","False"
-"Moonstone Deep","itch.io","16/09/2017","0","False"
-"Quest of Dungeons","itch.io","25/03/2014","0","False"
-"Gyro Boss DX","itch.io","3/05/2019","0","False"
-"Galactic Bar Fight","itch.io","1/03/2022","0","False"
-"Long Journey Home","itch.io","30/05/2017","0","False"
-"Nex Machina","Steam","20/06/2017","0","False"
-"inbento","itch.io","2/09/2019","0","False"
-"ALL-STARS DUNGEONS AND DIAMONDS","itch.io","1/10/2015","0","False"
-"Ripple","itch.io",,"0","False"
-"Fall Guys","Epic","30/11/2021","7149","True"
-"Maneater","Epic","1/11/1975","0","False"
-"Pleroma","itch.io","23/01/2020","0","False"
-"The Captain","Epic","22/10/2020","0","False"
-"Lava Golf","itch.io","25/05/2021","0","False"
-"Image of Perfection","itch.io","29/07/2019","0","False"
-"Feyna's Quest","itch.io",,"0","False"
-"Ripped Pants at Work","itch.io","21/01/2018","0","False"
-"Gigabit","itch.io",,"0","False"
-"The Floor is Jelly","itch.io","30/05/2014","0","False"
-"Rip Them Off","itch.io","24/09/2020","0","False"
-"Zzap!","itch.io",,"0","False"
-"ENDLESS Space 2","Steam","18/05/2017","0","False"
-"A Kishoutenketsu in the countryside","itch.io",,"0","False"
-"Is Lupin Still Flirting?","itch.io","24/03/2021","0","False"
-"Total War: WARHAMMER","Epic","24/05/2016","0","False"
-"Thermo Puzzle","itch.io",,"0","False"
-"Saturnalia","Epic","30/07/2017","0","False"
-"Bumble Butt","itch.io",,"0","False"
-"Rorschach","itch.io","20/01/2021","0","False"
-"ZeroRanger","itch.io","28/09/2018","0","False"
-"Predestination","itch.io","26/02/2019","0","False"
-"sideliner","itch.io","14/08/2020","0","False"
-"_________ (What Even Is That Thing?)","itch.io",,"0","False"
-"Nebs 'n Debs (NES)","itch.io","3/03/2019","0","False"
-"Operation STEEL","itch.io","1/01/2022","0","False"
-"Stacks On Stacks (On Stacks)","itch.io","1/04/2020","0","False"
-"Alt-Frequencies","itch.io","16/05/2019","0","False"
-"MAGEROOM","itch.io","9/06/2021","0","False"
-"The Trolley","itch.io","13/12/2017","0","False"
-"Death's Door","Steam","20/07/2021","1268","True"
-"Black Widow: Recharged","Epic","27/10/2021","0","False"
-"Bury me, my Love","itch.io","26/10/2017","0","False"
-"Space Battalion Alpha","itch.io","17/05/2021","0","False"
-"An Airport Game","itch.io",,"0","False"
-"Build a Druid","itch.io",,"0","False"
-"DUFE: Masquerade","itch.io",,"0","False"
-"Watch Me Jump","itch.io","19/04/2018","0","False"
-"sweet*peony","itch.io",,"0","False"
-"NoSeq","itch.io","30/10/2020","0","False"
-"Ise & Kai: Chosen Throne","itch.io","17/08/2019","0","False"
-"Seven of Heart","itch.io",,"0","False"
-"About Love, Hate & the other ones","itch.io","19/12/2014","0","False"
-"Karlson Run","itch.io",,"0","False"
-"Spirit Cleaning","itch.io","29/01/2021","0","False"
-"From Orbit","itch.io","27/08/2019","0","False"
-"Pendula Swing: The Complete Journey","itch.io","8/03/2020","0","False"
-"Metori","itch.io","3/04/2019","0","False"
-"To Duel List","itch.io","18/09/2020","0","False"
-"Wrapped With A Kiss","itch.io",,"0","False"
-"Learn Japanese To Survive - Hiragana Battle","itch.io","16/02/2016","0","False"
-"Harvest Hero Origins","itch.io",,"0","False"
-"Baldi's Basics Plus","itch.io","11/06/2020","0","False"
-"Hacknet","itch.io","12/08/2015","0","False"
-"Grimm & Tonic: Aperitif","itch.io","5/10/2018","0","False"
-"Sewer Rave","itch.io","30/10/2018","0","False"
-"KillingFloor2Beta","Epic","18/11/2016","0","False"
-"Lieve Oma","itch.io","5/04/2016","0","False"
-"Hitman: Game of the Year Edition","Epic","7/11/2017","160","False"
-"Gutwhale","itch.io","6/04/2020","0","False"
-"Legend of the Lost Dragons","itch.io","5/05/2020","0","False"
-"Red Embrace (BL Visual Novel)","itch.io","15/02/2018","0","False"
-"Amnesia: The Dark Descent","Steam","8/09/2010","0","False"
-"Ministry of Broadcast","Steam","30/01/2020","0","False"
-"ARK: Survival Of The Fittest","Steam","29/08/2017","0","False"
-"Couch Goblins","itch.io",,"0","False"
-"Supraland","Epic","5/04/2019","0","False"
-"zip: set one","itch.io","11/03/2018","0","False"
-"Sandstorm","itch.io","23/01/2015","0","False"
-"Sophie's Safecracking Simulator","itch.io","3/05/2021","0","False"
-"Lost Potato","itch.io","13/08/2020","0","False"
-"a new life.","itch.io","15/05/2020","0","False"
-"Astronomia","itch.io","8/07/2020","0","False"
-"Beglitched","itch.io","7/10/2016","0","False"
-"Defold","Steam","28/01/2021","775","False"
-"ToeJam & Earl: Back in the Groove","Steam","28/02/2019","0","False"
-"The Piano Player","itch.io","30/03/2018","0","False"
-"Once Upon A Crime in the West","itch.io","3/05/2019","0","False"
-"Spring Falls","itch.io","17/11/2019","0","False"
-"Wart Worm Wingding!","itch.io",,"0","False"
-"8 Bit Space (ZX Spectrum Inspired Platformer)","itch.io","16/03/2020","0","False"
-"Density Experiment","itch.io",,"0","False"
-"The Lost Art of Innkeeping","itch.io","8/05/2020","0","False"
-"JB Hairboll in Murder Flub","itch.io",,"0","False"
-"Traveler","itch.io","1/06/2021","0","False"
-"Book of Demons","Steam","13/12/2018","0","False"
-"Dota 2","Steam","9/07/2013","35040","False"
-"Voxella","itch.io","14/10/2020","0","False"
-"Knight & Damsel","itch.io","20/08/2015","0","False"
-"The Quest for One","itch.io","10/07/2017","0","False"
-"Crescent Loom","itch.io","13/03/2017","0","False"
-"Mostly Intense Monster Defense","itch.io","13/09/2019","0","False"
-"Rebop Blasters","itch.io","19/04/2019","0","False"
-"Nina Aquila: Legal Eagle, Season One","itch.io",,"0","False"
-"Khronos-X","itch.io","26/09/2016","0","False"
-"Slain: Back From Hell","Epic","24/03/2016","0","False"
-"Wargroove","Steam","1/02/2019","0","False"
-"Mouse Corp.","itch.io","17/08/2014","0","False"
-"Darkwood","Epic","17/08/2017","0","False"
-"Shrinespark","itch.io","11/11/2020","0","False"
-"Bullet Beat","itch.io","12/11/2019","0","False"
-"Sokobond","itch.io","21/07/2014","0","False"
-"Safari Zone","itch.io",,"0","False"
-"Write'n'Slash","itch.io","16/04/2019","0","False"
-"An Ode to Todd the Toad: Frogcare!","itch.io","15/12/2020","0","False"
-"Hidden Folks","itch.io","14/02/2017","0","False"
-"Do I Pass?","itch.io","19/08/2019","0","False"
-"Spell Slingers: Trick or Treat","itch.io",,"0","False"
-"Watchlist","itch.io","6/07/2017","0","False"
-"WE ARE DOOMED","itch.io","14/04/2015","0","False"
-"Where the Snow Settles","itch.io","22/07/2021","0","False"
-"Leggite Luta Livre","itch.io",,"0","False"
-"Pitman","itch.io",,"0","False"
-"Safe Journey","itch.io","20/07/2018","0","False"
-"Order A Pizza: A Visual Novel","itch.io","21/03/2019","0","False"
-"Dépanneur Nocturne","itch.io","26/05/2020","0","False"
-"Watch Dogs 2","Epic","15/11/2016","0","False"
-"Mindustry","Steam","26/09/2019","0","False"
-"Witches and Stitches","itch.io",,"0","False"
-"Mirror's Edge Catalyst","Origin","8/06/2016","4969","False"
-"Just Another Day at the Office","itch.io",,"0","False"
-"Inner Tao","itch.io","12/04/2021","0","False"
-"Eyewear Cleaner 2077","itch.io",,"0","False"
-"Vylan","itch.io",,"0","False"
-"Alchemist's Castle","itch.io","31/10/2017","0","False"
-"Fugl","itch.io","14/09/2017","0","False"
-"Para//ax","itch.io",,"0","False"
-"Cat Ace","itch.io",,"0","False"
-"Alone in the Grey","itch.io","28/12/2018","0","False"
-"Spooky Station","itch.io","25/10/2019","0","False"
-"Tales From Windy Meadow","itch.io","20/12/2018","0","False"
-"Circa Infinity","itch.io","9/09/2015","0","False"
-"Welcome to Elk","itch.io","17/09/2020","0","False"
-"VoltAge:Genesis","itch.io","1/04/2019","0","False"
-"Wonder Boy The Dragons Trap","Epic",,"0","False"
-"Madball","itch.io",,"0","False"
-"Space Duet","itch.io","18/12/2019","0","False"
-"Will Glow the Wisp","itch.io","15/09/2017","0","False"
-"Edolie","Steam","27/02/2015","0","False"
-"DreamCatcher: Reflections, Volume 1","itch.io","18/01/2021","0","False"
-"Drillmin","itch.io","27/04/2021","0","False"
-"Super Mumtaz Bros.","itch.io","4/01/2021","0","False"
-"Playground","itch.io","1/06/2015","0","False"
-"Locomancer","itch.io","28/02/2017","0","False"
-"Totally planet","itch.io","22/10/2020","0","False"
-"A Hell of a Journey","itch.io",,"0","False"
-"Marginalia","itch.io","28/10/2017","0","False"
-"Subterrarium","itch.io","26/05/2016","0","False"
-"The Geography","itch.io","12/09/2021","0","False"
-"Robot Wants It All","itch.io","5/04/2019","0","False"
-"FutureGrind","itch.io","22/01/2019","0","False"
-"Pressure","itch.io","2/02/2013","0","False"
-"Chimpology","itch.io","21/06/2017","0","False"
-"Obstacles","itch.io","3/11/2018","0","False"
-"Ritual of the Moon","itch.io","18/04/2019","0","False"
-"Commune Corvidae","itch.io","11/09/2018","0","False"
-"Popup Dungeon","Steam","12/08/2020","0","False"
-"yarne","itch.io","1/04/2021","0","False"
-"Bleed","itch.io","12/12/2012","0","False"
-"GearHead Caramel","itch.io",,"0","False"
-"ARK: Survival Evolved","Steam","27/08/2017","0","False"
-"SUPERHOT","itch.io","24/02/2016","8984","False"
-"Canvas Colors: In The Moving City","itch.io","3/04/2021","0","False"
-"SOLITUNE","itch.io","20/11/2016","0","False"
-"Just Die Already","Epic","20/05/2021","0","False"
-"Back To Bed","itch.io","6/08/2014","0","False"
-"Hopper","itch.io","3/06/2021","0","False"
-"space shooter","itch.io",,"0","False"
-"RXP 2010: DELUXE LOVER'S PAQUE","itch.io",,"0","False"
-"Aseprite","Steam","22/02/2016","174205","True"
-"Guild of Dungeoneering","Epic","15/07/2015","0","False"
-"Draw Slasher","Steam","13/10/2016","0","False"
-"Lunarrota","itch.io",,"0","False"
-"Pixel Wheels","itch.io","20/07/2020","0","False"
-"Homunculus Hotel","itch.io",,"0","False"
-"Slay the Spire","Steam","23/01/2019","6686","True"
-"When There Is No More Snow","itch.io","28/04/2021","0","False"
-"Midnight Scenes Ep.2: The Goodbye Note (Special Edition)","itch.io",,"0","False"
-"Hope's Peak","itch.io","28/06/2016","0","False"
-"Textreme 2","itch.io",,"0","False"
-"Air Dasher","itch.io",,"0","False"
-"Mastermind Classic","itch.io",,"0","False"
-"My Personal Hilopet","itch.io",,"0","False"
-"Volatile","itch.io",,"0","False"
-"Pixplode","Steam","3/07/2017","0","False"
-"A Short Hike","itch.io","30/07/2019","0","False"
-"MiTOS","itch.io",,"0","False"
-"Orwell: Keeping an Eye on You","itch.io","19/10/2016","0","False"
-"Lost","itch.io","31/12/2007","0","False"
-"Toybox Aviation","itch.io",,"0","False"
-"Snake vs Snake","itch.io","26/09/2018","0","False"
-"Hunter's Moon Remastered","itch.io",,"0","False"
-"Tonight We Riot","itch.io","8/05/2020","0","False"
-"Tenderfoot Tactics","itch.io","21/10/2020","0","False"
-"MewnBase","itch.io","7/12/2018","0","False"
-"Roarr! Jurassic Edition","Steam","7/11/2018","0","False"
-"Titanfall 2 Deluxe Edition","Origin","27/10/2016","0","False"
-"cityglitch","itch.io","26/07/2017","0","False"
-"Apparition","itch.io","31/10/2018","0","False"
-"Color Jumper","itch.io","1/11/2017","0","False"
-"Sonic Mania","Epic","15/08/2017","2761","False"
-"DEATHLOOP","Steam","13/09/2021","4202","True"
-"Light Borrower","itch.io","27/06/2018","0","False"
-"Fractured Minds","Steam","14/11/2019","0","False"
-"Stories and Smoke","itch.io","11/02/2020","0","False"
-"Halcyon 6","Epic","9/09/2016","0","False"
-"Wanderlust: Travel Stories","GOG","26/09/2019","0","False"
-"Ori and the Blind Forest","Steam","10/03/2015","0","False"
-"MENOS: PSI-SHATTER","itch.io",,"0","False"
-"The Answer is 42","Steam","12/12/2019","0","False"
-"Wizard Battle","itch.io","6/08/2019","0","False"
-"Another Perspective","itch.io","8/11/2013","0","False"
-"The Hayseed Knight","itch.io","8/12/2020","0","False"
-"Vulture","itch.io","8/09/2017","0","False"
-"Pale Cachexia","itch.io","14/04/2021","0","False"
-"Route Me Mail and Delivery Co","itch.io","28/05/2021","0","False"
-"Rise of the Tomb Raider: 20 Year Celebration","Epic","11/10/2016","0","False"
-"Dangerous Roads Ahead","itch.io",,"0","False"
-"crystal anomaly","itch.io",,"0","False"
-"Bomber Crew","Steam","19/10/2017","0","False"
-"Linearity","itch.io","25/12/2020","0","False"
-"Vignettes","itch.io","20/04/2017","0","False"
-"Portal","Steam","10/10/2007","0","False"
-"GUILTY GEAR -STRIVE-","Steam","11/06/2021","98415","True"
-"Attraction Force","itch.io","26/07/2019","0","False"
-"Tyrian 2000","GOG","30/11/1999","0","False"
-"Toree 3D","itch.io","9/04/2021","0","False"
-"Conversations With My Anxiety","itch.io",,"0","False"
-"Windosill (2009)","itch.io","26/05/2009","0","False"
-"Not the Robots","itch.io","12/12/2013","0","False"
-"Illusory Dreamlight 1: Deprimerie","itch.io","21/08/2018","0","False"
-"Kaiju Klimb","itch.io","7/01/2020","0","False"
-"void.Resign","itch.io",,"0","False"
-"ART SQOOL","itch.io","5/02/2019","0","False"
-"SHUT IN","itch.io","30/10/2020","0","False"
-"Darkness Within 2: The Dark Lineage Director's Cut Edition","Steam","5/12/2014","0","False"
-"ZONES","itch.io","3/05/2018","0","False"
-"this discord has ghosts in it","itch.io",,"0","False"
-"STRAINGE","itch.io","11/03/2021","0","False"
-"Balloony's adventure","itch.io",,"0","False"
-"Advent NEON [DEMO]","itch.io",,"0","False"
-"Bring Your Own Oxygen","itch.io","10/05/2021","0","False"
-"Wander the Cosmos","itch.io","5/02/2021","0","False"
-"Unfinished - An Artist's Lament","itch.io","3/05/2021","0","False"
-"Kaiju Big Battel: Fighto Fantasy","itch.io","31/10/2018","0","False"
-"Soulblight","Steam","15/03/2018","0","False"
-"Cursed to Golf","itch.io",,"0","False"
-"Oceanwork","itch.io","27/04/2021","0","False"
-"That Which Faith Demands","itch.io","14/05/2021","0","False"
-"MMM: Murder Most Misfortunate","itch.io","1/05/2017","0","False"
-"Jabberwocky","itch.io","3/02/2020","0","False"
-"The Great Perhaps","Steam","14/08/2019","0","False"
-"Home - A Unique Horror Adventure","itch.io","1/06/2012","0","False"
-"System Shock: Enhanced Edition","Steam","22/10/2015","0","False"
-"Laser Paddles","itch.io","31/10/2018","0","False"
-"Restricted Airspace","itch.io","31/12/2019","0","False"
-"Cookies","itch.io","23/04/2021","0","False"
-"Sonny","itch.io","18/04/2017","0","False"
-"Serious Scramblers","itch.io","14/11/2018","0","False"
-"Balloon Party","itch.io","3/07/2016","0","False"
-"Don't Take It Personally, I Just Don't Like You: The Camping Trip","itch.io","22/12/2019","0","False"
-"When The River Runs Dry Early Release","itch.io","25/10/2021","0","False"
-"Good Morning Hon","itch.io",,"0","False"
-"death by flower arrangement","itch.io","17/10/2016","0","False"
-"Highway Blossoms: Remastered","itch.io",,"0","False"
-"Kiwi","itch.io","8/06/2021","0","False"
-"FORGET THE BRAKES!","itch.io",,"0","False"
-"TEKKEN 7","Steam","1/06/2017","697","False"
-"Salt and Sanctuary","Epic","15/03/2016","0","False"
-"All Hams on Deck!","itch.io","19/01/2020","0","False"
-"Cyber Hamster Tilt","itch.io","13/12/2020","0","False"
-"Wandersong","Steam","27/09/2018","0","False"
-"Sarawak","itch.io","28/01/2021","0","False"
-"Skullgirls 2nd Encore","Steam","22/08/2013","0","False"
-"Go Home Dinosaurs!","Steam","14/03/2013","0","False"
-"Tile Crusher","itch.io","17/03/2014","0","False"
-"Hack Grid","itch.io","22/01/2021","0","False"
-"Milo's Quest","itch.io",,"0","False"
-"Nepenthe","itch.io","17/05/2018","0","False"
-"Micro Dash","itch.io",,"0","False"
-"Bat Lizard Bonanza","itch.io","26/08/2020","0","False"
-"Cats are Liquid - A Light in the Shadows","itch.io","25/07/2016","0","False"
-"Fire Place","itch.io","21/09/2018","0","False"
-"Super Snake 3D","itch.io","19/10/2019","0","False"
-"Tetromino Chill","itch.io","28/06/2020","0","False"
-"BioShock Infinite: Complete Edition","Epic","4/12/2014","0","False"
-"GoNNER","itch.io","12/10/2016","0","False"
-"SHNIPERS","itch.io","15/11/2019","0","False"
-"Kane & Lynch 2: Dog Days","Steam","17/08/2010","0","False"
-"Absolute Blue","itch.io",,"0","False"
-"Imperishable Memories","itch.io","25/08/2018","0","False"
-"The Morning Star","itch.io","12/02/2021","0","False"
-"Interstellaria","itch.io","17/07/2015","0","False"
-"Pixel Fireplace","itch.io","25/10/2010","0","False"
-"Bfxr","itch.io",,"24528","True"
-"PHN-HOME","itch.io","29/03/2021","0","False"
-"Underhero","itch.io","19/09/2018","0","False"
-"Orbital Racer","Steam","14/12/2017","0","False"
-"Temple Of Tangram","itch.io",,"0","False"
-"Kaleidoscope","itch.io",,"0","False"
-"Sangwich","itch.io","25/04/2021","0","False"
-"Rebel Galaxy Outlaw","Steam","22/09/2020","0","False"
-"Roll for Confidence: A CMC Vignette","itch.io","10/09/2021","0","False"
-"PICO-8","itch.io",,"0","True"
-"ProcrastiTyper","itch.io",,"0","False"
-"Pathfinder Kingmaker - Enhanced Plus Edition","Epic","19/06/2019","0","False"
-"2901//DRUM_DREAM Vol2","itch.io",,"0","False"
-"Find Me","itch.io","20/01/2020","0","False"
-"Slimed","itch.io","28/11/2018","0","False"
-"The Life of Saint Fiona Bianco Xena","itch.io",,"0","False"
-"Isolation Story","itch.io","21/12/2020","0","False"
-"SMITE - Public Test","Steam",,"0","False"
-"Dates & Wires","itch.io","17/05/2021","0","False"
-"Chambara","itch.io","12/12/2017","0","False"
-"Build a Bard","itch.io",,"0","False"
-"Wizard of Legend","Steam","15/05/2018","0","False"
-"Meditation 5","itch.io",,"0","False"
-"Guppy","itch.io","25/10/2013","0","False"
-"Amnesia: Rebirth","Steam","20/10/2020","0","False"
-"Dear Esther: Landmark Edition","Steam","14/02/2017","0","False"
-"Amnesia: A Machine for Pigs","Epic","10/09/2013","0","False"
-"PRAGMA","itch.io","6/06/2020","0","False"
-"Maze Of Bears","itch.io","4/01/2022","0","False"
-"Talk To Me","itch.io","24/11/2017","0","False"
-"Science Girls!","itch.io","28/05/2009","0","False"
-"Ultimate Zombie Death Ball","itch.io","29/10/2021","0","False"
-"Xenogunner","itch.io","1/04/2020","0","False"
-"Neon Abyss","Epic","14/07/2020","0","False"
-"Signs of the Sojourner","itch.io","14/05/2020","0","False"
-"Ultima 4: Quest of the Avatar","GOG","16/09/1985","0","False"
-"PachaMama","itch.io","17/04/2021","0","False"
-"Drawkanoid","itch.io","21/01/2020","0","False"
-"Halo: The Master Chief Collection","Steam","3/12/2019","30915","True"
-"Despotism 3k","Steam","8/11/2018","0","False"
-"Secrets of Raetikon","itch.io","17/04/2014","0","False"
-"My Nuclear Octopus","itch.io","4/08/2020","0","False"
-"Summer Gems","itch.io",,"0","False"
-"Numbertron (Sharp MZ)","itch.io",,"0","False"
-"Willful","itch.io","9/08/2017","0","False"
-"Dodgy Boat","itch.io",,"0","False"
-"Angry Video Game Nerd I&II Deluxe","itch.io","19/03/2021","0","False"
-"Death Drives A Bus","itch.io","14/06/2020","0","False"
-"Tape","itch.io","19/11/2015","0","False"
-"monad","itch.io","15/08/2019","0","False"
-"Rune of Eternity","itch.io",,"0","False"
-"Purple Noise Echo","itch.io","1/10/2019","0","False"
-"piCOLUMNS","itch.io","14/04/2021","0","False"
-"Ballsy! World Cup 2020","itch.io","28/10/2020","0","False"
-"West of Dead","Steam","18/06/2020","0","False"
-"[Speer]","itch.io",,"0","False"
-"Dino Island - The Four Crystals","itch.io","19/10/2020","0","False"
-"Centipede Recharged","Epic","29/09/2021","0","False"
-"Sausage Sports Club","itch.io","31/12/2017","0","False"
-"The Binding of Isaac","Steam","28/09/2011","575","True"
-"Rustler","Steam","31/08/2021","0","False"
-"Asteroids... But Roguelite","itch.io",,"0","False"
-"Crashlands","Steam","21/01/2016","0","False"
-"10mg: Sealed Estate","itch.io","14/10/2020","0","False"
-"songs and flowers","itch.io","15/01/2020","0","False"
-"Vampyr","Epic","4/06/2018","0","False"
-"you used to be someone","itch.io","10/12/2017","0","False"
-"Magnibox","itch.io","26/03/2019","0","False"
-"Shattered Planet","itch.io","27/03/2014","0","False"
-"Bugspeed Collider","itch.io","5/10/2016","0","False"
-"Cannonhead Clash (Atari 2600)","itch.io",,"0","False"
-"Splitgate","Steam","24/05/2019","74659","False"
-"Left 4 Dead 2","Steam","16/11/2009","0","False"
-"GNOG","itch.io","17/07/2018","0","False"
-"Concentric","itch.io","4/01/2018","0","False"
-"Gloomhaven","Epic","17/07/2019","0","False"
-"Building Relationships","itch.io","14/09/2020","0","False"
-"Mirror's Edge Catalyst","Steam","4/06/2020","36763","False"
-"10 Beautiful Postcards","itch.io","27/05/2019","0","False"
-"Make It Last","itch.io","7/12/2017","0","False"
-"Nuclear Throne","itch.io","5/12/2015","29","False"
-"ESC","itch.io","8/03/2018","0","False"
-"Dragonsphere","GOG","2/01/1994","0","False"
-"Wonderland Nights: White Rabbit's Diary","itch.io","11/06/2020","0","False"
-"Binky's Trash Service","itch.io","16/01/2021","0","False"
-"Void Runner","itch.io","5/03/2018","0","False"
-"Nasty Little Man","itch.io","4/03/2020","0","False"
-"Learn Japanese To Survive! Kanji Combat","itch.io","1/08/2018","0","False"
-"SteamVR","Steam",,"0","True"
-"The Fantaballous Tilt","itch.io","29/10/2021","0","False"
-"Feisty Heist","itch.io","9/11/2019","0","False"
-"Ancient Enemy","Epic","9/04/2020","0","False"
-"Trackmania","Epic","1/07/2020","0","False"
-"Riba","itch.io","31/01/2021","0","False"
-"Team Hogus: GHAMEMFAIFTH OTHIYLTIM","itch.io","27/08/2020","0","False"
-"Lonely People Potion Shop","itch.io","10/03/2021","0","False"
-"Curious Expedition","itch.io","1/09/2016","0","False"
-"Teenagent","GOG","26/02/1994","0","False"
-"Spooky Ghosts Dot Com","itch.io","3/08/2018","0","False"
-"Rulent Tower VR","itch.io","1/04/2020","0","False"
-"Runt Tabletop Roleplaying System","itch.io",,"0","False"
-"Hearthstone","Battle.net","11/03/2014","1044","False"
-"Taimumari: Definitive Edition","itch.io","16/12/2015","0","False"
-"The USB Stick Found in the Grass","Steam","29/01/2021","0","False"
-"Tomb Raider","Steam","4/03/2013","0","False"
-"Bem Feito","itch.io","8/08/2020","0","False"
-"Wanderers","itch.io",,"0","False"
-"THE GREY MAN","itch.io","19/12/2016","0","False"
-"Planet Diver","itch.io","1/12/2015","0","False"
-"Pixross","itch.io","28/11/2020","0","False"
-"Cycle 28","itch.io","9/03/2018","0","False"
-"PGA TOUR 2K21","Steam","20/08/2020","0","False"
-"BasketBelle","itch.io","4/07/2012","0","False"
-"Flashover MegaSector","itch.io","21/08/2019","0","False"
-"Curse of the Crescent Isle DX","itch.io","21/08/2015","0","False"
-"Grow in the Hole","itch.io","15/12/2015","0","False"
-"Dee Dum (Computer)","itch.io","24/07/2017","0","False"
-"LOVE 2: kuso","itch.io","7/11/2017","0","False"
-"BOX","itch.io","23/11/2019","0","False"
-"Knight Bewitched","itch.io","18/04/2018","0","False"
-"Collateral Thinking DX","itch.io","10/06/2021","0","False"
-"JRNL","itch.io",,"0","False"
-"Hoplegs","itch.io","22/04/2021","0","False"
-"Golf Peaks","itch.io","13/11/2018","0","False"
-"Haque","itch.io","23/11/2017","0","False"
-"Destiny 2","Steam","1/10/2019","3480","False"
-"Pyo","itch.io",,"0","False"
-"Backbone","itch.io","8/06/2021","0","False"
-"Yooka-Laylee and the Impossible Lair","Epic","7/10/2019","0","False"
-"Money Garden","itch.io","23/03/2021","0","False"
-"Nib","itch.io",,"0","False"
-"Dragon Age: Origins - Ultimate Edition","GOG","29/10/2010","0","False"
-"Strife of Cosmos","itch.io",,"0","False"
-"Naughty Elves - Christmas puzzle game","itch.io","7/12/2017","0","False"
-"Before I Forget","itch.io","16/07/2020","0","False"
-"Sunlight","itch.io","14/01/2021","0","False"
-"CRNVRS (en, updated version)","itch.io",,"0","False"
-"MineFinitum","itch.io","14/02/2021","0","False"
-"10S","itch.io","24/08/2018","0","False"
-"Ultima  Worlds of Adventure 2: Martian Dreams","GOG","31/12/1991","0","False"
-"Fossil Echo","itch.io","1/07/2016","0","False"
-"Warpips","Steam","21/04/2022","0","False"
-"Brothers - A Tale of Two Sons","Epic","7/08/2013","0","False"
-"Midnight on the Milky Way -- Complete","itch.io","2/04/2021","0","False"
-"Call of Duty: Modern Warfare","Battle.net","25/10/2019","0","False"
-"Beppo's Hole in One Golf","itch.io","20/01/2020","0","False"
-"Hack FPS - Anniversary Edition","itch.io",,"0","False"
-"Be Not Afraid A.K.A. Seraphim Horror Show!?","itch.io","29/05/2020","0","False"
-"Froggy Family Fort","itch.io","25/04/2020","0","False"
-"XCOM 2","Steam","4/02/2016","0","False"
-"NecroWorm","Steam","18/05/2017","0","False"
-"This War of Mine","Steam","14/11/2014","0","False"
-"Drum Controller","itch.io",,"0","False"
-"Splinter Zone","itch.io","1/05/2017","0","False"
-"Iratus","Epic","23/04/2020","0","False"
-"Grime House","itch.io",,"0","False"
-"Mop Boy Demo but better","itch.io",,"0","False"
-"Pixel Driver - Fast paced infinite driving","itch.io",,"0","False"
-"Alisa | The Awakening Demo","itch.io",,"0","False"
-"Shoot Shoot Mega Pack","itch.io","27/04/2017","0","False"
-"Summer in Mara","itch.io","16/06/2020","0","False"
-"SPACE / MECH / PILOT - THE UNIVERSE DRIVE 1.0","itch.io",,"0","False"
-"Snack Scoffer","itch.io",,"0","False"
-"The Long Dark","Steam","1/08/2017","0","False"
-"Cyberhold (Prototype)","itch.io","30/10/2020","0","False"
-"Lesbian Mothman Hunters","itch.io","31/10/2019","0","False"
-"Word Forward","itch.io","28/08/2019","0","False"
-"for|rest","itch.io",,"0","False"
-"Martial Cards","itch.io","14/05/2021","0","False"
-"Philosophy Fantasy","itch.io",,"0","False"
-"Witchball","itch.io","15/12/2017","0","False"
-"Team Fortress 2","Steam","10/10/2007","8160","False"
-"Three Lesbians in a Barrow","itch.io","17/05/2019","0","False"
-"Blinck Island Returns","itch.io","16/02/2021","0","False"
-"Sub-Uber-Marine","itch.io",,"0","False"
-"Palette Studio","itch.io",,"0","False"
-"Ultra Street Fighter IV","Steam","7/08/2014","2269","False"
-"Project MALLOW","itch.io","18/07/2017","0","False"
-"Antecrypt⚡","itch.io","10/06/2021","0","False"
-"Jezebel and the Flame","itch.io","20/04/2020","0","False"
-"butterflowers","itch.io","2/02/2021","0","False"
-"Wondee","itch.io","6/12/2016","0","False"
-"CrossCode","itch.io","20/09/2018","0","False"
-"Borbo's Quest","itch.io","20/12/2020","0","False"
-"Hexologic","Steam","29/05/2018","0","False"
-"Your Future Self","itch.io","8/03/2019","0","False"
-"Eddie Hill -in- The Curse Of The Skull Medallion","itch.io","7/04/2021","0","False"
-"VirtuaVerse","GOG","11/05/2020","0","False"
-"F J O R D S","itch.io","31/10/2013","0","False"
-"Sulphur Nimbus: Hel's Elixir","itch.io","12/07/2019","0","False"
-"Cantrip","itch.io","14/02/2019","0","False"
-"the silence","itch.io","27/04/2018","0","False"
-"Reverie","itch.io","3/10/2017","0","False"
-"Cecconoid","itch.io","8/10/2019","0","False"
-"Block Swap","itch.io","15/07/2020","0","False"
-"Soundodger+","itch.io","11/10/2013","0","False"
-"Food Flinger VR","itch.io","16/06/2020","0","False"
-"Optivox - The Voxel Modeler for Game Development","itch.io",,"0","False"
-"The White Door","itch.io","9/01/2020","0","False"
-"And Other Stories","itch.io","12/08/2020","0","False"
-"Quench","itch.io","7/08/2019","0","False"
-"Selection Process","itch.io","21/06/2021","0","False"
-"Metro Exodus Enhanced Edition","Steam","14/02/2020","0","False"
-"Motorcycle Mechanic Simulator 2021","Steam","17/11/2021","0","False"
-"The Vanishing of Ethan Carter Redux","Epic","11/09/2015","0","False"
-"Vast Trivia Of The Void","itch.io","27/04/2021","0","False"
-"NEXT JUMP: Shmup Tactics","itch.io","28/04/2017","0","False"
-"Pixel Composer","itch.io",,"0","False"
-"Steel Seraph (Early Access)","itch.io","30/03/2019","0","False"
-"Project SNAQE","itch.io","4/02/2022","0","False"
-"Borderlands 3","Epic","13/09/2019","0","False"
-"RB: Axolotl","itch.io","7/08/2020","0","False"
-"Fat Slice 2","itch.io","26/05/2018","0","False"
-"System Shock: Classic","Steam","22/09/1994","0","False"
-"Bicyclism EP","itch.io","14/11/2016","0","False"
-"In Sound Mind","Epic","28/09/2021","0","False"
-"Chess and Dungeons","itch.io","18/05/2021","0","False"
-"Unto the Night","itch.io",,"0","False"
-"Shutter Stroll","itch.io","2/06/2020","0","False"
-"Asterism","itch.io",,"0","False"
-"MultiVersus","Steam","19/07/2022","24840","True"
-"The Tower: The Order of XII","itch.io","26/09/2019","0","False"
-"Marchland","itch.io",,"0","False"
-"Antistatic","itch.io","24/01/2019","0","False"
-"Take A Hike!","itch.io","20/09/2020","0","False"
-"Ganbare! Super Strikers","itch.io","26/07/2018","0","False"
-"Dx Ball Shooter","itch.io","3/07/2016","0","False"
-"Flewberry","itch.io","17/08/2018","0","False"
-"There You Go","itch.io","2/07/2016","0","False"
-"GameGuru","Steam","19/05/2015","0","False"
-"Bombing!!: A Graffiti Sandbox","itch.io","18/05/2021","0","False"
-"The Wishing Stone","itch.io",,"0","False"
-"Expeditions: Viking","Steam","27/04/2017","0","False"
-"Zombie Admin","itch.io","29/09/2021","0","False"
-"Lost Dreams","itch.io",,"0","False"
-"Tap Strike BOOM!","itch.io",,"0","False"
-"Don't Look Down","itch.io",,"0","False"
-"Kerbal Space Program","Steam","27/04/2015","0","False"
-"Sunflower Maintenance / 向日葵のメンテナンス","itch.io",,"0","False"
-"Depth of Extinction","itch.io","31/10/2016","0","False"
-"Snowdown","itch.io","2/11/2019","0","False"
-"Bleed 2","itch.io","8/02/2017","0","False"
-"Yu-Gi-Oh! Master Duel","Steam","18/01/2022","39414","False"
-"In Between","Steam","21/08/2015","0","False"
-"Detours","itch.io","10/02/2021","0","False"
-"hollow","itch.io","16/11/2017","0","False"
-"PIPO'S ON THE RUN","itch.io","14/12/2020","0","False"
-"Knight Bewitched 2","itch.io",,"0","False"
-"Robo Runner","itch.io","7/03/2021","0","False"
-"Shing!","Steam","28/08/2020","0","False"
-"Wheels of Aurelia","itch.io","20/09/2016","0","False"
-"Vampire Night Shift","itch.io","29/08/2020","0","False"
-"Amnesia: A Machine for Pigs","Steam","10/09/2013","0","False"
-"Homebound","itch.io","16/02/2017","0","False"
-"Magic Wand","itch.io","25/06/2017","0","False"
-"Cosmic Rochambo","itch.io","26/11/2016","0","False"
-"Post Void","Steam","6/08/2020","298","False"
-"Cook, Serve, Delicious! 3?!","Steam","14/10/2020","0","False"
-"Arlo The Rabbit","itch.io","23/05/2018","0","False"
-"VVVVVV","itch.io","11/01/2010","5101","False"
-"NEON STRUCT","itch.io","20/05/2015","0","False"
-"The Furniture Of Self","itch.io","2/04/2019","0","False"
-"Eldritch","itch.io","21/10/2013","0","False"
-"Newtraction","itch.io","31/07/2021","0","False"
-"Plunge","itch.io","23/08/2019","0","False"
-"Sundered: Eldritch Edition","itch.io","28/07/2017","0","False"
-"Ball vs Block","itch.io","13/05/2021","0","False"
-"The Manse on Soracca","itch.io","12/10/2019","0","False"
-"Without Escape","itch.io","24/01/2018","0","False"
-"Hexed","itch.io",,"0","False"
-"HORIZON VANGUARD","itch.io","31/12/2018","0","False"
-"Super Box Land Demake","itch.io","9/10/2019","0","False"
-"SMITE","Steam","8/09/2015","43239","True"
-"Never Alone (Kisima Ingitchuna)","Epic","18/11/2014","0","False"
-"Space Fuel","itch.io","9/04/2021","0","False"
-"Oneons: Prisoners","itch.io",,"0","False"
-"A Forgetful Loop","itch.io","4/09/2020","0","False"
-"Fatum Betula","itch.io","20/06/2020","0","False"
-"Terroir","itch.io","17/05/2017","0","False"
-"Central Limit Theorem","itch.io","15/11/2018","0","False"
-"Super Head Ball","itch.io",,"0","False"
-"Bunny Hill Horror","itch.io","20/10/2019","0","False"
-"Batbarian: Testament of the Primordials","itch.io","15/10/2020","0","False"
-"Being","itch.io","10/05/2017","0","False"
-"Monaco","Steam","24/04/2013","0","False"
-"Bullet Heaven 2","itch.io","7/12/2015","0","False"
-"Warhammer 40,000: Mechanicus - Standard Edition","Epic",,"0","False"
-"Polyroll","itch.io","29/10/2019","0","False"
-"Pathway","Steam","11/04/2019","0","False"
-"Corridor Z","Steam","8/01/2018","0","False"
-"Hungry Frog","itch.io","21/05/2021","0","False"
-"Hell is other demons","Epic","18/04/2019","0","False"
-"Ori and the Blind Forest: Definitive Edition","Steam","27/04/2016","0","False"
-"SKELERUN","itch.io",,"0","False"
-"RogueSlide","itch.io",,"0","False"
-"Jupitron Game Collection Vol.1","itch.io",,"0","False"
-"Fostering Apocalypse","itch.io","8/06/2021","0","False"
-"Dominique Pamplemousse and Dominique Pamplemousse in ""Combinatorial Explosion!""","itch.io","1/04/2017","0","False"
-"The Escapists","Epic","13/02/2015","0","False"
-"Company of Heroes 2","Steam","25/06/2013","0","False"
-"Containment","itch.io","13/01/2012","0","False"
-"Fantasy RPG Cursors (gold)","itch.io",,"0","False"
-"Counter-Strike: Source","Steam","1/11/2004","180600","False"
-"Book of Eos","itch.io",,"0","False"
-"reIterate()","itch.io",,"0","False"
-"SOMOS","itch.io","8/11/2018","0","False"
-"DOOM 64","Epic","31/03/1997","0","False"
-"This Panda Needs You","itch.io","8/09/2017","0","False"
-"Wave_Machine","itch.io","29/04/2021","0","False"
-"The Hunt for my GirlFriend","itch.io","10/01/2021","0","False"
-"Overcooked! 2","Epic","7/08/2018","0","False"
-"Butterflies Episode 2: Getting Up","itch.io","19/09/2021","0","False"
-"Lillyann","itch.io","26/02/2021","0","False"
-"Dystopicon","itch.io","7/06/2019","0","False"
-"8 Links","itch.io","24/04/2018","0","False"
-"Hack FPS","itch.io","12/10/2020","0","False"
-"SubDivide","itch.io",,"0","False"
-"tumbleblox","itch.io","3/05/2020","0","False"
-"Four Horsemen","itch.io","15/04/2017","0","False"
-"SuperLuminauts","itch.io","1/09/2017","0","False"
-"Blobbins","itch.io","21/02/2021","0","False"
-"1993 Space Machine","itch.io","28/03/2016","0","False"
-"gloom reducer","itch.io","3/12/2021","0","False"
-"VOID","itch.io","17/04/2008","0","False"
-"Prehistoric Dude","itch.io","11/08/2020","0","False"
-"Rogue Legacy","Epic","27/06/2013","457","False"
-"Silver Grapple","itch.io","25/08/2017","0","False"
-"Beneath a Steel Sky","GOG","11/04/1994","0","False"
-"Overwatch","Battle.net","24/05/2016","287","False"
-"ΔV: Rings of Saturn","Steam","12/08/2019","0","False"
-"Intelligent Design: An Evolutionary Sandbox","itch.io","12/05/2017","0","False"
-"Infiniboss","itch.io","27/08/2019","0","False"
-"A Wave of Lights","itch.io","9/08/2020","0","False"
-"10mg: Locked In","itch.io","15/10/2020","0","False"
-"Say No! More","Steam","9/04/2021","0","False"
-"Chronicles of two Heroes","itch.io",,"0","False"
-"Don't Escape: 4 Days to Survive","itch.io","11/03/2019","0","False"
-"Democratic Socialism Simulator","itch.io","20/02/2020","355","False"
-"League of Legends",,"27/10/2009","36111","True"
-"Rebel Galaxy","Steam","20/10/2015","0","False"
-"Mixolumia","itch.io","8/08/2020","0","False"
-"Gardenia","itch.io","30/11/2019","0","False"
-"Rhythm 'n Bullets","itch.io","9/11/2020","0","False"
-"DERE EVIL EXE","itch.io","29/05/2018","0","False"
-"Mixed Feelings","itch.io","15/11/2020","0","False"
-"The Spark of One","itch.io",,"0","False"
-"TowerFall Dark World Expansion","itch.io","12/05/2015","0","False"
-"Sophie's Cubes","itch.io","6/04/2020","0","False"
-"The Lost Night","itch.io","28/02/2021","0","False"
-"Znax","itch.io",,"0","False"
-"The Quiet Sleep","itch.io","14/10/2017","0","False"
-"How to Win - Season One","itch.io","18/06/2020","0","False"
-"Black Box","itch.io",,"0","False"
-"Remnant: From the Ashes","Epic","20/08/2019","0","False"
-"A Sketchbook About Her Sun","itch.io","10/06/2021","0","False"
-"Worldcraft","itch.io","2/02/2020","0","False"
-"Fossil Hunters","itch.io","13/02/2018","0","False"
-"Legion TD 2","Steam","1/10/2021","95846","True"
-"2ECONDS TO STΔRLIVHT: My Heart's Reflection","itch.io","22/01/2021","0","False"
-"IGEO","itch.io","19/04/2016","0","False"
-"Greedy Bubble","itch.io","7/06/2021","0","False"
-"BEACON","itch.io","30/04/2018","0","False"
-"Rooftop Cop","itch.io","2/03/2015","0","False"
-"Delver","itch.io","6/09/2013","0","False"
-"Gimmick in the Chaos Dimension","itch.io","30/05/2021","0","False"
-"Beyond The Bow","itch.io","15/05/2021","0","False"
-"Clash Force","itch.io","25/10/2017","0","False"
-"Rakete","itch.io","7/01/2012","0","False"
-"Final Spike","itch.io","1/10/2018","0","False"
-"What Comes After","itch.io","5/11/2020","0","False"
-"i hurt myself - postjam edition","itch.io",,"0","False"
-"THE BLACK IRIS","itch.io","6/02/2021","0","False"
-"STRAWBERRY CUBES","itch.io","2/07/2015","0","False"
-"""Gamer""+ Crossroad of Sympathy","itch.io","21/01/2021","0","False"
-"Night Call","itch.io","17/07/2019","0","False"
-"Quiet as a Stone","itch.io","20/11/2018","0","False"
-"Dead Cells","Steam","6/08/2018","26820","True"
-"Lawn Buster for Hire","itch.io",,"0","False"
-"Unreal Tournament","Epic","1/05/2016","0","False"
-"Trackmania","Ubisoft Connect","1/07/2020","0","False"
-"Heroes of the Storm","Battle.net","2/06/2015","10969","False"
-"Fire & Fondness 2","itch.io","8/08/2020","0","False"
-"Turn-Based Champion","itch.io","2/06/2018","0","False"
-"HELP - The Heroes Enhancing Lives Program","itch.io","29/02/2020","0","False"
-"Boys Work","itch.io","25/06/2018","0","False"
-"dstnce.","itch.io","15/12/2020","0","False"
-"Cris Tales","Epic","19/07/2021","0","False"
-"Microscope Madness","itch.io",,"0","False"
-"Dona Vasa","itch.io","4/04/2021","0","False"
-"2000:1: A Space Felony","itch.io","7/07/2017","0","False"
-"WATCH_DOGS 2","Ubisoft Connect","15/11/2016","0","False"
-"Witches and Bandits and Swords (Oh My)","itch.io",,"0","False"
-"Push It In","itch.io","15/04/2015","0","False"
-"Gods Will Fall","Epic","28/01/2021","0","False"
-"X-Morph: Defense","Steam","30/08/2017","0","False"
-"UNBEATABLE [white label]","itch.io",,"0","False"
-"Regina & Mac","itch.io","16/01/2020","0","False"
-"DUNGEONBLADE - HAUNTED KINGDOM","itch.io","9/10/2020","0","False"
-"SOLAS 128","itch.io","25/01/2021","0","False"
-"Déjà Vu","itch.io","31/12/1985","0","False"
-"Card Hog","itch.io","23/06/2020","0","False"
-"StarBoy","itch.io",,"0","False"
-"Sunset Overdrive","Steam","16/11/2018","0","False"
-"VEKTOR 2089","itch.io","18/09/1989","0","False"
-"RADARjAM","itch.io","28/07/2020","0","False"
-"Treasure Hunter Simulator","Steam","6/12/2018","0","False"
-"Unbuild","itch.io","27/04/2021","0","False"
-"Ouroboros: The Sacrifice","itch.io",,"0","False"
-"The Witchling Marjolaine","itch.io","13/04/2020","0","False"
-"Stars Die","itch.io","28/01/2020","0","False"
-"Cross The Road","itch.io","3/07/2016","0","False"
-"SPLASH BLAST PANIC","itch.io","28/08/2018","0","False"
-"Moving Out","Epic","27/04/2020","0","False"
-"Ug! Caveman Game","itch.io",,"0","False"
-"Sudd City Adventures","itch.io","22/05/2020","0","False"
-"Gunhouse","itch.io","20/01/2020","0","False"
-"Fit For A King","itch.io","5/09/2019","0","False"
-"Wasteland 3","Steam","27/08/2020","0","False"
-"Doorways","itch.io","20/09/2013","0","False"
-"</reality>","itch.io",,"0","False"
-"The Missing Locksmith","itch.io","12/04/2020","0","False"
-"Dino Run","itch.io","30/04/2008","0","False"
-"20x20x20","itch.io","20/11/2019","0","False"
-"Shadow of the Tomb Raider: Definitive Edition","Epic","19/11/2019","0","False"
-"Halloween Forever","itch.io","25/10/2016","0","False"
-"Another Lost Phone: Laura's Story","itch.io","21/09/2017","0","False"
-"TENNNES","itch.io",,"0","False"
-"Pushamo","itch.io","12/11/2020","0","False"
-"Sound Typist","itch.io",,"0","False"
-"Redd's Runaway","itch.io",,"0","False"
-"Attentat 1942","itch.io","31/10/2017","0","False"
-"Who Killed My Father Academy!","itch.io",,"0","False"
-"Super Grappling Gecko","itch.io","11/10/2020","0","False"
-"Clean ATTACK!","itch.io",,"0","False"
-"Drawful 2","Steam","20/06/2016","0","False"
-"Emberglass","itch.io","13/01/2021","0","False"
-"Solar Danmaku","itch.io","16/04/2015","0","False"
-"Shovel Escape","itch.io",,"0","False"
-"Clam Man","itch.io","23/05/2019","0","False"
-"Slimes","itch.io",,"0","False"
-"The Witcher: Enhanced Edition","GOG","26/10/2007","0","False"
-"10mg: Cover Me In Leaves","itch.io","15/10/2020","0","False"
-"Jotun: Valhalla Edition","itch.io","29/09/2015","0","False"
-"Wampus","itch.io","1/02/2019","0","False"
-"Fantastic Fetus: Prebirth","itch.io",,"0","False"
-"Cardinal Cross","itch.io",,"0","False"
-"Soul Searching","itch.io","15/02/2017","0","False"
-"The Twine Grimoire, Vol. 1","itch.io",,"0","False"
-"The Sink Gods","itch.io","8/10/2021","0","False"
-"The Endless Empty","itch.io","3/11/2018","0","False"
-"Landlord of the Woods","itch.io","17/03/2021","0","False"
-"Pig Eat Ball","itch.io","26/09/2018","0","False"
-"10 in 1 game-a-week bundle!","itch.io",,"0","False"
-"Goopty Goo","itch.io",,"0","False"
-"Mysteries Under Lake Ophelia","itch.io","31/10/2021","0","False"
-"The Wooter","itch.io","28/07/2020","0","False"
-"Shenmue 3","Epic","19/11/2019","0","False"
-"Monster Pub Chapter 3","itch.io",,"0","False"
-"Walkerwall","itch.io",,"0","False"
-"Headspun: Dazed Edition","itch.io","28/08/2019","0","False"
-"KEO","Steam","9/12/2021","0","False"
-"Squeaker Dialogue Editor","itch.io",,"0","False"
-"Putrid Shark","itch.io","28/05/2021","0","False"
-"No One Goes Alone","itch.io",,"0","False"
-"Luck be a Landlord","itch.io","8/01/2021","0","False"
-"Keep Moving Forward","itch.io","25/01/2021","0","False"
-"Little Square Things","itch.io","28/09/2019","0","False"
-"Demon Truck","itch.io","26/09/2016","0","False"
-"Simple & Easy Localization Tool Unity","itch.io",,"0","False"
-"Mad Devils","itch.io","10/05/2021","0","False"
-"Disco Elysium","Steam","15/10/2019","0","False"
-"Skyling : Garden Defense","itch.io","19/04/2016","0","False"
-"Cosmic Express","itch.io","16/03/2017","0","False"
-"A Planet of Mine","itch.io","11/07/2017","0","False"
-"TORO","itch.io","15/05/2015","0","False"
-"Alien Death Mob","itch.io",,"0","False"
-"Spirit of the North","Epic","26/11/2020","0","False"
-"Magic Trick","itch.io","10/06/2020","0","False"
-"CLOSED HANDS","itch.io","4/03/2021","0","False"
-"Dogs Throwing Swords II: Three Barks To The Wind","itch.io",,"0","False"
-"Cardful Planning","itch.io","19/05/2021","0","False"
-"Loop Hero","Epic","4/03/2021","0","False"
-"Tapioca Rider","itch.io","30/08/2018","0","False"
-"demon DOIF","itch.io","29/01/2021","0","False"
-"Micron","itch.io","10/06/2012","0","False"
-"Cloud Serpent","itch.io","12/10/2018","0","False"
-"Mini Metro","itch.io","6/11/2015","0","False"
-"A Year Of Rain","Steam","13/03/2020","0","False"
-"Lizard Lady vs the Cats","itch.io","3/02/2021","0","False"
-"Calm Horizon","itch.io","13/02/2021","0","False"
-"BOTOLO","itch.io","15/12/2016","0","False"
-"The Amazing American Circus","Steam","16/09/2021","0","False"
-"Honey Twigs","itch.io",,"0","False"
-"Disobedient Sheep","itch.io",,"0","False"
-"911 Operator","Steam","24/02/2017","0","False"
-"Super Wiloo Demake","itch.io","30/07/2019","0","False"
-"Demonizer","itch.io","30/10/2020","0","False"
-"Lucifer Within Us","itch.io","15/10/2020","0","False"
-"Super Meat Boy","Epic","20/10/2010","620121","False"
-"Central Fugitive","itch.io",,"0","False"
-"Apex Legends","Origin","4/02/2019","5640","False"
-"Celeste","itch.io","25/01/2018","7044","True"
-"Relicta","Epic","4/08/2020","0","False"
-"Double Cross","itch.io","10/01/2019","0","False"
-"The Outcast Lovers","itch.io","17/07/2020","0","False"
-"NAIR - now with Online Play","itch.io","1/08/2019","0","False"
-"Victor Vran","Steam","24/07/2015","0","False"
-"Space Station Architect","itch.io",,"0","False"
-"Hi-Score Boi","itch.io","14/07/2020","0","False"
-"ETHEREAL","itch.io","7/03/2019","0","False"
-"inter-view","itch.io","14/01/2019","0","False"
-"UPSQUID","itch.io","31/12/2021","0","False"
-"Hero Hours Contract","itch.io","26/08/2020","0","False"
-"Monster Pub Chapter 1","itch.io","31/10/2017","0","False"
-"Rubies In Space (FULL GAME)","itch.io",,"0","False"
-"WarpThrough","itch.io","10/12/2019","0","False"
-"Puzzling Peaks EXE","itch.io",,"0","False"
-"Auto Chess","Epic","4/01/2019","7652","False"
-"Interactivity: The Interactive Experience","itch.io","23/10/2019","0","False"
-"Fantasy Strike","Steam","25/07/2019","780","False"
-"Dota Underlords","Steam","20/06/2019","504000","False"
-"Titan Souls","Steam","14/04/2015","0","False"
-"Retrace","itch.io","20/01/2020","0","False"
-"Tallowmere","itch.io","3/03/2015","0","False"
-"KIDS","itch.io","27/05/2019","0","False"
-"Knight's Retreat","Steam","6/08/2020","0","False"
-"Lucid: Parables of the Ubermensch","itch.io","25/03/2021","0","False"
-"Catlateral Damage: Remeowstered","itch.io","14/09/2021","0","False"
-"A Mortician's Tale","itch.io","18/10/2017","0","False"
-"Neon Depth","itch.io","8/09/2021","0","False"
-"PARANOIHELL","itch.io","16/01/2020","0","False"
-"Errant Kingdom","itch.io","15/01/2020","0","False"
-"The Vanishing of Ethan Carter","Epic","25/09/2014","0","False"
-"Desolate Roads","itch.io","20/10/2020","0","False"
-"Doodle Date","itch.io","19/04/2018","0","False"
-"The Adventures of Wolf and Hood - a Jigsaw Tale","itch.io","12/12/2020","0","False"
-"Hyperspace Dogfights","itch.io",,"0","False"
-"I Have Low Stats But My Class Is ""Leader"", So I Recruited Everyone I Know To Fight The Dark Lord","itch.io","15/12/2018","0","False"
-"Radio Commander","Steam","10/10/2019","0","False"
-"MetaWare High School (Demo)","itch.io","2/04/2020","0","False"
-"SkateBIRD","itch.io","16/09/2021","0","False"
-"Attention Heroes!","itch.io",,"0","False"
-"Untitled Darkness","itch.io","10/08/2021","0","False"
-"Neon Baller 0.1","itch.io",,"0","False"
-"You Are A Whale Part 1","itch.io","9/08/2019","0","False"
-"Vienna Automobile Society","itch.io","15/09/2017","0","False"
-"Loco Motive","itch.io","5/12/2020","0","False"
-"Easter Bunny on speed","itch.io","21/03/2021","0","False"
-"Sticky Cats","itch.io",,"0","False"
-"little boats of farewell","itch.io",,"0","False"
-"2   9   0   1  / / FREELANCER","itch.io",,"0","False"
-"EarthX","Steam","12/07/2019","0","False"
-"PREY","Epic","11/07/2006","0","False"
-"2064: Read Only Memories","itch.io","5/10/2015","0","False"
-"Anodyne","itch.io","22/03/2013","0","False"
-"Evangeline","itch.io","20/02/2017","0","False"
-"Might & Magic VIII: Day of the Destroyer","Ubisoft Connect","29/02/2000","0","False"
-"Escape Room - The Sick Colleague","itch.io","4/09/2020","0","False"
-"Warframe","Steam","25/03/2013","0","False"
-"Code Dungeon","itch.io","12/08/2020","0","False"
-"Worms W.M.D","Steam","23/08/2016","0","True"
-"Evoland Legendary Edition","Epic","7/02/2019","0","False"
-"Bunflower","itch.io",,"0","False"
-"Eternia: Pet Whisperer","itch.io","3/05/2021","0","False"
-"Changeling","itch.io",,"0","False"
-"Nainai’s Recipe","itch.io","20/05/2021","0","False"
-"RD Mars","itch.io",,"0","False"
-"Tooth and Tail","Steam","12/09/2017","0","False"
-"SUPER IS HOT","itch.io","13/12/2020","0","False"
-"FUTUREVOXIMAGINARIUMDOTEXEV1.1:DOGELOVEREDITION","itch.io",,"0","False"
-"Lenna's Inception","itch.io","17/01/2020","0","False"
-"Spirit Swap: Lofi Beats to Match-3 To","itch.io","30/09/2022","0","False"
-"The Lost Cave of the Ozarks","itch.io","28/10/2019","0","False"
-"Shn!p","itch.io","25/04/2017","0","False"
-"Millikan's Reach","itch.io","31/01/2022","0","False"
-"MAYHEM","itch.io","25/03/2011","0","False"
-"Viral Reload","itch.io","30/09/2021","0","False"
-"Half-Life 2","Steam","16/11/2004","180","False"
-"The Wordland Scape","itch.io",,"0","False"
-"Legend of Hand","itch.io","27/09/2017","0","False"
-"LightUp!","itch.io","4/06/2021","0","False"
-"The Hero of Budgie Island","itch.io",,"0","False"
-"Meta Form","itch.io",,"0","False"
-"Eldritch Academy","itch.io",,"0","False"
-"Wolfenstein: The New Order","Epic","20/05/2014","0","False"
-"Blood Under the Bridge","itch.io",,"0","False"
-"Telefrag VR","Steam","19/07/2019","0","False"
-"SPOOKWARE","itch.io","26/08/2021","0","False"
-"I Found a New Friend","itch.io",,"0","False"
-"Throw Me in the River","itch.io","5/10/2020","0","False"
-"forma.8","itch.io",,"0","False"
-"Swung","itch.io","22/05/2020","0","False"
-"Pipe Push Paradise","itch.io","19/01/2018","0","False"
-"The Church In The Darkness","itch.io","2/08/2019","0","False"
-"OCHITSUBAKI DEMO","itch.io",,"0","False"
-"Make It Last: While You Can","itch.io","3/09/2020","0","False"
-"Wand Wars","itch.io","13/04/2016","0","False"
-"Jupitron Game Collection Vol.4 - Middleware","itch.io",,"0","False"
-"Quake Champions","Steam","22/08/2017","0","False"
-"RoboVDino","itch.io","18/06/2018","0","False"
-"Infini","itch.io","4/03/2020","0","False"
-"Bear-ly There","itch.io",,"0","False"
-"Dragons in Space","itch.io",,"0","False"
-"Alpha Dog","itch.io","30/08/2019","0","False"
-"Control : Override","itch.io",,"0","False"
-"Slinger VR","Steam","23/04/2020","0","False"
-"What Goes Pumpkin the Night","itch.io","26/10/2020","0","False"
-"The Night Fisherman","itch.io","29/06/2020","0","False"
-"Kero-Go!","itch.io",,"0","False"
-"7 Second Haircuts","itch.io","10/05/2021","0","False"
-"Bonbon","itch.io","3/08/2017","0","False"
-"ParaMonsters and the Haunted Escape Room","itch.io","26/11/2020","0","False"
-"Kabaret","itch.io","30/09/2021","0","False"
-"Bring Back The Sun by Daniel da Silva","itch.io",,"0","False"
-"FRAMED Collection","itch.io","17/05/2018","0","False"
-"The Wanderer Vibes: Neon","itch.io",,"0","False"
-"Terraforming Mars","Epic","17/10/2018","0","False"
-"Psychoballs","itch.io","9/03/2018","0","False"
-"Roly-Polo","itch.io","16/10/2020","0","False"
-"Ultra Hat Dimension","itch.io","14/07/2020","0","False"
-"Pumpkin Eater","itch.io","17/11/2021","0","False"
-"Good Lookin Home Cookin: A CMC Vignette","itch.io","14/04/2021","0","False"
-"Minit Fun Racer","itch.io","18/02/2021","0","False"
-"NO THING","itch.io","6/04/2016","0","False"
-"Augma II Arc I","itch.io","8/02/2021","0","False"
-"TowerFall Ascension","itch.io","11/03/2014","0","False"
-"Solace State Demo","itch.io",,"0","False"
-"Long Gone Days","itch.io","28/03/2018","0","False"
-"Quest Of Graal DX","itch.io",,"0","False"
-"Stellar Interface","itch.io","21/11/2016","0","False"
-"Titan Tactics","itch.io","11/04/2021","0","False"
-"Kindling Spirits","itch.io","2/02/2021","0","False"
-"INMOST","itch.io","11/10/2019","0","False"
-"Refactor","itch.io","31/12/2021","0","False"
-"Towayami","itch.io","19/04/2019","0","False"
-"Bond: Wish of the Forest","itch.io","12/05/2021","0","False"
-"Cruel World","itch.io","4/04/2021","0","False"
-"Silicon Zeroes","itch.io","18/09/2017","0","False"
-"Lacrymo Tennis 2016 (+ 2018)","itch.io",,"0","False"
-"Jam and the Mystery of the Mysteriously Spooky Mansion","itch.io","14/10/2019","0","False"
-"Gunbuds","itch.io","1/06/2018","0","False"
-"Boa Retina","itch.io","1/07/2017","0","False"
-"Quadrilateral Cowboy","itch.io","25/07/2016","0","False"
-"Intra-System: Trust Issues","itch.io","25/04/2017","0","False"
-"Galactic Civilizations III (Test branch)","Epic",,"0","False"
-"Harvesterado","itch.io","24/08/2020","0","False"
-"Aarre Safari Ride","itch.io","17/07/2019","0","False"
-"Drones, The Human Condition","itch.io","1/12/2016","0","False"
-"Technoccult: Covenant","itch.io","31/10/2014","0","False"
-"Mages of Mystralia","Epic","18/05/2017","0","False"
-"Hiding Spot","itch.io","16/10/2018","0","False"
-"GRAVITY Pilot!","itch.io",,"0","False"
-"Little Burned Maiden","itch.io","27/08/2020","0","False"
-"MUSCLE WORLD","itch.io","21/05/2018","0","False"
-"Killing Floor 2","Epic","18/11/2016","0","False"
-"The Count of Monte Carlo","itch.io","26/10/2020","0","False"
-"Metamorphabet (2015)","itch.io","29/04/2015","0","False"
-"Crawl Space","itch.io","26/10/2017","0","False"
-"The Red Door","itch.io",,"0","False"
-"Dumpy & Bumpy","itch.io","26/11/2020","0","False"
-"Lofi Hip Hop Worlds To Study In","itch.io","30/01/2021","0","False"
-"Toree 2","itch.io","30/09/2021","0","False"
-"Headsnatchers","Steam","7/11/2019","0","False"
-"Midnight Scenes Ep.1: The Highway (Special Edition)","itch.io",,"0","False"
-"Obduction","Epic","24/08/2016","0","False"
-"Double Jump 2","itch.io","3/03/2021","0","False"
-"Contractors VR","Steam","14/12/2018","4140","True"
-"Sole Iron Tail Demo","itch.io","31/12/2021","0","False"
-"Concave Shooter","itch.io","4/11/2016","0","False"
-"Reminiscence in the Night","itch.io","30/11/2020","0","False"
-"RIOT - Civil Unrest","Steam","12/02/2019","0","False"
-"Hunt: Showdown (Test Server)","Steam","27/08/2019","0","False"
-"THE CORRIDOR","itch.io","4/12/2020","0","False"
-"Headlong Racing","itch.io",,"0","False"
-"Legends of Runeterra","Epic","30/04/2020","50","False"
-"Qavo","itch.io","4/11/2018","0","False"
-"The Machine's Garden","itch.io","7/08/2020","0","False"
-"NEO-PROGRAMS","itch.io","31/01/2021","0","False"
-"2-3-5-7","itch.io","6/03/2021","0","False"
-"Bunny Hill Horror: Bunny Boiler","itch.io","16/10/2020","0","False"
-"LOST ORBIT: Terminal Velocity","itch.io","15/07/2019","0","False"
-"THE DOOR","itch.io","22/03/2016","0","False"
-"Explorers (Deluxe Edition 🗿)","itch.io","11/12/2020","0","False"
-"Map Pack","Epic",,"0","False"
-"Baba Is You","itch.io","13/03/2019","6388","False"
-"Vagante","Steam","21/02/2018","0","False"
-"Bird Bakery","itch.io",,"0","False"
-"The Code Zone Retro Pack","itch.io",,"0","False"
-"Chamber.Repeat();","itch.io","2/05/2021","0","False"
-"Warsow","GOG","8/10/2012","0","False"
-"Out of Reach: Treasure Royale","Steam","14/10/2020","0","False"
-"BioShock Remastered","Epic","13/09/2016","0","False"
-"Attrition","itch.io","7/03/2018","0","False"
-"Enter the Gungeon","Steam","5/04/2016","0","True"
-"Steam Marines","itch.io","24/09/2014","0","False"
-"VR Kayaking Game (Demo)","itch.io",,"0","False"
-"Lutra's Monologue","itch.io","15/02/2021","0","False"
-"A Light Long Gone","itch.io","14/05/2020","0","False"
-"We should talk.","itch.io","16/07/2020","0","False"
-"Worlds of Ultima : The Savage Empire","GOG","30/12/1990","0","False"
-"Catlandia: Crisis at Fort Pawprint","itch.io","26/02/2020","0","False"
-"Gratia","itch.io",,"0","False"
-"City of Brass","Epic","4/05/2018","0","False"
-"Dead Space","Origin","24/10/2008","5309","False"
-"The Dark Eye: Chains of Satinav","Steam","22/06/2012","0","False"
-"Hero Generations","itch.io","10/04/2015","0","False"
-"The Arcade Tower","itch.io","5/01/2022","0","False"
-"RogueCraft Squadron","itch.io",,"0","False"
-"adjacency","itch.io","9/06/2017","0","False"
-"Hot Pot Panic","itch.io","19/10/2018","0","False"
-"Utopia Process","itch.io","26/03/2021","0","False"
-"Kill the Superweapon","itch.io","1/03/2018","0","False"
-"DATA LOSS","itch.io","1/05/2020","0","False"
-"Math Labyrinth","itch.io","22/12/2019","0","False"
-"Button City","itch.io","10/08/2021","0","False"
-"Void Wisp","itch.io","4/07/2017","0","False"
-"Metro Exodus","Steam","14/02/2020","0","False"
-"Coriander and The Fall of Orion","itch.io","30/10/2020","0","False"
-"Elephant Hunter Hunter","itch.io","13/06/2018","0","False"
-"Hellhole Game","itch.io","31/03/2021","0","False"
-"Space Hole 2018","itch.io","31/12/2018","0","False"
-"Eye of Ra","itch.io","16/11/2018","0","False"
-"co-open","itch.io","5/02/2021","0","False"
-"Pictassembler","itch.io",,"0","False"
-"Gladiabots","itch.io","1/05/2016","0","False"
-"Luna","itch.io","1/08/2017","0","False"
-"Codemancer","itch.io","12/08/2019","0","False"
-"Quible Sphere","itch.io",,"0","False"
-"Valheim","Steam","2/02/2021","9259","False"
-"Hunt: Showdown","Steam","27/08/2019","17089","True"
-"Bezier","itch.io","3/03/2016","0","False"
-"Among the Innocent: A Stricken Tale","itch.io","14/02/2017","0","False"
-"Celestial Links","itch.io","17/04/2020","0","False"
-"Luminous","itch.io","9/05/2018","0","False"
-"Cardinal Chains","itch.io","21/03/2018","0","False"
-"Dream Dye","itch.io","26/05/2021","0","False"
-"seethe and scab","itch.io",,"0","False"
-"Pixels Out of Space","itch.io","7/09/2020","0","False"
-"BBQ DAD: First Bite","itch.io","12/07/2020","0","False"
-"Driftland: The Magic Revival","Steam","18/04/2019","0","False"
-"LAZA KNITEZ!!","itch.io","12/03/2014","0","False"
-"Last Horizon","Steam","18/11/2015","0","False"
-"Widget Satchel","itch.io","27/11/2019","0","False"
-"Dayscream","itch.io","13/10/2020","0","False"
-"Backspace Bouken","itch.io","13/12/2019","0","False"
-"Surfacing","itch.io","30/10/2020","0","False"
-"Fäiser","itch.io","30/05/2019","0","False"
-"Planetary grapple","itch.io","2/03/2019","0","False"
-"wonShot","itch.io","2/12/2020","0","False"
-"The Sky Left Us [Demo]","itch.io",,"0","False"
-"QLRZ","itch.io",,"0","False"
-"Figment","itch.io","22/09/2017","0","False"
-"They Came From Uranus!","itch.io","2/07/2019","0","False"
-"Repurpose (Demo)","itch.io",,"0","False"
-"The Stillness of the Wind","itch.io","7/02/2019","0","False"
-"Pupper's Garden","itch.io","3/05/2020","0","False"
-"These Lands","itch.io","26/04/2019","0","False"
-"Firemakaf","itch.io",,"0","False"
-"Putahe ng Ina Mo: Sinigang Edition","itch.io",,"0","False"
-"Total Arcade Racing","itch.io","14/08/2020","0","False"
-"Volk-san: Egg&Catch","itch.io","7/06/2021","0","False"
-"Butterflies Episode 1: Rudies","itch.io","17/08/2018","0","False"
-"I'm a love interest in my childhood friend's reverse harem!!!","itch.io",,"0","False"
-"Pillars on Poppy Hills","itch.io","2/11/2020","0","False"
-"Lydia","itch.io","2/06/2017","0","False"
-"Bard Harder!","itch.io",,"0","False"
-"Minit","itch.io","3/04/2018","0","False"
-"Arcus","itch.io","28/07/2016","0","False"
-"Type The Entire Of Ulysses. That's it. That's the game.","itch.io",,"0","False"
-"Pawnbarian","Steam","24/09/2021","0","False"
-"Danger Crew","itch.io","6/05/2019","0","False"
-"Gun Rounds","itch.io","11/04/2020","0","False"
-"Jardin","itch.io","27/01/2019","0","False"
-"Lure of the Temptress","GOG","12/04/1992","0","False"
-"PROVIDER","itch.io",,"0","False"
-"Death Ray Manta SE","itch.io","17/09/2015","0","False"
-"Swim Out","itch.io","9/08/2017","0","False"
-"Soft Underbelly","itch.io","5/07/2020","0","False"
-"Derpy Deep Drive","itch.io",,"0","False"
-"Water Landing (Dracula Edition)","itch.io",,"0","False"
-"Eatvolve","itch.io",,"0","False"
-"Shmup Ball","itch.io","4/06/2021","0","False"
-"BlackJack Math","itch.io","21/01/2022","0","False"
-"Idle Champions of the Forgotten Realms","Epic","11/12/2018","0","False"
-"Lust for Darkness","Steam","12/06/2018","0","False"
-"Dominique Pamplemousse in ""It's All Over Once The Fat Lady Sings!""","itch.io","1/04/2013","0","False"
-"Mutant Year Zero Road to Eden","Epic","4/12/2018","0","False"
-"Prison of the Magi: Ch. 0","itch.io","27/03/2020","0","False"
-"Neverout","Steam","18/05/2017","0","False"
-"Running Askew","itch.io","5/02/2017","0","False"
-"Redout: Enhanced Edition","Epic","2/09/2016","0","False"
-"Throw Cubes into Brick Towers To Collapse Them","itch.io","24/09/2019","0","False"
-"Hood Outlaws and Legends","Epic","7/05/2021","0","False"
-"Portal Dogs","itch.io","22/02/2020","0","False"
-"Moon Hunters","itch.io","10/03/2016","0","False"
-"RPG Maker VX","Steam","20/10/2016","0","False"
-"Ash K's Chunkiest Juice template","itch.io",,"0","False"
-"Going Under","Steam","24/09/2020","0","False"
-"Over My Dead Body","itch.io","19/06/2017","0","False"
-"Caduceus","itch.io","1/12/2017","0","False"
-"Shiny Gauntlet","itch.io","1/10/2015","0","False"
-"Sightline","itch.io",,"0","False"
-"Unreal Tournament: Game of the Year Edition","Steam","17/03/2008","4663","False"
-"Tomb Raider GAME OF THE YEAR EDITION","Epic","28/01/2014","0","False"
-"Peck N Run","itch.io",,"0","False"
-"ParamediCats","itch.io","22/03/2020","0","False"
-"BFF or Die","itch.io","6/01/2019","0","False"
-"Switch 'N' Shoot","itch.io","17/10/2016","0","False"
-"96","itch.io","26/01/2017","0","False"
-"TEOCALLI","itch.io","10/03/2019","0","False"
-"Sudoku Zenkai","itch.io","2/04/2018","0","False"
-"Flufftopia","itch.io","5/03/2018","0","False"
-"Invertio","itch.io","7/02/2021","0","False"
-"The Forgotten Caves of Foolish Linger","itch.io","21/05/2021","0","False"
-"Crystal Control II","itch.io","27/05/2016","0","False"
-"Mech_Romancer Charity Bundle 1","itch.io","6/10/2018","0","False"
-"Roses Will Rise","itch.io",,"0","False"
-"112 Operator","Steam","23/04/2020","0","False"
-"Glitch Dungeon","itch.io",,"0","False"
-"Tic-Tac-Crow","itch.io","22/02/2021","0","False"
-"(Not Escape Room)","itch.io",,"0","False"
-"Dark Hope: A Puzzle Adventure","itch.io","21/12/2019","0","False"
-"Pebble Witch","itch.io","2/12/2020","0","False"
-"Jetscout: Mystery of the Valunians","itch.io","16/12/2020","0","False"
-"Cook, Serve, Delicious! 2!!","itch.io","13/09/2017","0","False"
-"Strobophagia | Rave Horror","itch.io","28/10/2020","0","False"
-"Ring of Pain","Epic","14/10/2020","0","False"
-"Fuzzy Road Home","itch.io",,"0","False"
-"The Light at the End of the Ocean","itch.io",,"0","False"
-"Mech_Romancer Charity Bundle 2","itch.io",,"0","False"
-"Knights of the Round Torus","itch.io","5/10/2020","0","False"
-"Inside The Mirror","itch.io",,"0","False"
-"Fast Cubes","itch.io",,"0","False"
-"Milkmaid of the Milky Way","itch.io","4/01/2017","0","False"
-"10mg: SNAAAK","itch.io","15/10/2020","0","False"
-"Behind the Masc","itch.io",,"0","False"
-"A NIGHTMARE'S TRIP","itch.io","7/10/2019","0","False"
-"Akuto: Showdown","itch.io","1/12/2016","0","False"
-"A Way Out","Steam","18/06/2020","9821","False"
-"Catty & Batty: The Spirit Guide","itch.io","10/02/2021","0","False"
-"Korpus: Buried over the Black Soil","itch.io","14/02/2020","0","False"
-"Spaß Taxi","itch.io","21/12/2019","0","False"
-"Promesa","itch.io","15/10/2020","0","False"
-"Kakatte Koi Yo!","itch.io",,"0","False"
-"Ruya","itch.io","1/11/2017","0","False"
-"VideoHole: Episode I","itch.io",,"0","False"
-"Liberated","GOG","30/07/2020","0","False"
-"DAEMON X MACHINA","Epic","12/09/2019","0","False"
-"Spooky Waltz","itch.io",,"0","False"
+﻿Name
+The First Greek Odyssey
+Guppy
+All Hams on Deck!
+Cellular Harvest: Purple
+Warpips
+inbento
+The First Tree
+Fit For A King
+Dona Vasa
+"Darkness Within 2: The Dark Lineage Director's Cut Edition"
+AcChen - Tile matching the Arcade way
+The Red Door
+Slimed
+PUBG: BATTLEGROUNDS
+Kaleidoscope
+Lara Croft and the Temple of Osiris
+2ECONDS TO STΔRLIVHT: Forever My Diamond
+Mop Boy Demo but better
+Traveler
+Arlo The Rabbit
+Quiet as a Stone
+"Nina Aquila: Legal Eagle, Season One"
+Draw Slasher
+Emberglass
+Central Fugitive
+Home - A Unique Horror Adventure
+Coriander and The Fall of Orion
+Shenmue 3
+TowerFall Dark World Expansion
+Escape Room - The Sick Colleague
+Naughty Elves - Christmas puzzle game
+Bond: Wish of the Forest
+Rip Them Off
+MMM: Murder Most Misfortunate
+Clam Man
+Fossil Hunters
+dstnce.
+Invertio
+Bouncy Cars
+Metori
+Backspace Bouken
+911 Operator
+Cannonhead Clash (Atari 2600)
+Highway Blossoms: Remastered
+Gladiabots
+i hurt myself - postjam edition
+Obduction
+Image of Perfection
+Déjà Vu
+The Answer is 42
+Ripple
+Puzzling Peaks EXE
+MultiVersus
+10 Beautiful Postcards
+The Hero of Budgie Island
+Halcyon 6
+Bezier (PC)
+Alone With You
+Witchball
+the worm game (SOUP 1.0)
+Headlong Racing
+Froggy Family Fort
+Route Me Mail and Delivery Co
+soundStrider
+Micro Dash
+</reality>
+Jotun: Valhalla Edition
+The Hunt for my GirlFriend
+Void Runner
+The Life of Saint Fiona Bianco Xena
+Linearity
+Sokobond
+TEOCALLI
+"Balloony's adventure"
+Do I Pass?
+Partition Sector
+An Ode to Todd the Toad: Frogcare!
+DOOM 64
+Going Under
+Aseprite
+Color Jumper
+Speed Dating for Ghosts
+"Frick, Inc."
+Stars Die
+Diver
+TENNNES
+Galactic Civilizations III
+Lust from Beyond: M Edition
+Mutant Year Zero Road to Eden
+Control : Override
+GoNNER
+Pico-8 Multicart
+Pawnbarian
+Chimpology
+Blood Under the Bridge
+The Witcher: Enhanced Edition
+BioShock Remastered
+Minit
+Isolation Story
+Light Borrower
+Jam and the Mystery of the Mysteriously Spooky Mansion
+Attraction Force
+Dx Ball Shooter
+The Missing Locksmith
+Depth of Extinction
+Portal Dogs
+MetaWare High School (Demo)
+Bullet Heaven 2
+NO THING
+Demetrios - The BIG Cynical Adventure
+Dragons in Space
+"""Gamer""+ Crossroad of Sympathy"
+Shoot Shoot Mega Pack
+Meta Form
+VOID
+"Don't Escape: 4 Days to Survive"
+songs and flowers
+Jupitron Game Collection Vol.1
+Numbertron (Sharp MZ)
+Sangwich
+Philosophy Fantasy
+Doujins and Dragons
+"PIPO'S ON THE RUN"
+Unbuild
+Auto Chess Experimental
+Gyro Boss DX
+YBit
+Red Embrace (BL Visual Novel)
+WARSAW
+RIOT - Civil Unrest
+The Geography
+TRAINBOW
+Cats are Liquid - A Light in the Shadows
+Adventure for a Bit
+Antistatic
+GUROBU
+Attention Heroes!
+Crashlands
+TowerFall Ascension
+"Nebs 'n Debs (NES)"
+Yi and the Thousand Moons
+Gloomhaven
+In The Hollow of the Valley
+Yu-Gi-Oh!  Master Duel
+Gimmick in the Chaos Dimension
+yarne
+Jetscout: Mystery of the Valunians
+Cleansuit
+Peace of Mind
+Magic Trick
+BioShock Infinite: Complete Edition
+Space Hole 2020
+"Izil's Adventures: Blackfeather's Legacy"
+Borderlands 3
+wonShot
+Edolie
+Swim Out
+Drum Controller
+Laser Paddles
+"The Machine's Garden"
+Kingdom Two Crowns
+Loop Hero
+Skullgirls 2nd Encore
+The White Door
+A Planet of Mine
+VEKTOR 2089
+Gun Rounds
+Slain: Back from Hell
+Left 4 Dead 2
+The Church In The Darkness
+Pixel Driver - Fast paced infinite driving
+Sunflower Maintenance / 向日葵のメンテナンス
+ZeroRanger
+Dawn of a Soul
+Darkwood
+Dodgy Boat
+Fast Cubes
+Danger Scavenger
+seethe and scab
+The Dark Eye: Chains of Satinav
+Errant Kingdom
+Shovel Escape
+The Wooter
+Titanfall 2
+The Arcade Tower
+Muffin Fight VR
+Celeste
+Gunbuds
+JB Hairboll in Murder Flub
+Inside | Out
+Windbound
+"Mirror's Edge Catalyst"
+Ring of Pain
+Quench
+RB: Axolotl
+Dub Dash
+Demon Truck
+Treasure Adventure Game
+Contractors VR
+SPARE
+Lost Dreams
+Arachnowopunk
+Boys Work
+Boa Retina
+Valheim
+"Asteroids, Inc."
+Legends of Runeterra
+Detective Case and Clown Bot in: Murder in The Hotel Lisbon
+Moon Hunters
+Catlateral Damage: Remeowstered
+Idle Champions of the Forgotten Realms
+Who Killed My Father Academy!
+Grime House
+Where the Snow Settles
+Tropico 5
+Baba Is You
+Super Mumtaz Bros.
+Tyrian 2000
+Book of Eos
+Lonely People Potion Shop
+BROCCOLI QUEST
+The Lost Night
+"Sulphur Nimbus: Hel's Elixir"
+Parcels And Pollen
+Dota Underlords
+Haque
+Pumpkin Eater
+Sonic Mania
+Stacks On Stacks (On Stacks)
+Worlds of Ultima : The Savage Empire
+The Search
+SUPERHOT
+Grapple Force Rena
+And Other Stories
+little boats of farewell
+Ball vs Block
+Last Fleet
+How to Win - Season One
+The Pig: Money is Time
+A Sketchbook About Her Sun
+Space Duet
+Half-Life 2: Deathmatch
+Metamorphabet (2015)
+Fostering Apocalypse
+demon DOIF
+Bumble Butt
+Sewer Rave
+Bring Back The Sun by Daniel da Silva
+Soulblight
+Grand Theft Auto V
+Space Hole 2016
+Homunculus Hotel
+Fake Illusions - Encore Update
+MiTOS
+A Light Long Gone
+OMEGANAUT
+space shooter
+Neon Baller 0.1
+Micron
+This War of Mine
+Vampire Night Shift
+Slinger VR
+Knights of the Round Torus
+Flashover MegaSector
+eat-it-all
+Asterism
+New Spirits
+Space Battalion Alpha
+Turn-Based Champion
+Swung
+_________ (What Even Is That Thing?)
+"Mini's Magic World"
+Grow in the Hole
+Never Alone (Kisima Ingitchuna)
+The Last Librarian
+Disobedient Sheep
+WarpThrough
+8 Links
+Totally planet
+Untitled Darkness
+Quest of Dungeons
+"Death's Door"
+Figment
+Telefrag VR
+Luna
+Alien Death Mob
+Retrace
+ProcrastiTyper
+Strife of Cosmos
+Monster Pub Chapter 2
+Pyo
+Splinter Zone
+Sudoku Zenkai
+Titan Tactics
+Grumpy Librarian
+Gigabit
+inter-view
+Pictassembler
+Alpha Dog
+Dear Esther: Landmark Edition
+Roses Will Rise
+Regina & Mac
+RogueSlide
+Just Another Day at the Office
+Spooky Station
+Riba
+El Gancho
+Stellar Interface
+A Kishoutenketsu in the countryside
+Reminiscence in the Night
+Sly Panda
+Cat Ace
+"Old Man's Journey"
+Pressure
+RD Mars
+Out of Reach: Treasure Royale
+Midnight Scenes Ep.2: The Goodbye Note (Special Edition)
+Catty & Batty: The Spirit Guide
+"Don't Starve Together"
+Bomber Crew
+Midnight Scenes: The Nanny
+"Cook, Serve, Delicious! 2!!"
+Legion TD 2
+STRAINGE
+Toy Kingdom 2
+Pixels Out of Space
+PROVIDER
+KAIMA
+WE ARE DOOMED
+Killing Floor 2
+MAYHEM
+Soundodger+
+"Beppo's Hole in One Golf"
+Schildmaid MX
+Overwatch 2
+BEAUTIFUL DESOLATION
+ToeJam & Earl: Back in the Groove
+Soul Searching
+"Binky's Trash Service"
+Fire & Fondness 2
+Hellhole Game
+Prehistoric Dude
+Dead Space
+Hack FPS - Anniversary Edition
+"Borbo's Quest"
+Shell Out Showdown
+TORO
+Tic-Tac-Crow
+Cloud Gardens
+ENDLESS Space 2
+Tallowmere
+Bunny Hill Horror: Bunny Boiler
+PRAGMA
+"Type The Entire Of Ulysses. That's it. That's the game."
+When There Is No More Snow
+Spirit Swap: Lofi Beats to Match-3 To
+Despotism 3k
+Double Turn
+Last Train To Tranz-Central (ZX Spectrum)
+Being
+Shrinespark
+PhasR
+ARK: Survival Evolved
+Popup Dungeon
+Neverout
+Martial Cards
+Left 4 Dead
+Ouroboros: The Sacrifice
+West of Dead
+IGEO
+Lieve Oma
+A Normal Lost Phone
+Shutter Stroll
+Can Androids Pray: Blue
+The Vanishing of Ethan Carter Redux
+DATA LOSS
+Backbone
+Dino Run
+Bat Lizard Bonanza
+Kane & Lynch 2: Dog Days
+Drawful 2
+Loco Motive (Game Jam)
+Fantasy Strike
+Wander the Cosmos
+Bonbon
+LOST ORBIT: Terminal Velocity
+PachaMama
+Ultra Street Fighter IV
+Half-Life 2: Lost Coast
+Rakete
+Bombing!!: A Graffiti Sandbox
+Ossuary
+Lure of the Temptress
+Amnesia: The Dark Descent
+Out For Delivery
+Steam Marines
+"Don't Look Down"
+Mad Devils
+"I Have Low Stats But My Class Is ""Leader"", So I Recruited Everyone I Know To Fight The Dark Lord"
+Pawndemonium
+"Maudelyn's Quest"
+Redout: Enhanced Edition
+Shiny Gauntlet
+Simple Complex Puzzle
+Moonstone Deep
+GRAVITY Pilot!
+Mages of Mystralia
+Spyro Reignited Trilogy
+BlackJack Math
+Staxter
+Tabletop Simulator
+"Hope's Peak"
+Another Perspective
+Over My Dead Body
+GameGuru Classic
+Lucifer Within Us
+Chess and Dungeons
+Cat Tower
+Black Box
+StarFighter R&D HD Edition
+BasketBelle
+Towayami
+The Wanderer Vibes: Neon
+Restricted Airspace
+LongStory
+Motorcycle Mechanic Simulator 2021
+Fantasy RPG Cursors (gold)
+"DreamCatcher: Reflections, Volume 1"
+PHN-HOME
+Evoland Legendary Edition
+Landlord of the Woods
+An Airport Game
+Codemancer
+​RELEVƎ⅃ƎЯ
+Drew and the Floating Labyrinth
+Hyperspace Dogfights
+Luminous
+Predestination
+HORIZON VANGUARD
+Crawl Space
+Talk To Me
+Dragonsphere
+Halloween Forever
+Magic Wand
+Elden: Path of the Forgotten
+Rising Hell
+CROSSNIQ+
+Underhero
+Nonsense Soccer
+Steam Marines 2
+No One Goes Alone
+Thea 2: The Shattering
+Lofi Hip Hop Worlds To Study In
+Pikuniku
+Mending Wall
+I Found a New Friend
+Halo: The Master Chief Collection
+Iratus
+Geneforge 1: Mutagen
+Titan Souls
+Maneater
+Hidden Folks
+Air Dasher
+SOLAS 128
+Hazard
+Tomb Raider GAME OF THE YEAR EDITION
+"DEMON'S TILT"
+Chronology: Time Changes Everything
+Pale Cachexia
+Destiny 2
+Gebo
+Sightline
+NEO-PROGRAMS
+SkateBIRD
+Vampyr
+Alt-Frequencies
+Vagante
+The Piano Player
+Silicon Zeroes
+Desolate Roads
+Supraland
+Super Head Ball
+Math Labyrinth
+Galactic Civilizations III (Test branch)
+QUACK ATTACK 1985: TURBO DX EDITION
+Gloria Victis
+Cantrip
+Slay the Spire
+RogueCraft Squadron
+Cris Tales
+a new life.
+To Ash and Ember
+The Trolley
+Hyperplex 3D
+Watchlist
+Feisty Heist
+Locomancer
+A Good Snowman Is Hard To Build
+PARTICLE MACE
+Harvesterado
+RADARjAM
+piCOLUMNS
+Spell Casting
+Harvest Hero Origins
+Disco Elysium
+Znax
+Pixross
+BFF or Die
+Orbital Racer
+Science Girls!
+SHUT IN
+Super Wiloo Demake
+"Millikan's Reach"
+Kerbal Space Program
+Broken Age
+"I'm a love interest in my childhood friend's reverse harem!!!"
+Bringris
+"Dominique Pamplemousse in ""It's All Over Once The Fat Lady Sings!"""
+Learn Japanese To Survive - Hiragana Battle
+Zombusters
+Wolfenstein: The New Order
+Guild of Dungeoneering
+SMITE - Public Test
+Team Hogus: GHAMEMFAIFTH OTHIYLTIM
+Vignettes
+In Sound Mind
+Rising Dusk
+Amnesia: Rebirth
+SUPER IS HOT
+Make It Last: While You Can
+Spooky Waltz
+Tenderfoot Tactics
+Brothers - A Tale of Two Sons
+After The End: The Harvest
+The Code Zone Retro Pack
+"The Tall Wall Falls: The Inner Gate's Last Stand"
+Quest Of Graal DX
+A Forgetful Loop
+Butterflies Episode 2: Getting Up
+Fury Unleashed
+Rebel Galaxy Outlaw
+Paint Game
+Grow Big (or Go Home): Ultimate Edition
+Hunt: Showdown
+ParamediCats
+The Wordland Scape
+Kero-Go!
+Murder at the Cat Show
+Wondee
+Mostly Intense Monster Defense
+Rooftop Cop
+Nepenthe
+We Met in May
+Snowdown
+Dates & Wires
+Kaiju Klimb
+Ballsy! World Cup 2020
+Circa Infinity
+Rise of the Tomb Raider: 20 Year Celebration
+Wandersong
+Neon Abyss
+The Crystal Golem
+Vast Trivia Of The Void
+HITMAN
+The Light at the End of the Ocean
+20x20x20
+Warframe
+Memories of East Coast
+Bard Harder!
+Three Lesbians in a Barrow
+They Came From Uranus!
+Alien Life Lab
+tumbleblox
+This Panda Needs You
+Zombie Admin
+Ministry of Broadcast
+Bear-ly There
+"Alchemist's Castle"
+Kaiju Big Battel: Fighto Fantasy
+Candylight
+Bem Feito
+Jardin
+Blinck Island Returns
+"Don't Take It Personally, I Just Don't Like You: The Camping Trip"
+Salt and Sanctuary
+Stalingrad
+Amnesia: A Machine for Pigs
+Greedy Bubble
+Thermo Puzzle
+Karlson Run
+Cosmic Rochambo
+Spirit Cleaning
+Infiniboss
+Rebel Galaxy
+Pillars on Poppy Hills
+Potion Prodigy
+Jazz Jackrabbit 2: The Secret Files
+Portal 2
+Building Relationships
+Call of Duty: Modern Warfare
+Beglitched
+Spirit of the North
+The Lost Cave of the Ozarks
+Hunt: Showdown (Test Server)
+Worldcraft
+Dead Cells
+Hoplegs
+These Lands
+Lesbian Mothman Hunters
+Operation STEEL
+"Lutra's Monologue"
+Hero Hours Contract
+Cathode Ray Tube VR
+Eldritch Academy
+Lawn Buster for Hire
+The Three Musketeers
+Ganbare! Super Strikers
+Slain: Back From Hell
+"About Love, Hate & the other ones"
+Four Horsemen
+Long Journey Home
+X-Morph: Defense
+DUFE: Masquerade
+Tannenberg
+Night Call
+Monster Pub Chapter 3
+"Another Lost Phone: Laura's Story"
+Mindustry
+PepaFatal
+Other Minds
+Cecconoid
+Road Trip
+Crescent Loom
+Fractured Minds
+RITE
+Gardenia
+"Pupper's Garden"
+Battlefield 3
+"Oh Jeez, Oh No, My Rabbits Are Gone!!!"
+Mother Island
+INDEPENDANT VIDEO VIDEO GAME
+Utopia Process
+Jupitron Game Collection Vol.4 - Middleware
+Snake vs Snake
+Good Lookin Home Cookin: A CMC Vignette
+Prison of the Magi: Ch. 0
+The Morning Star
+"Cook, Serve, Delicious! 3?!"
+Not the Robots
+Fat Slice 2
+Pathway
+Adventures of a Radish(Full)
+A Way Out
+Detours
+Ise & Kai: Chosen Throne
+Batbarian: Testament of the Primordials
+"A Mortician's Tale"
+"Move 'n' Bloom"
+Neon Depth
+"An Outcry, prelude"
+Zero Hour
+Robo Runner
+Back To Bed
+Chambara
+Dark Hope: A Puzzle Adventure
+Amnesia: A Machine for Pigs
+StarCraft II
+"Feyna's Quest"
+Company of Heroes 2
+Final Spike
+Destroy All Humans! – Clone Carnage
+Nauticrawl
+Last Horizon
+NoSeq
+Build a Bard
+Fugl
+PARANOIHELL
+Quadrilateral Cowboy
+Steel Seraph (Early Access)
+Marginalia
+Cats are Liquid - A Better Place
+Unreal Tournament: Game of the Year Edition
+Mixed Feelings
+10S
+FUTUREVOXIMAGINARIUMDOTEXEV1.1:DOGELOVEREDITION
+The Wishing Stone
+Lydia
+Starlight Shores
+Leggite Luta Livre
+Aye Aye Captain
+2   9   0   1  / / FREELANCER
+"Unfinished - An Artist's Lament"
+Eldritch
+Dark Sheep
+NAIR - With Rollback
+Pitman
+Hiding Spot
+Imaginaria
+The Tower: The Order of XII
+zip: set one
+The Adventurer - Action platformer
+Shrine to Anubis
+Wand Wars
+The Law
+Butterflies Episode 1: Rudies
+Illusory Dreamlight 1: Deprimerie
+Flewberry
+Cloud Serpent
+The Last Survey
+Word Forward
+Space Gladiators
+Monstrata Fracture
+Aarre Safari Ride
+Putahe ng Ina Mo: Sinigang Edition
+Lucid: Parables of the Ubermensch
+Harvest Island
+Astronomia
+Curious Expedition
+you used to be someone
+The Quiet Sleep
+The Escapists
+Pleroma
+In Between
+STRAWBERRY CUBES
+Torchlight
+The Devil
+Attrition
+BOX
+sideliner
+Beneath a Steel Sky
+Dream Dye
+10mg: Sealed Estate
+THE BLACK IRIS
+Monaco
+The Quest for One
+A Hell of a Journey
+Supreme Ruler Cold War
+Little Burned Maiden
+The Endless Empty
+My Personal Hilopet
+Submerged Hidden Depths
+Lava Golf
+Spelunky
+Kakatte Koi Yo!
+Slimes
+reIterate()
+10mg: SNAAAK
+Hacknet
+Lillyann
+My Nuclear Octopus
+Death and Taxes
+Eye of Ra
+Rettend - File #1
+"Shu's Garden"
+Nuclear Throne
+Gutwhale
+The Spark of One
+Rising Storm 2: Vietnam
+Demonizer
+Bicyclism EP
+Spaß Taxi
+The Witchling Marjolaine
+Crystal Control II
+NecroWorm
+LightUp!
+Technoccult: Covenant
+The lost artifacts
+Delver
+Head AS Code
+Good Morning Drifter
+Card Hog
+Mysteries Under Lake Ophelia
+VVVVVV
+Lacrymo Tennis 2016 (+ 2018)
+Sector 781
+8 Bit Space (ZX Spectrum Inspired Platformer)
+Worms W.M.D
+Mafia
+And All Would Cry Beware!
+Sunrise
+KIDS
+The Stillness of the Wind
+The Captain
+UNBEATABLE [white label]
+INMOST
+Is Lupin Still Flirting?
+"ROOM EXPLORER 2010: DELUXE LOVER'S PAQUE"
+Remnant: From the Ashes
+"Bury me, my Love"
+Double Cross
+Eyad and Hala
+6 pack of craft games
+Might & Magic VIII: Day of the Destroyer
+The Outcast Lovers
+Go Home Dinosaurs!
+gloom reducer
+Secrets of Raetikon
+Rebop Blasters
+Super Skull Smash GO! 2 Turbo
+System Shock: Enhanced Edition
+Containment
+LiveScream
+Throw Cubes into Brick Towers To Collapse Them
+WATCH_DOGS 2
+The Fantaballous Tilt
+Honey Twigs
+AFTER SCHOOL
+VaporLight: Drifter
+for|rest
+Super Grappling Gecko
+Reverie
+A Short Hike
+Pendula Swing: The Complete Journey
+Arcade Spirits
+FurnCap
+Keep Moving Forward
+Retromancer
+LOVE 2: kuso
+Multilytheus
+Penance
+void.Resign
+Wonder Boy The Dragons Trap
+Intra-System: Trust Issues
+Knight & Damsel
+Kiwi
+Dungeon Escape
+Starbound
+Radio Commander
+PDF-Suite Standard
+Take A Hike!
+Unto the Night
+Jazz Jackrabbit 2: The Christmas Chronicles
+We should talk.
+Alone in the Grey
+Wart Worm Wingding!
+"Baldi's Basics Plus"
+Code Dungeon
+Post Void
+BBQ DAD: First Bite
+ART SQOOL
+Hell is other demons
+Lizzi Crossing
+StarBoy
+The Count of Monte Carlo
+Shredded Secrets
+Find Me
+Destructivator 2
+THE GREY MAN
+Democratic Socialism Simulator
+The Floor is Jelly
+Bleed 2
+TEKKEN 7
+Catlateral Damage
+"Mirror's Edge Catalyst"
+Skyling : Garden Defense
+Sausage Sports Club
+GearHead Caramel
+VIRTUA BLINDS
+Witches and Bandits and Swords (Oh My)
+monad
+ALL @ ONCE
+Nasty Little Man
+Central Limit Theorem
+Rogue Legacy
+Ancient Enemy
+Firemakaf
+ΔV: Rings of Saturn
+Welcome to Elk
+(Not Escape Room)
+7 Second Haircuts
+Hexologic
+Panic Factory
+ALL-STARS DUNGEONS AND DIAMONDS
+La maleta
+HELP - The Heroes Enhancing Lives Program
+death by flower arrangement
+Cyberhold (Prototype)
+Good Morning Hon
+Lore Distance Relationship
+Alisa | The Awakening Demo
+Flufftopia
+Pixplode
+UPSQUID
+Among the Innocent: A Stricken Tale
+Sole Iron Tail
+Maze Of Bears
+XCOM 2
+BLOOD VOID MASS
+Eternia: Pet Whisperer
+[ENDLESS_OVERDRIVE]
+Milkmaid of the Milky Way
+Gunhouse
+Sarawak
+Pixel Wheels
+Tapioca Rider
+"Write'n'Slash"
+Galactic Bar Fight VR
+Little Square Things
+Celestial Links
+SuperLuminauts
+PREY
+Changeling
+Balloon Party
+Trackmania
+Serendipity
+Skuiggle
+Dumpy & Bumpy
+FORGET THE BRAKES!
+MUSCLE WORLD
+Drawkanoid
+Ultimate Zombie Death Ball
+Spring Falls
+Commune Corvidae
+SPOOKWARE
+LYNE
+Eatvolve
+Fatum Betula
+Microscope Madness
+SOLITUNE
+The Sky Left Us [Demo]
+Volatile
+Fortune-499
+Vienna Automobile Society
+NEON STRUCT
+Legend of Hand
+Interstellaria
+NEXT JUMP: Shmup Tactics
+LAZA KNITEZ!!
+Why Do You Do This To Me?
+Dystopicon
+Cardful Planning
+2064: Read Only Memories
+Concentric
+Warsow
+RoboVDino
+Cuckoo Castle
+DUNGEONBLADE - HAUNTED KINGDOM
+Toybox Aviation
+Playground
+Cross The Road
+Cycle 28
+Fall Guys
+Spooky Ghosts Dot Com
+Liyla and The Shadows Of War
+GourMelee
+Macbat 64
+You Can Pet The Dog VR
+The Hayseed Knight
+Oceanwork
+Silver Grapple
+DAEMON X MACHINA
+Sonny
+Super Snake 3D
+Torchlight II
+Sidewords
+Angry Video Game Nerd I&II Deluxe
+Future Unfolding
+Gratia
+Rusty Lake Hotel
+witches and stitches
+Hack FPS
+2000:1: A Space Felony
+hollow
+The Quiet Lonely House
+Tic Tac Together
+Newtraction
+Fossil Echo
+Enter the Gungeon
+Control
+Total War: WARHAMMER
+FroggieChat
+adjacency
+A Year Of Rain
+Runbow
+Good Dog
+Plunge
+Amethyst Hearth
+Il Filo Conduttore
+Pixel Fireplace
+Pippu - Bauble Quest
+Meditation 5
+Peck N Run
+Bring Your Own Oxygen
+Paper Boats
+Fable Anniversary
+10mg: Cover Me In Leaves
+Golf Peaks
+Asteroids... But Roguelite
+Explorers (Deluxe Edition 🗿)
+Moon and Lou
+Space Hole 2018
+Knight Bewitched
+Hood Outlaws and Legends
+Couch Goblins
+"Switch 'N' Shoot"
+Seven of Heart
+Corridor Z
+Surviving Mars
+Glittermitten Grove
+butterflowers
+Borb the Birb
+Build a Druid
+Can Androids Pray: Red
+Money Garden
+The Great Perhaps
+Midnight Scenes Ep.1: The Highway (Special Edition)
+My Little Pony: Super Ethical Shipping Climax!
+Total Arcade Racing
+Liberated
+Jezebel and the Flame
+Concave Shooter
+A Hole New World
+Heroes of the Storm
+Elephant Hunter Hunter
+City of Brass
+"Shantae and the Pirate's Curse"
+"2ECONDS TO STΔRLIVHT: My Heart's Reflection"
+Taimumari: Definitive Edition
+Metro Exodus
+Beyond The Bow
+Doorways
+Midnight on the Milky Way -- Complete
+Relicta
+Evangeline
+Victor Vran
+Portal
+The Manse on Soracca
+"A Snake's Tale"
+Lost Ark
+Grimm & Tonic: Aperitif
+Supraland
+Map Pack
+F J O R D S
+Pushamo
+Motel 666
+cityglitch
+Purple Noise Echo
+Madball
+MewnBase
+Hexed
+TOMATO CLINIC
+MAGEROOM
+Be Not Afraid A.K.A. Seraphim Horror Show!?
+Dragon Drop
+Glitch Dungeon
+Block Swap
+Repurpose (Demo)
+Hot Pot Panic
+"Milo's Quest"
+Refactor
+Chronicles of two Heroes
+Once Upon A Crime in the West
+Dino Island The Four Crystals
+Shing!
+Minit Fun Racer
+O   O   O
+Xenogunner
+Ultima 4: Quest of the Avatar
+Lost
+Putrid Shark
+Ruya
+SubDivide
+Behind the Masc
+Say No! More
+Cruel World
+Hypnagogia 無限の夢 Boundless Dreams
+Only One Burn
+Super Hexagon
+Riverbond
+BioShock 2 Remastered
+Goopty Goo
+Inside The Mirror
+112 Operator
+Before I Forget
+ZONES
+Caduceus
+Infini
+Spell Slingers: Trick or Treat
+Blast Rush
+Walkerwall
+Pig Eat Ball
+Marchland
+Advent NEON [DEMO]
+Unobelisk
+Summer in Mara
+"Warhammer 40,000: Mechanicus - Standard Edition"
+Food Flinger VR
+Bugspeed Collider
+Nex Machina
+SHNIPERS
+Watch Me Jump
+Cookies
+Quible Sphere
+Solar Blaster: Challenge Stage
+"I don't belong - A visual Novel"
+The Adventures of Wolf and Hood - a Jigsaw Tale
+Strobophagia | Rave Horror
+from view
+Freaky Fish DX
+Second Extinction
+Drillmin
+Attentat 1942
+Interactivity: The Interactive Experience
+Absolute Blue
+1993 Space Machine
+Learn Japanese To Survive! Kanji Combat
+EMUUROM
+"Wonderland Nights: White Rabbit's Diary"
+Toree 3D
+MENOS: PSI-SHATTER
+Chamber.Repeat();
+Letters Long Lost
+That Which Faith Demands
+Safari Zone
+Un Pas Fragile
+Push It In
+VR Kayaking Game (Demo)
+Selection Process
+CLOSED HANDS
+Robot Wants It All
+Intelligent Design: An Evolutionary Sandbox
+ParaMonsters and the Haunted Escape Room
+What Comes After
+Mixolumia
+Martian Space Blaster
+Order A Pizza: A Visual Novel
+"Sophie's Cubes"
+Willful
+Mastermind Classic
+Sandstorm
+GalaxSeed
+Half-Life 2
+Ori and the Blind Forest: Definitive Edition
+Wasteland 3
+From Orbit
+crystal anomaly
+Tales From Windy Meadow
+Sun Dogs
+Make It Last
+Clash Force
+Super Box Land Demake
+Hacknet
+Kabaret
+Windosill (2009)
+"Lenna's Inception"
+Para//ax
+Village Apothecary
+Cosmic Express
+Kill the Superweapon
+Lust for Darkness
+Good Mourning
+"The Wratch's Den 👹"
+Plant Down
+Shn!p
+Moving Out
+Hopper
+Team Fortress 2
+Super Raft Boat
+MineFinitum
+Bunnies vs. Bunnies: Ukraine Edition
+Gods Will Fall
+Cursed to Golf
+Pathfinder Kingmaker - Enhanced Plus Edition
+Pebble Witch
+Indigo Child
+Cyber Hamster Tilt
+Button City
+To Duel List
+Tales of the Neon Sea
+Self-Checkout Unlimited
+Snack Scoffer
+Wave_Machine
+Rorschach Plus
+10mg: Locked In
+Rustler
+10 in 1 game-a-week bundle!
+Catlandia: Crisis at Fort Pawprint
+Augma II Arc I
+They Bleed Pixels
+She Who Fights Monsters: Choice Edition
+Bloomblebee
+Elephantasy
+What Goes Pumpkin the Night
+Without Escape
+Fortnite
+Black Widow: Recharged
+Dogs Throwing Swords II: Three Barks To The Wind
+Bunflower
+Planetary grapple
+Lunarrota
+Somewhere Better
+Eddie Hill -in- The Curse Of The Skull Medallion
+No Wheels Racing
+Limiter!
+SlipSpeed
+Splitgate
+DEATHLOOP
+Agoraphobia
+Danger Crew
+Ultra Hat Dimension
+Vulture
+2-3-5-7
+KillingFloor2Beta
+The Majesty of Colors
+Dépanneur Nocturne
+Terraforming Mars
+Apparition
+PGA TOUR 2K21
+Canvas Colors: In The Moving City
+Neverinth
+Rune of Eternity
+96
+DERE EVIL EXE
+Throw Me in the River
+Zzap!
+Jabberwocky
+Revolver and Co
+Moving (On)
+Surfacing
+Resynth
+Sub-Uber-Marine
+Temple Of Tangram
+The Vanishing of Ethan Carter
+Tap Strike BOOM!
+Overcooked! 2
+Rubies In Space (FULL GAME) (Old Build)
+The USB Stick Found in the Grass
+Ring of Pain
+VoltAge:Genesis
+Unreal Tournament
+Watch Dogs 2
+Magnibox
+Calm Horizon
+Septiny
+Notebook Artillery
+Satisfactory
+The Sun Will Set
+"Wizard's Adventure"
+The Furniture Of Self
+Apex Legends
+QLRZ
+Pixel Session Vol.1
+Wanderlust: Travel Stories
+Auto Chess
+"Knight's Retreat"
+Minion Masters
+Changes
+Qavo
+"Yoku's Island Express"
+co-open
+Hearthstone
+Yooka-Laylee and the Impossible Lair
+Pullfrog
+Viral Reload
+Roly-Polo
+Promesa
+Dee Dum (Computer)
+Kindling Spirits
+Mortal Kombat 11
+Klang 2
+ETHEREAL
+Tooth and Tail
+Koto
+KEO
+Rulent Tower VR
+GUILTY GEAR -STRIVE-
+Shmup Ball
+Hero Generations
+Arcus
+Super Meat Boy
+Hungry Frog
+"Drones, The Human Condition"
+A Way Out
+Toree 2
+ARK: Survival Of The Fittest
+PALACE OF WOE
+Quake Champions
+Bullet Beat
+EarthX
+Expeditions: Viking
+Safe Journey
+Easter Bunny on speed
+Akuto: Showdown
+Monster Pub Chapter 1
+Wizard Battle
+"Redd's Runaway"
+Sunlight
+Lizard Lady vs the Cats
+"Rhythm 'n Bullets - VR"
+Super Win the Game
+SOMOS
+In Extremis
+Quantum Break
+Dragon Age: Origins - Ultimate Edition
+Fire Place
+Hellcraze
+Ynglet
+The Fall of Lazarus
+Conversations With My Anxiety
+ESC
+Homing
+Saturnalia
+BEACON
+Teenagent
+"Dominique Pamplemousse and Dominique Pamplemousse in ""Combinatorial Explosion!"""
+Vylan
+the silence
+Tile Crusher
+Void Wisp
+Fantastic Fetus: Prebirth
+Decommissioner - GBJAM8 2020
+THE CORRIDOR
+Trackmania
+SKELERUN
+Dangerous Roads Ahead
+Self.destroy()
+Tee-riffic Golf.
+Tomb Raider
+The Binding of Isaac
+Mech_Romancer Charity Bundle 2
+Imperishable Memories
+Planet Diver
+An Oath In Kind
+Sky Rogue
+When We First Met
+"Sophie's Safecracking Simulator"
+Khronos-X
+Will Glow the Wisp
+Counter-Strike: Global Offensive
+There You Go
+Serious Scramblers
+And Yet It Moves
+Centipede Recharged
+Tetromino Chill
+OCHITSUBAKI DEMO
+Collateral Thinking DX
+Crying Suns
+Legend of the Lost Dragons
+Cardinal Chains
+Wampus
+A Dance of Fire and Ice
+Treasure Hunter Simulator
+Baby Labor
+Bunny Hill Horror
+Fuzzy Road Home
+Cattails
+The Amazing American Circus
+T.A.R.S
+Cosmic Courier: Trapped in Limbo
+Summer Gems
+Your Future Self
+[Speer]
+Sticky Cats
+3310 Jam- Nokia World
+Space Fuel
+Clean ATTACK!
+Metro Exodus Enhanced Edition
+Nectar of the Gods: Offline Edition
+Unrailed
+Mech_Romancer Charity Bundle 1
+BOTOLO
+When The River Runs Dry Early Release
+Running Askew
+Counter-Strike: Source
+Mouse Corp.
+"WATER'S FINE"
+Ori and the Blind Forest
+Shattered Planet
+Mini Metro
+SPLASH BLAST PANIC
+The Church of Cheesus Crisp: An All You can Pray Buffet
+Blobbins
+Starbound - Unstable
+Curse of the Crescent Isle DX
+Possession
+Just Die Already
+Widget Satchel
+Headsnatchers
+Death Ray Manta SE (PC)
+Solar Danmaku
+Dayscream
+Wanderers
+DW
+Subterrarium
+An American Werewolf in LA (EN)
+Captain Backwater
+FRAMED Collection
+Derpy Deep Drive
+Korpus: Buried over the Black Soil
+Cardinal Cross
+10 Flights of Ballooning
+Filament
+Sundered: Eldritch Edition
+"Summoner's Mess"
+Antecrypt⚡
+"LIL' DRONE"
+Signs of the Sojourner
+Bleed
+Double Jump 2
+Flashback
+The Change Architect
+Project MALLOW
+"LouveSystems'  TrackMasters"
+Voxella
+Ultima  Worlds of Adventure 2: Martian Dreams
+Destruction Rocks
+SMITE
+Combo Postage
+Back 4 Blood
+Sagebrush
+Solace State Demo
+Soft Underbelly
+The Long Dark
+Hack Grid
+Doodle Date
+Mutiny Island
+SPACE / MECH / PILOT - THE UNIVERSE DRIVE 1.0
+Fäiser
+Wandersong
+Wheels of Aurelia
+System Shock: Classic
+CrossCode
+Pipe Push Paradise
+Shadow of the Tomb Raider: Definitive Edition
+Fallout 3: Game of the Year Edition
+Tonight We Riot
+forma.8
+Headspun: Dazed Edition
+You Are A Whale Part 1
+Project SNAQE
+Obstacles
+Anodyne
+The Night Fisherman
+"Hunter's Moon Remastered (C64)"
+Gig Life
+Record Store Nightmare
+Homebound
+Amelie
+Nainai’s Recipe
+"CRNVRS (en, updated version)"
+Ripped Pants at Work
+Divinity: Original Sin 2 - Definitive Edition
+Polyroll
+Wrapped With A Kiss
+A Wave of Lights
+Dota 2
+Book of Demons
+Insurmountable
+Cities Skylines
+Eyewear Cleaner 2077
+EVADER
+Wizard of Legend
+Rose & Time
+Wargroove
+Psychoballs
+"It's Six Random Characters and a Single Floor Dungeon, That's the Whole Game"
+Ritual of the Moon
+Ug! Caveman Game
+THE DOOR
+Awesome Mix Tape
+Luck be a Landlord
+RPG Maker VX
+The Sink Gods
+Death Drives A Bus
+The Forgotten Caves of Foolish Linger
+GNOG
+Lost Potato
+Sketchy Racing
+Car Mechanic Simulator 2018
+Shipwreck
+The Testimony of Trixie Glimmer Smith
+Driftland: The Magic Revival
+Nib
+VideoHole: Episode I
+Sunset Overdrive
+Among Us
+Density Experiment
+The Textorcist
+Roll for Confidence: A CMC Vignette
+Heartbeat
+Antigas Constelações (sobre a Vila Itororó)
+Choice Chamber
+Stories and Smoke
+"A NIGHTMARE'S TRIP"
+Sudd City Adventures
+Calico
+Roarr! Jurassic Edition
+Terroir
+Inner Tao
+Titanfall 2 Deluxe Edition
+Sanitarium
+VirtuaVerse
+Last Knight: Rogue Rider Edition
+Long Gone Days
+Hi-Score Boi
+FutureGrind
+The Lost Art of Innkeeping
+Knight Bewitched 2
+Orwell: Keeping an Eye on You
