@@ -42,11 +42,20 @@ function generateHtmlTable(data) {
       if (index === 0) {
         return;
       }
-      if (index == 1) {
+
+      if (row[1] === "True") {return;}
+
+      if (index === 1) {
         html += '<thead>';
         html += '<tr>';
         html += '<th>';
         html += "Name";
+        html += '</th>';
+        html += '<th>';
+        html += "Completion Status";
+        html += '</th>';
+        html += '<th>';
+        html += "Score";
         html += '</th>';
         html += '</tr>';
         html += '</thead>';
@@ -56,13 +65,37 @@ function generateHtmlTable(data) {
         html += '<td>';
         html += row[0];
         html += '</td>';
+        html += '<td>';
+        html += row[2];
+        html += '</td>';
+        html += '<td>';
+        html += row[3];
+        html += '</td>';
         html += '</tr>';
       }
     });
     html += '</tbody>';
     html += '</table>';
     $('#table').append(html);
-    $('#table>table').DataTable();
+    $('#table>table').DataTable({
+      order: [[1, 'asc'], [2, 'desc']],
+      paging: false,
+      columnDefs: [
+        {
+          targets: 0,
+          orderable: false
+        },
+        {
+          targets:1,
+          orderable: false
+        },
+        {
+          targets: 2,
+          searchable: false,
+          visible: false,
+        }
+      ],
+    });
   }
 }
 
