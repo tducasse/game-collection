@@ -42,12 +42,12 @@ a new life.,False,9 - Trash,
 "A NIGHTMARE'S TRIP",False,6 - Uncategorized,70
 A Normal Lost Phone,False,6 - Uncategorized,77
 A Planet of Mine,False,9 - Trash,
-A Short Hike,False,7 - Completed,72
+A Short Hike,False,8 - Done,72
 A Sketchbook About Her Sun,False,9 - Trash,
 "A Snake's Tale",False,6 - Uncategorized,70
 A Wave of Lights,False,9 - Trash,
 A Way Out,True,6 - Uncategorized,79
-A Way Out,False,7 - Completed,87
+A Way Out,False,8 - Done,87
 A Year Of Rain,False,6 - Uncategorized,47
 Aarre Safari Ride,False,9 - Trash,
 "About Love, Hate & the other ones",False,9 - Trash,
@@ -104,7 +104,7 @@ Another Perspective,False,6 - Uncategorized,70
 Antecrypt⚡,False,9 - Trash,
 Antigas Constelações (sobre a Vila Itororó),False,9 - Trash,
 Antistatic,False,9 - Trash,
-Apex Legends,False,6 - Uncategorized,78
+Apex Legends,True,6 - Uncategorized,78
 Apex Legends,False,2 - Multi solo,69
 Apparition,False,9 - Trash,
 Arachnowopunk,False,9 - Trash,
@@ -126,7 +126,7 @@ Attention Heroes!,False,9 - Trash,
 Attraction Force,False,9 - Trash,
 Attrition,False,9 - Trash,
 Augma II Arc I,False,9 - Trash,
-Auto Chess,False,8 - Dropped,59
+Auto Chess,False,8 - Done,59
 Auto Chess Experimental,False,9 - Trash,
 Awesome Mix Tape,False,9 - Trash,
 Aye Aye Captain,False,9 - Trash,
@@ -136,7 +136,7 @@ Back 4 Blood,False,4 - Solo backlog,77
 Back To Bed,False,9 - Trash,
 Backbone,False,6 - Uncategorized,68
 Backspace Bouken,False,6 - Uncategorized,70
-Balatro,False,1 - Solo,95
+Balatro,False,1a - Solo replayable,95
 "Baldi's Basics Plus",False,9 - Trash,
 Ball vs Block,False,9 - Trash,
 Balloon Party,False,9 - Trash,
@@ -146,7 +146,7 @@ Bard Harder!,False,9 - Trash,
 BasketBelle,False,6 - Uncategorized,60
 Bat Lizard Bonanza,False,9 - Trash,
 Batbarian: Testament of the Primordials,False,6 - Uncategorized,58
-BattleBit Remastered,False,8 - Dropped,89
+BattleBit Remastered,False,8 - Done,89
 Battlefield 3,False,6 - Uncategorized,81
 BBQ DAD: First Bite,False,9 - Trash,
 Be Not Afraid A.K.A. Seraphim Horror Show!?,False,9 - Trash,
@@ -339,12 +339,12 @@ Dates & Wires,False,9 - Trash,
 Dawn of a Soul,False,9 - Trash,
 Daymare: 1998,False,6 - Uncategorized,72
 Dayscream,False,9 - Trash,
-Dead Cells,False,1 - Solo,96
+Dead Cells,False,1a - Solo replayable,96
 Dead Island Riptide Definitive Edition,False,6 - Uncategorized,70
 Dead Space,False,4 - Solo backlog,85
 Deadlock,False,2 - Multi solo,
 Dear Esther: Landmark Edition,False,6 - Uncategorized,72
-Death and Taxes,False,7 - Completed,79
+Death and Taxes,False,8 - Done,79
 death by flower arrangement,False,9 - Trash,
 Death Drives A Bus,False,9 - Trash,
 Death Ray Manta SE (PC),False,9 - Trash,
@@ -371,7 +371,7 @@ Dépanneur Nocturne,False,9 - Trash,
 Depth of Extinction,False,6 - Uncategorized,60
 DERE EVIL EXE,False,6 - Uncategorized,70
 Derpy Deep Drive,False,9 - Trash,
-Desktop Dungeons,False,6 - Uncategorized,83
+Desktop Dungeons,False,4 - Solo backlog,83
 Desolate Roads,False,9 - Trash,
 Despotism 3k,False,6 - Uncategorized,60
 Destiny 2,False,6 - Uncategorized,74
@@ -381,11 +381,11 @@ Destructivator 2,False,9 - Trash,
 Detective Case and Clown Bot in: Murder in The Hotel Lisbon,False,6 - Uncategorized,80
 Detours,False,9 - Trash,
 Deus Ex - Mankind Divided,False,6 - Uncategorized,78
-Diablo IV,False,8 - Dropped,88
+Diablo IV,False,8 - Done,88
 Dino Island The Four Crystals,False,9 - Trash,
 Dino Run,False,6 - Uncategorized,80
 Disco Elysium,False,4 - Solo backlog,92
-Dishonored - Definitive Edition,False,4 - Solo backlog,84
+Dishonored - Definitive Edition,False,8 - Done,84
 Dishonored: Death of the Outsider,False,4 - Solo backlog,83
 Disobedient Sheep,False,9 - Trash,
 Diver,False,9 - Trash,
@@ -407,7 +407,7 @@ Doodle Date,False,6 - Uncategorized,70
 DOOM 64,False,6 - Uncategorized,70
 Doorways,False,9 - Trash,
 Dota 2,False,6 - Uncategorized,80
-Dota Underlords,False,8 - Dropped,70
+Dota Underlords,False,8 - Done,70
 Double Cross,False,6 - Uncategorized,70
 Double Jump 2,False,9 - Trash,
 Double Turn,False,9 - Trash,
@@ -464,7 +464,7 @@ Epistory - Typing Chronicles,False,6 - Uncategorized,71
 Errant Kingdom,False,6 - Uncategorized,70
 ESC,False,9 - Trash,
 Escape Room - The Sick Colleague,False,9 - Trash,
-Eternal Return,False,8 - Dropped,77
+Eternal Return,False,8 - Done,77
 Eternal Threads,False,6 - Uncategorized,
 Eternia: Pet Whisperer,False,9 - Trash,
 ETHEREAL,False,6 - Uncategorized,70
@@ -495,7 +495,7 @@ Fallout New Vegas: Old World Blues,False,6 - Uncategorized,81
 Fallout Tactics: Brotherhood of Steel,False,6 - Uncategorized,70
 Fallout: A Post Nuclear Role Playing Game,False,6 - Uncategorized,87
 Fallout: New Vegas,False,4 - Solo backlog,87
-Fangs,False,8 - Dropped,46
+Fangs,False,8 - Done,46
 Fantastic Fetus: Prebirth,False,9 - Trash,
 Fantasy RPG Cursors (gold),False,9 - Trash,
 Fantasy Strike,False,6 - Uncategorized,63
@@ -525,7 +525,7 @@ for|rest,False,9 - Trash,
 FORGET THE BRAKES!,False,9 - Trash,
 forma.8,False,9 - Trash,
 Fort Triumph,False,6 - Uncategorized,77
-Fortnite,False,8 - Dropped,69
+Fortnite,False,8 - Done,69
 Fortnite Battle Royale,False,6 - Uncategorized,71
 Fortune-499,False,6 - Uncategorized,70
 Fossil Echo,False,6 - Uncategorized,61
@@ -601,7 +601,7 @@ Grumpy Librarian,False,9 - Trash,
 Guacamelee! 2,False,6 - Uncategorized,81
 Guacamelee! Super Turbo Championship Edition,False,6 - Uncategorized,82
 Guild of Dungeoneering,False,6 - Uncategorized,69
-GUILTY GEAR -STRIVE-,False,8 - Dropped,91
+GUILTY GEAR -STRIVE-,False,8 - Done,91
 Gun Rounds,False,9 - Trash,
 Gunbuds,False,9 - Trash,
 Gunhouse,False,9 - Trash,
@@ -636,7 +636,7 @@ Headlong Racing,False,9 - Trash,
 Headsnatchers,False,6 - Uncategorized,52
 Headspun: Dazed Edition,False,9 - Trash,
 Heartbeat,False,9 - Trash,
-Hearthstone,False,8 - Dropped,80
+Hearthstone,False,8 - Done,80
 Hell is other demons,False,6 - Uncategorized,71
 Hell is Others,False,6 - Uncategorized,
 Hellcraze,False,9 - Trash,
@@ -645,7 +645,7 @@ HELP - The Heroes Enhancing Lives Program,False,9 - Trash,
 Hero Generations,False,6 - Uncategorized,50
 Hero Hours Contract,False,9 - Trash,
 Hero of the Kingdom II,False,6 - Uncategorized,73
-Heroes of Might and Magic 3: Complete,False,8 - Dropped,94
+Heroes of Might and Magic 3: Complete,False,8 - Done,94
 Heroes of the Storm,False,6 - Uncategorized,73
 Hexed,False,9 - Trash,
 Hexologic,False,6 - Uncategorized,70
@@ -653,7 +653,7 @@ Hidden Folks,False,6 - Uncategorized,77
 Hiding Spot,False,6 - Uncategorized,70
 Highway Blossoms: Remastered,False,9 - Trash,
 Hi-Score Boi,False,9 - Trash,
-HITMAN,False,7 - Completed,81
+HITMAN,False,8 - Done,81
 hollow,False,9 - Trash,
 Home - A Unique Horror Adventure,False,9 - Trash,
 Homebound,False,9 - Trash,
@@ -672,7 +672,7 @@ Hot Pot Panic,False,9 - Trash,
 How to Win - Season One,False,9 - Trash,
 Hue,False,6 - Uncategorized,89
 Hungry Frog,False,9 - Trash,
-Hunt: Showdown,False,8 - Dropped,76
+Hunt: Showdown,False,8 - Done,76
 Hunt: Showdown (Test Server),True,6 - Uncategorized,76
 "Hunter's Moon Remastered (C64)",False,9 - Trash,
 Hyperplex 3D,False,9 - Trash,
@@ -788,7 +788,7 @@ Left 4 Dead 2,False,3 - With friends only,82
 Legend of Hand,False,6 - Uncategorized,70
 Legend of the Lost Dragons,False,9 - Trash,
 Legends of Runeterra,True,6 - Uncategorized,80
-Legends of Runeterra,False,8 - Dropped,80
+Legends of Runeterra,False,8 - Done,80
 Leggite Luta Livre,False,9 - Trash,
 Legion TD 2,False,3 - With friends only,60
 "LEGO Builder's Journey",False,6 - Uncategorized,80
@@ -820,7 +820,7 @@ LongStory,False,6 - Uncategorized,60
 Loop Hero,False,4 - Solo backlog,76
 Lore Distance Relationship,False,9 - Trash,
 Lost,False,9 - Trash,
-Lost Ark,False,8 - Dropped,72
+Lost Ark,False,8 - Done,72
 Lost Castle,False,6 - Uncategorized,57
 Lost Dreams,False,9 - Trash,
 LOST ORBIT: Terminal Velocity,False,9 - Trash,
@@ -859,7 +859,7 @@ Marginalia,False,6 - Uncategorized,70
 Martial Cards,False,9 - Trash,
 Martian Space Blaster,False,9 - Trash,
 MARVEL SNAP,False,2 - Multi solo,87
-"Marvel's Guardians of the Galaxy",False,6 - Uncategorized,81
+"Marvel's Guardians of the Galaxy",False,4 - Solo backlog,81
 "Marvel's Guardians of the Galaxy: Social-Lord Outfit",False,6 - Uncategorized,
 "Marvel's Midnight Suns",False,4 - Solo backlog,76
 Mastermind Classic,False,9 - Trash,
@@ -878,8 +878,8 @@ Metamorphabet (2015),False,9 - Trash,
 MetaWare High School (Demo),False,9 - Trash,
 Metori,False,9 - Trash,
 Metro Exodus,False,6 - Uncategorized,88
-Metro Exodus Enhanced Edition,False,6 - Uncategorized,83
-Metro: Last Light,False,6 - Uncategorized,83
+Metro Exodus Enhanced Edition,False,4 - Solo backlog,83
+Metro: Last Light,False,4 - Solo backlog,83
 Metro: Last Light Complete Edition,False,6 - Uncategorized,92
 MewnBase,False,6 - Uncategorized,80
 Micro Dash,False,9 - Trash,
@@ -896,13 +896,13 @@ Milkmaid of the Milky Way,False,6 - Uncategorized,70
 "Milo's Quest",False,9 - Trash,
 Mindustry,False,4 - Solo backlog,94
 MineFinitum,False,9 - Trash,
-Mini Metro,False,8 - Dropped,77
+Mini Metro,False,8 - Done,77
 Minion Masters,False,6 - Uncategorized,90
 "Mini's Magic World",False,9 - Trash,
 Ministry of Broadcast,False,6 - Uncategorized,79
 Minit,False,4 - Solo backlog,72
 Minit Fun Racer,False,9 - Trash,
-"Mirror's Edge Catalyst",False,7 - Completed,69
+"Mirror's Edge Catalyst",False,8 - Done,69
 "Mirror's Edge Catalyst",True,6 - Uncategorized,69
 MiTOS,False,9 - Trash,
 Mixed Feelings,False,9 - Trash,
@@ -934,7 +934,7 @@ Moving (On),False,9 - Trash,
 Moving Out,False,4 - Solo backlog,71
 Muffin Fight VR,False,9 - Trash,
 Multilytheus,False,9 - Trash,
-MultiVersus,False,8 - Dropped,86
+MultiVersus,False,8 - Done,86
 Murder at the Cat Show,False,9 - Trash,
 MUSCLE WORLD,False,9 - Trash,
 Mutant Year Zero Road to Eden,False,6 - Uncategorized,84
@@ -976,7 +976,7 @@ Nonsense Soccer,False,9 - Trash,
 NoSeq,False,9 - Trash,
 Not the Robots,False,6 - Uncategorized,45
 Notebook Artillery,False,9 - Trash,
-Nuclear Throne,False,8 - Dropped,70
+Nuclear Throne,False,8 - Done,70
 Numbertron (Sharp MZ),False,9 - Trash,
 O   O   O,False,9 - Trash,
 Obduction,False,6 - Uncategorized,79
@@ -1003,7 +1003,7 @@ Out of Line,False,6 - Uncategorized,
 Out of Reach: Treasure Royale,False,6 - Uncategorized,58
 Over My Dead Body,False,9 - Trash,
 Overcooked! 2,False,6 - Uncategorized,81
-Overwatch 2,False,8 - Dropped,65
+Overwatch 2,False,8 - Done,65
 PachaMama,False,9 - Trash,
 Paint Game,False,9 - Trash,
 PALACE OF WOE,False,9 - Trash,
@@ -1060,8 +1060,8 @@ Plunge,False,6 - Uncategorized,70
 POLYGON,False,6 - Uncategorized,74
 Polyroll,False,6 - Uncategorized,70
 Popup Dungeon,False,6 - Uncategorized,73
-Portal,False,7 - Completed,97
-Portal 2,False,7 - Completed,98
+Portal,False,8 - Done,97
+Portal 2,False,8 - Done,98
 Portal Dogs,False,9 - Trash,
 Possession,False,9 - Trash,
 Post Void,False,6 - Uncategorized,90
@@ -1108,7 +1108,7 @@ Quiet as a Stone,False,6 - Uncategorized,60
 RADARjAM,False,9 - Trash,
 Radio Commander,False,6 - Uncategorized,72
 Rakete,False,9 - Trash,
-Ravenswatch,False,1 - Solo,78
+Ravenswatch,False,1a - Solo replayable,78
 RB: Axolotl,False,9 - Trash,
 RD Mars,False,9 - Trash,
 Ready or Not,False,3 - With friends only,88
@@ -1154,7 +1154,7 @@ Ritual of the Moon,False,9 - Trash,
 Riverbond,False,6 - Uncategorized,70
 Road Trip,False,9 - Trash,
 Roarr! Jurassic Edition,False,6 - Uncategorized,39
-Robin Hood,False,8 - Dropped,62
+Robin Hood,False,8 - Done,62
 Robo Runner,False,9 - Trash,
 Robot Wants It All,False,6 - Uncategorized,70
 RoboVDino,False,9 - Trash,
@@ -1249,14 +1249,14 @@ Sky Rogue,False,6 - Uncategorized,80
 Skyling : Garden Defense,False,6 - Uncategorized,70
 Slain: Back from Hell,False,6 - Uncategorized,61
 Slain: Back From Hell,True,6 - Uncategorized,60
-Slay the Spire,False,1 - Solo,96
+Slay the Spire,False,1a - Solo replayable,96
 Slimed,False,9 - Trash,
 Slimes,False,9 - Trash,
 Slinger VR,False,6 - Uncategorized,66
 SlipSpeed,False,9 - Trash,
 SLUDGE LIFE,False,6 - Uncategorized,87
 Sly Panda,False,9 - Trash,
-SMITE,False,8 - Dropped,79
+SMITE,False,8 - Done,79
 SMITE - Public Test,False,9 - Trash,
 Snack Scoffer,False,9 - Trash,
 Snake vs Snake,False,9 - Trash,
@@ -1303,7 +1303,7 @@ Spirit of the North,False,6 - Uncategorized,
 Spirit Swap: Lofi Beats to Match-3 To,False,9 - Trash,
 SPLASH BLAST PANIC,False,9 - Trash,
 Splinter Zone,False,9 - Trash,
-Splitgate,False,8 - Dropped,90
+Splitgate,False,8 - Done,90
 SPOOKWARE,False,6 - Uncategorized,
 Spooky Ghosts Dot Com,False,6 - Uncategorized,60
 Spooky Station,False,9 - Trash,
@@ -1360,7 +1360,7 @@ Super Skull Smash GO! 2 Turbo,False,9 - Trash,
 Super Snake 3D,False,9 - Trash,
 Super Wiloo Demake,False,9 - Trash,
 Super Win the Game,False,6 - Uncategorized,80
-SUPERHOT,False,7 - Completed,77
+SUPERHOT,False,8 - Done,77
 SuperLuminauts,False,9 - Trash,
 Supraland,True,6 - Uncategorized,
 Supraland,False,6 - Uncategorized,81
@@ -1420,7 +1420,7 @@ THE DOOR,False,9 - Trash,
 The Elder Scrolls Online,False,6 - Uncategorized,72
 The Endless Empty,False,6 - Uncategorized,70
 The Escapists,False,6 - Uncategorized,55
-The Evil Within,False,6 - Uncategorized,75
+The Evil Within,False,4 - Solo backlog,75
 The Evil Within 2,False,4 - Solo backlog,83
 The Falconeer,False,6 - Uncategorized,53
 The Fall of Lazarus,False,6 - Uncategorized,40
@@ -1507,11 +1507,11 @@ Tile Crusher,False,9 - Trash,
 Titan Souls,False,6 - Uncategorized,77
 Titan Tactics,False,9 - Trash,
 Titanfall 2,True,6 - Uncategorized,83
-Titanfall 2,False,8 - Dropped,83
+Titanfall 2,False,8 - Done,83
 To Ash and Ember,False,9 - Trash,
 To Duel List,False,9 - Trash,
 ToeJam & Earl: Back in the Groove,False,6 - Uncategorized,80
-"Tom Clancy's Splinter Cell",False,7 - Completed,83
+"Tom Clancy's Splinter Cell",False,8 - Done,83
 TOMATO CLINIC,False,9 - Trash,
 Tomb Raider,False,6 - Uncategorized,82
 Tomb Raider,True,6 - Uncategorized,82
@@ -1530,7 +1530,7 @@ TowerFall Ascension,False,4 - Solo backlog,75
 TowerFall Dark World Expansion,False,9 - Trash,
 Toy Kingdom 2,False,9 - Trash,
 Toybox Aviation,False,9 - Trash,
-Trackmania,False,8 - Dropped,68
+Trackmania,False,8 - Done,68
 Trackmania,True,6 - Uncategorized,
 TrackMania,True,6 - Uncategorized,84
 TRAINBOW,False,9 - Trash,
@@ -1652,7 +1652,7 @@ Worms W.M.D,False,6 - Uncategorized,75
 Wrapped With A Kiss,False,9 - Trash,
 "Write'n'Slash",False,9 - Trash,
 XCOM 2,False,4 - Solo backlog,84
-XDefiant,False,8 - Dropped,87
+XDefiant,False,8 - Done,87
 Xenogunner,False,9 - Trash,
 X-Morph: Defense,False,6 - Uncategorized,88
 yarne,False,9 - Trash,
