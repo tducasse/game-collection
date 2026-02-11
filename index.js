@@ -38,24 +38,18 @@ function generateHtmlTable(data) {
   if (typeof (data[0]) === 'undefined') {
     return null;
   } else {
-    $.each(data, function (index, row) {
+    $.each(data, function(index, row) {
       if (index === 0) {
         return;
       }
 
-      if (row[1] === "True") {return;}
+      if (row[1] === "True") { return; }
 
       if (index === 1) {
         html += '<thead>';
         html += '<tr>';
         html += '<th>';
         html += "Name";
-        html += '</th>';
-        html += '<th>';
-        html += "Completion Status";
-        html += '</th>';
-        html += '<th>';
-        html += "Score";
         html += '</th>';
         html += '</tr>';
         html += '</thead>';
@@ -64,12 +58,6 @@ function generateHtmlTable(data) {
         html += '<tr>';
         html += '<td>';
         html += row[0];
-        html += '</td>';
-        html += '<td>';
-        html += row[2];
-        html += '</td>';
-        html += '<td>';
-        html += row[3];
         html += '</td>';
         html += '</tr>';
       }
@@ -86,7 +74,7 @@ function generateHtmlTable(data) {
           orderable: false
         },
         {
-          targets:1,
+          targets: 1,
           orderable: false
         },
         {
