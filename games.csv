@@ -1,8 +1,7 @@
 ﻿Name,Hidden
 ​RELEVƎ⅃ƎЯ,False
 """Gamer""+ Crossroad of Sympathy",False
-(Not Escape Room),False
-(PC) Headlong Racing,False
+(Not Escape Room),True
 (PC/OUYA) My Nuclear Octopus,False
 [ENDLESS_OVERDRIVE],False
 [REDACTED],False
@@ -11,11 +10,11 @@ _________ (What Even Is That Thing?),False
 </reality>,False
 10 Beautiful Postcards,False
 10 Flights of Ballooning,False
-10 in 1 game-a-week bundle!,False
-10mg: Cover Me In Leaves,False
-10mg: Locked In,False
-10mg: Sealed Estate,False
-10mg: SNAAAK,False
+10 in 1 game-a-week bundle!,True
+10mg: Cover Me In Leaves,True
+10mg: Locked In,True
+10mg: Sealed Estate,True
+10mg: SNAAAK,True
 10S,False
 112 Operator,False
 12 is Better Than 6,False
@@ -27,7 +26,8 @@ _________ (What Even Is That Thing?),False
 2-3-5-7,False
 2ECONDS TO STΔRLIVHT: Forever My Diamond,False
 "2ECONDS TO STΔRLIVHT: My Heart's Reflection",False
-3310 Jam- Nokia World,False
+2XKO,False
+3310 Jam- Nokia World,True
 6 pack of craft games,False
 7 Second Haircuts,False
 8 Bit Space (ZX Spectrum Inspired Platformer),False
@@ -177,7 +177,7 @@ BFF or Die,False
 Bicyclism EP,False
 "Binky's Trash Service",False
 BioShock 2 Remastered,False
-BioShock Infinite: Complete Edition,False
+BioShock Infinite,False
 BioShock Remastered,False
 "Bitl Development Studio's MAYHEM",False
 Black Desert,False
@@ -283,7 +283,7 @@ Changes,False
 Chess and Dungeons,False
 Chimpology,False
 Chivalry 2,False
-Chivalry 2 - Public Testing,False
+Chivalry 2 - Public Testing,True
 Choice Chamber,False
 Chronicles of two Heroes,False
 Chronology: Time Changes Everything,False
@@ -291,6 +291,7 @@ CHUCHEL,False
 Circa Infinity,False
 Circus Electrique,False
 Cities Skylines,False
+Citizen Sleeper,False
 City of Brass,False
 City of Gangsters,False
 cityglitch,False
@@ -345,7 +346,7 @@ Curious Expedition,False
 Curse of the Crescent Isle DX,False
 Cursed to Golf,False
 Cyber Hamster Tilt,False
-Cyberhold (Prototype),False
+Cyberhold (Prototype),True
 Cycle 28,False
 DAEMON X MACHINA,False
 Danger Crew,False
@@ -377,8 +378,8 @@ DEATHLOOP,True
 DEATHLOOP,False
 "Death's Door",False
 "Death's Gambit - Afterlife",False
-Deceive Inc,False
-Decommissioner - GBJAM8 2020,False
+Deceive Inc.,False
+Decommissioner - GBJAM8 2020,True
 Dee Dum (Computer),False
 Deep Rock Galactic,False
 Definitely Not Fried Chicken,False
@@ -401,7 +402,7 @@ Desktop Dungeons,False
 Desolate Roads,False
 Despotism 3k,False
 Destiny 2,False
-Destroy All Humans! – Clone Carnage,False
+Destroy All Humans!: Clone Carnage,False
 Destruction Rocks,False
 Destructivator 2 (PC),False
 Detective Case and Clown Bot in: Murder in The Hotel Lisbon,False
@@ -432,6 +433,7 @@ Dona Vasa,False
 "Don't Take It Personally, I Just Don't Like You: The Camping Trip",False
 Doodle Date,False
 DOOM 64,False
+DOOMBLADE,False
 Doorways,False
 Dota 2,False
 Dota Underlords,False
@@ -498,7 +500,7 @@ ETHEREAL,False
 EVADER,False
 Evangeline,False
 Evil Dead The Game,False
-Evoland Legendary Edition,False
+Evoland,False
 Eximius: Seize the Frontline,False
 Expeditions: Viking,False
 Explorers (Deluxe Edition 🗿),False
@@ -512,7 +514,7 @@ Fäiser,False
 Fake Illusions - Encore Update,False
 Fall Guys,False
 Fallout 2: A Post Nuclear Role Playing Game,False
-Fallout 3: Game of the Year Edition,False
+Fallout 3,False
 Fallout Tactics: Brotherhood of Steel,False
 Fallout: A Post Nuclear Role Playing Game,False
 Fallout: New Vegas,False
@@ -532,7 +534,7 @@ Figment,True
 Figment,False
 Figment 2: Creed Valley,False
 Filament,False
-Final Spike,False
+Final Spike,True
 Find Me,False
 Fire & Fondness 2,False
 Fire Place,False
@@ -576,9 +578,9 @@ FUTUREVOXIMAGINARIUMDOTEXEV1.1:DOGELOVEREDITION,False
 Fuzzy Road Home,False
 Galactic Bar Fight VR,False
 Galactic Civilizations III,False
-Galactic Civilizations III (Test branch),False
+Galactic Civilizations III (Test branch),True
 GalaxSeed,False
-Gamedec - Definitive Edition,False
+Gamedec,False
 GameGuru Classic,False
 Ganbare! Super Strikers,False
 Garden Story,False
@@ -666,6 +668,7 @@ Haven Park,False
 Havendock,False
 Hazard,False
 Head AS Code,False
+Headlong Racing,False
 Headsnatchers,False
 Headspun: Dazed Edition,False
 Heartbeat,False
@@ -707,12 +710,13 @@ Horizon Chase Turbo,False
 HORIZON VANGUARD,False
 Hot Pot Panic,False
 HOT WHEELS UNLEASHED,False
+Hotline Miami,False
 How to Win - Season One,False
 Hue,False
 HUMANKIND,False
 Hungry Frog,False
 Hunt: Showdown 1896,False
-Hunt: Showdown 1896 (Test Server),False
+Hunt: Showdown 1896 (Test Server),True
 "Hunter's Moon Remastered (C64)",False
 Hyperplex 3D,False
 Hyperspace Dogfights,False
@@ -720,7 +724,7 @@ Hypnagogia 無限の夢 Boundless Dreams,False
 "I don't belong - A visual Novel",False
 I Found a New Friend,False
 "I Have Low Stats But My Class Is ""Leader"", So I Recruited Everyone I Know To Fight The Dark Lord",False
-i hurt myself - postjam edition,False
+i hurt myself - postjam edition,True
 I Need Spirit! Off-Road Edition,False
 Idle Champions of the Forgotten Realms,False
 IGEO,False
@@ -762,11 +766,11 @@ Isolation Story,False
 It Takes Two,True
 It Takes Two,True
 It Takes Two,False
-"It Takes Two Friend's Pass",False
+"It Takes Two Friend's Pass",True
 "It's Six Random Characters and a Single Floor Dungeon, That's the Whole Game",False
 "Izil's Adventures: Blackfeather's Legacy",False
 Jabberwocky,False
-Jam and the Mystery of the Mysteriously Spooky Mansion,False
+Jam and the Mystery of the Mysteriously Spooky Mansion,True
 Jardin,False
 Jazz Jackrabbit 2: The Christmas Chronicles,False
 Jazz Jackrabbit 2: The Secret Files,False
@@ -801,7 +805,7 @@ KIDS,False
 KILL KNIGHT,False
 Kill the Superweapon,False
 Killing Floor 2,False
-KillingFloor2Beta,False
+KillingFloor2Beta,True
 Kindling Spirits,False
 King of Seas,False
 Kingdom Come Deliverance,False
@@ -827,12 +831,15 @@ Lava Golf,False
 Lawn Buster for Hire,False
 LAZA KNITEZ!!,False
 League of Legends,False
+League of Legends,True
 Learn Japanese To Survive - Hiragana Battle,False
 Learn Japanese To Survive! Kanji Combat,False
 Left 4 Dead,False
 Left 4 Dead 2,False
 Legend of Hand,False
+Legend of Keepers,False
 Legend of the Lost Dragons,False
+Legends of Runeterra,True
 Legends of Runeterra,False
 Leggite Luta Livre,False
 Legion TD 2,False
@@ -857,7 +864,7 @@ LiveScream,False
 Liyla and The Shadows Of War,False
 Lizard Lady vs the Cats,False
 Lizzi Crossing Classic,False
-Loco Motive (Game Jam),False
+Loco Motive (Game Jam),True
 Locomancer,False
 Lofi Hip Hop Worlds To Study In,False
 Lonely People Potion Shop,False
@@ -905,6 +912,7 @@ Marchland,False
 Marginalia,False
 Martial Cards,False
 Martian Space Blaster,False
+Marvel Cosmic Invasion,False
 Marvel Rivals,False
 MARVEL SNAP,False
 "Marvel's Guardians of the Galaxy",False
@@ -915,8 +923,8 @@ Mastermind Classic,False
 Math Labyrinth,False
 "Maudelyn's Quest",False
 Maze Of Bears,False
-Mech_Romancer Charity Bundle 1,False
-Mech_Romancer Charity Bundle 2,False
+Mech_Romancer Charity Bundle 1,True
+Mech_Romancer Charity Bundle 2,True
 Meditation 5,False
 Memories of East Coast,False
 Mending Wall,False
@@ -939,7 +947,7 @@ Midnight on the Milky Way,False
 Midnight Scenes: The Goodbye Note,False
 Midnight Scenes: The Highway,False
 Midnight Scenes: The Nanny,False
-Might & Magic VIII: Day of the Destroyer,False
+Might and Magic VIII: Day of the Destroyer,False
 Mighty Fight Federation,False
 Milkmaid of the Milky Way,False
 "Millikan's Reach",False
@@ -973,9 +981,10 @@ Moon Hunters,False
 Moonstone Deep,False
 Mop Boy Demo but better,False
 MORDHAU,False
+Mortal Kombat 1,False
 Mortal Kombat 11,False
 Mortal Shell,False
-Mortal Shell Tech Beta,False
+Mortal Shell Tech Beta,True
 Mostly Intense Monster Defense,False
 Motel 666,False
 Mother Island,False
@@ -1021,12 +1030,13 @@ Nex Machina,False
 NEXT JUMP: Shmup Tactics,False
 Nib,False
 Night Call,False
+Nightingale,True
 Nightingale,False
-Nightingale - Legacy Mode,False
 "Nina Aquila: Legal Eagle, Season One",False
 NO THING,False
 No Wheels Racing,False
 Nobody Wants to Die,False
+Nocturnal,False
 Nonsense Soccer,False
 NoSeq,False
 Not the Robots,False
@@ -1062,7 +1072,7 @@ Out of Reach: Treasure Royale,False
 Over My Dead Body,False
 Overcooked! 2,False
 Overwatch,False
-Overwatch 2,False
+Overwatch 2,True
 PachaMama,False
 Paint Game,False
 PALACE OF WOE,False
@@ -1142,8 +1152,8 @@ Project Zomboid,False
 Promesa,False
 PROVIDER,False
 PUBG: BATTLEGROUNDS,False
-PUBG: Experimental Server,False
-PUBG: Test Server,False
+PUBG: Experimental Server,True
+PUBG: Test Server,True
 Pullfrog,False
 Pumpkin Eater,False
 "Pupper's Garden",False
@@ -1168,7 +1178,7 @@ Quest of Dungeons,False
 Quest Of Graal DX,False
 Quible Sphere,False
 Quiet as a Stone,False
-RADARjAM,False
+RADARjAM,True
 Radio Commander,False
 Rakete,False
 Ravenswatch,False
@@ -1182,8 +1192,8 @@ Recipe for Disaster,False
 Record Store Nightmare,False
 Red Embrace (BL Visual Novel),False
 "Redd's Runaway",False
+Redout,False
 Redout 2,False
-Redout: Enhanced Edition,False
 Refactor,False
 Regina & Mac,False
 reIterate(),False
@@ -1223,7 +1233,9 @@ Robin Hood,False
 Robo Runner,False
 Robot Wants It All,False
 RoboVDino,False
+Rocket League,False
 Rogue Legacy,False
+Rogue Waters,False
 RogueCraft Squadron,False
 RogueSlide,False
 Roll for Confidence: A CMC Vignette,False
@@ -1270,13 +1282,13 @@ seethe and scab,False
 Selection Process,False
 Self.destroy(),False
 Self-Checkout Unlimited,False
-Septiny,False
+Septiny,True
 Serendipity,False
 Serious Scramblers,False
 Seven of Heart,False
 Severed Steel,False
 Sewer Rave,False
-Shadow of the Tomb Raider: Definitive Edition,False
+Shadow of the Tomb Raider,False
 Shadow Tactics Blades of the Shogun,False
 Shadows: Awakening,False
 "Shantae and the Pirate's Curse",False
@@ -1327,7 +1339,7 @@ SlipSpeed,False
 SLUDGE LIFE,False
 Sly Panda,False
 SMITE,False
-SMITE - Public Test,False
+SMITE - Public Test,True
 SMITE 2,False
 Snack Scoffer,False
 Snake vs Snake,False
@@ -1388,7 +1400,7 @@ Stalingrad,False
 STAR WARS Battlefront II: Celebration Edition,False
 Star Wars Squadrons,False
 Starbound,False
-Starbound - Unstable,False
+Starbound - Unstable,True
 StarBoy,False
 StarCraft II,False
 StarFighter R&D HD Edition,False
@@ -1405,10 +1417,11 @@ Stories and Smoke,False
 STRAINGE,False
 Strange Horticulture,False
 STRAWBERRY CUBES,False
+Street Fighter 6,False
 Strife of Cosmos,False
 Strobophagia | Rave Horror,False
 Styx: Master of Shadows,False
-Styx: Shards of Darkness - Deluxe Edition,False
+Styx: Shards of Darkness,False
 SubDivide,False
 Submerged Hidden Depths,False
 Subterrarium,False
@@ -1435,7 +1448,7 @@ SUPER IS HOT,False
 Super Meat Boy,False
 Super Meat Boy Forever,False
 Super Mumtaz Bros.,False
-Super Raft Boat,False
+Super Raft Boat Classic,True
 Super Raft Boat Classic,False
 Super Skull Smash GO! 2 Turbo,False
 Super Snake 3D,False
@@ -1524,6 +1537,7 @@ THE GREY MAN,False
 The Hayseed Knight,False
 The Hero of Budgie Island,False
 The Hunt for my GirlFriend,False
+The Jackbox Megapicker,False
 The Jackbox Party Pack 4,False
 The Last Librarian,False
 The Last Survey,False
@@ -1545,6 +1559,7 @@ The Night Fisherman,False
 The Night of the Rabbit,False
 The Operator,False
 The Outcast Lovers,False
+The Outer Worlds,False
 "The Outer Worlds: Spacer's Choice Edition",False
 The Piano Player,False
 The Pig: Money is Time,False
@@ -1558,6 +1573,7 @@ The Sink Gods,False
 The Sky Left Us [Demo],False
 The Spark of One,False
 The Stillness of the Wind,False
+The Stone of Madness,False
 The Sun Will Set,False
 "The Tall Wall Falls: The Inner Gate's Last Stand",False
 The Testimony of Trixie Glimmer Smith,False
@@ -1605,8 +1621,9 @@ To Duel List,False
 ToeJam & Earl: Back in the Groove,False
 "Tom Clancy's Splinter Cell",False
 TOMATO CLINIC,False
+Tomb Raider,True
 Tomb Raider,False
-Tomb Raider GAME OF THE YEAR EDITION,False
+Tomb Raider I-III Remastered Starring Lara Croft,False
 Tonight We Riot,False
 Tooth and Tail,False
 Torchlight,False
@@ -1664,7 +1681,8 @@ UPSQUID,False
 Utopia Process,False
 Vagante,False
 Valheim,False
-VALORANT,False
+Valorant,True
+VALORANT,True
 Vambrace: Cold Soul,False
 Vampire Night Shift,False
 Vampire Survivors,False
@@ -1701,7 +1719,7 @@ Wandersong,True
 Wandersong,False
 Warframe,False
 Wargroove,False
-"Warhammer 40,000: Mechanicus - Standard Edition",False
+"Warhammer 40,000: Mechanicus",False
 Warpips,True
 Warpips,False
 WarpThrough,False
