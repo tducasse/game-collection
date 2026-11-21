@@ -1,24 +1,68 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Game Collection</title>
-
-  <!-- jQuery -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-  <!-- CSV parser -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
-
-  <!-- DataTables -->
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-
-  <!-- App -->
-  <script defer src="index.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Game collection</title>
+<meta name="description" content="Everything in my Playnite library, searchable, with GeForce NOW availability.">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
 </head>
 <body>
-  <div id="table"></div>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">
+      <h1>Game collection</h1>
+      <p id="summary" class="summary">Loading…</p>
+    </div>
+    <div class="search">
+      <input id="q" type="search" placeholder="Do I own…?  (try “elden”, “hades”, “zuma”)"
+             autocomplete="off" spellcheck="false" aria-label="Search games">
+      <button id="q-clear" class="q-clear" aria-label="Clear search" hidden>×</button>
+    </div>
+  </div>
+  <nav id="presets" class="presets" aria-label="Presets"></nav>
+</header>
+
+<div class="layout">
+  <aside id="filters" class="filters" aria-label="Filters"></aside>
+
+  <main class="main">
+    <div class="toolbar">
+      <button id="filters-toggle" class="filters-toggle">Filters</button>
+      <div id="result-count" class="result-count"></div>
+      <div class="tabs" role="tablist">
+        <button class="tab is-active" data-tab="library" role="tab">Library</button>
+        <button class="tab" data-tab="gamepass" role="tab">Game Pass</button>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table id="games" class="games">
+        <thead>
+          <tr>
+            <th class="col-name"><button data-sort="name">Game</button></th>
+            <th class="col-store"><button data-sort="store">Store</button></th>
+            <th class="col-gfn"><button data-sort="gfn">GeForce NOW</button></th>
+            <th class="col-playtime num"><button data-sort="playtime">Playtime</button></th>
+            <th class="col-completion"><button data-sort="completion">Status</button></th>
+            <th class="col-year num"><button data-sort="year">Year</button></th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <p id="empty" class="empty" hidden>Nothing matches those filters.</p>
+  </main>
+</div>
+
+<footer class="foot">
+  <span id="meta"></span>
+  <span class="sep">·</span>
+  <a href="#" id="permalink">link to this view</a>
+</footer>
+
+<script src="app.js"></script>
 </body>
 </html>
