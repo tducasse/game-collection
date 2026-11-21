@@ -1,551 +1,353 @@
-/* Game collection - static, dependency-free.
+/* My games - static, dependency-free.
  *
- * Data: data/games.json, written by the Playnite "Collection Publisher" extension.
- * State: the URL hash, so every view is bookmarkable/shareable (incl. on a phone).
+ * Data: data/games.json, written by the Playnite "Collection publisher" extension.
+ * State: the URL hash, so any view can be bookmarked/shared (phone included).
  */
 (() => {
   'use strict';
 
   const GFN_ORDER = { yes: 0, other: 1, no: 2, na: 3 };
   const GFN_LABEL = {
-    yes: 'Cloud ready',
-    other: 'Other store only',
-    no: 'Not on GFN',
-    na: 'Not applicable'
+    yes: 'GeForce NOW',
+    other: 'GFN, other store only',
+    no: 'No GeForce NOW',
+    na: 'Not streamable'
   };
-  const GFN_SHORT = { yes: '✓', other: '~', no: '✗', na: '–' };
-
   const ACCESS_LABEL = {
-    owned: 'Owned',
-    gamepass: 'Game Pass',
-    eaplay: 'EA Play',
-    ubisoftplus: 'Ubisoft+',
-    shared: 'Family share',
-    unknown: 'Unknown'
+    owned: 'Owned', gamepass: 'Game Pass', eaplay: 'EA Play',
+    ubisoftplus: 'Ubisoft+', shared: 'Family share', unknown: 'Unknown'
   };
-
-  const PLAYTIME_BUCKETS = [
-    { id: '0',    label: 'Never played', test: h => h === 0 },
-    { id: 'lt5',  label: 'Under 5 h',    test: h => h > 0 && h < 5 },
-    { id: '5-20', label: '5 – 20 h',     test: h => h >= 5 && h < 20 },
-    { id: '20-100', label: '20 – 100 h', test: h => h >= 20 && h < 100 },
-    { id: '100+', label: '100 h +',      test: h => h >= 100 }
-  ];
-
-  const FACETS = [
-    { key: 'gfn', label: 'GeForce NOW', order: ['yes', 'other', 'no', 'na'] },
-    { key: 'store', label: 'Store' },
-    { key: 'access', label: 'Access', order: ['owned', 'gamepass', 'eaplay', 'ubisoftplus', 'shared', 'unknown'] },
-    { key: 'completion', label: 'Completion' },
-    { key: 'playtime', label: 'Playtime' },
-    { key: 'flags', label: 'Flags', values: ['installed', 'favorite', 'hidden'] },
-    { key: 'platforms', label: 'Platform', limit: 8 },
-    { key: 'genres', label: 'Genre', limit: 12 },
-    { key: 'features', label: 'Features', limit: 10 },
-    { key: 'tags', label: 'Tags', limit: 14 },
-    { key: 'decade', label: 'Released' }
-  ];
-
-  const PRESETS = [
-    { id: 'all', label: 'Everything', apply: () => ({}) },
-    { id: 'cloud', label: 'Cloud ready', apply: () => ({ gfn: ['yes'] }) },
-    { id: 'laptop', label: 'Laptop only', apply: () => ({ gfn: ['no'] }) },
-    { id: 'other', label: 'On GFN, wrong store', apply: () => ({ gfn: ['other'] }) },
-    { id: 'backlog', label: 'Unplayed', apply: () => ({ playtime: ['0'] }) },
-    { id: 'installed', label: 'Installed', apply: () => ({ flags: ['installed'] }) },
-    { id: 'gp', label: 'Game Pass, not on GFN', apply: () => ({ __tab: 'gamepass', gfn: ['no'] }) }
-  ];
-
-  // ---------------------------------------------------------------- utilities
+  const STORE_CODE = {
+    Steam: 'STEAM', Epic: 'EPIC', GOG: 'GOG', 'Ubisoft Connect': 'UPLAY',
+    'EA app': 'EA_APP', 'Battle.net': 'BATTLENET', Xbox: 'XBOX', 'Xbox Game Pass': 'XBOX'
+  };
+  const ROMAN = { ii: '2', iii: '3', iv: '4', v: '5', vi: '6', vii: '7', viii: '8', ix: '9', xi: '11', xii: '12' };
 
   const $ = sel => document.querySelector(sel);
-
-  // PowerShell's ConvertTo-Json turns 1-element arrays into plain values.
   const asArray = v => (v == null ? [] : Array.isArray(v) ? v : [v]);
 
   function esc(s) {
-    return String(s ?? '').replace(/[&<>"']/g, c => (
-      { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
-    ));
+    return String(s ?? '').replace(/[&<>"']/g,
+      c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   }
 
-  const ROMAN = { ii: '2', iii: '3', iv: '4', v: '5', vi: '6', vii: '7', viii: '8', ix: '9', xi: '11', xii: '12' };
-
   function normalize(s) {
-    const words = String(s ?? '')
+    return String(s ?? '')
       .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, ' ')
       .trim()
       .split(' ')
-      .map(w => ROMAN[w] || w);
-    return words.join(' ');
+      .map(w => ROMAN[w] || w)
+      .join(' ');
   }
 
-  const nf = new Intl.NumberFormat();
-  const fmtInt = n => nf.format(n);
+  const fmt = n => new Intl.NumberFormat().format(n);
 
-  function fmtPlaytime(minutes) {
+  function playtime(minutes) {
     if (!minutes) return '';
     if (minutes < 60) return minutes + ' min';
     const h = minutes / 60;
     return (h < 10 ? h.toFixed(1) : Math.round(h)) + ' h';
   }
 
-  function timeAgo(iso) {
+  function ago(iso) {
     if (!iso) return '';
-    const then = new Date(iso).getTime();
-    if (!then) return '';
-    const days = Math.floor((Date.now() - then) / 86400000);
+    const days = Math.floor((Date.now() - new Date(iso).getTime()) / 86400000);
+    if (!isFinite(days)) return '';
     if (days <= 0) return 'today';
     if (days === 1) return 'yesterday';
-    if (days < 30) return days + ' d ago';
-    if (days < 365) return Math.floor(days / 30) + ' mo ago';
-    return Math.floor(days / 365) + ' y ago';
+    if (days < 30) return days + ' days ago';
+    if (days < 365) return Math.floor(days / 30) + ' months ago';
+    return Math.floor(days / 365) + ' years ago';
   }
 
   // ------------------------------------------------------------------- state
 
-  const EMPTY = { tab: 'library', sort: 'name', dir: 'asc', q: '', facets: {} };
-
   const state = {
-    data: null,
-    games: [],
-    gamePass: [],
-    tab: 'library',
-    sort: 'name',
-    dir: 'asc',
-    q: '',
-    facets: {},          // key -> Set(values)
-    expanded: new Set(),
-    preset: null
+    data: null, games: [], gamePass: [],
+    view: 'all', q: '', genre: '', store: '', sort: 'name',
+    expanded: new Set()
   };
 
   function readHash() {
-    const raw = location.hash.replace(/^#/, '');
-    const params = new URLSearchParams(raw);
-    const next = { ...EMPTY, facets: {} };
-
-    if (params.get('tab') === 'gamepass') next.tab = 'gamepass';
-    if (params.get('sort')) next.sort = params.get('sort');
-    if (params.get('dir') === 'desc') next.dir = 'desc';
-    if (params.get('q')) next.q = params.get('q');
-
-    for (const { key } of FACETS) {
-      const v = params.get(key);
-      if (v) next.facets[key] = new Set(v.split(',').filter(Boolean));
-    }
-    if (params.get('preset')) next.preset = params.get('preset');
-
-    state.tab = next.tab;
-    state.sort = next.sort;
-    state.dir = next.dir;
-    state.q = next.q;
-    state.facets = next.facets;
-    state.preset = next.preset;
+    const p = new URLSearchParams(location.hash.replace(/^#/, ''));
+    const view = p.get('view');
+    if (['all', 'tv', 'laptop', 'gamepass'].includes(view)) state.view = view;
+    state.q = p.get('q') ? normalize(p.get('q')) : '';
+    state.genre = p.get('genre') || '';
+    state.store = p.get('store') || '';
+    state.sort = p.get('sort') || 'name';
   }
 
   function writeHash() {
-    const params = new URLSearchParams();
-    if (state.tab !== 'library') params.set('tab', state.tab);
-    if (state.q) params.set('q', state.q);
-    for (const { key } of FACETS) {
-      const set = state.facets[key];
-      if (set && set.size) params.set(key, [...set].join(','));
-    }
-    if (state.sort !== 'name') params.set('sort', state.sort);
-    if (state.dir !== 'asc') params.set('dir', 'desc');
-    if (state.preset) params.set('preset', state.preset);
-
-    const hash = params.toString();
-    history.replaceState(null, '', hash ? '#' + hash : location.pathname + location.search);
+    const p = new URLSearchParams();
+    if (state.view !== 'all') p.set('view', state.view);
+    if (state.q) p.set('q', state.q);
+    if (state.genre) p.set('genre', state.genre);
+    if (state.store) p.set('store', state.store);
+    if (state.sort !== 'name') p.set('sort', state.sort);
+    const hash = p.toString();
+    history.replaceState(null, '', hash ? '#' + hash : location.pathname);
   }
 
-  // ------------------------------------------------------------------ facets
+  // ------------------------------------------------------------------- rows
 
-  function facetValue(game, key) {
-    if (key === 'flags') {
-      const out = [];
-      if (game.installed) out.push('installed');
-      if (game.favorite) out.push('favorite');
-      if (game.hidden) out.push('hidden');
-      return out;
-    }
-    if (key === 'playtime') {
-      const h = (game.playtime || 0) / 60;
-      const bucket = PLAYTIME_BUCKETS.find(b => b.test(h));
-      return bucket ? [bucket.id] : [];
-    }
-    if (key === 'decade') {
-      if (!game.year) return [];
-      return [game.year - (game.year % 10) + 's'];
-    }
-    return asArray(game[key]).filter(x => x !== '' && x != null);
-  }
-
-  function facetLabel(key, value) {
-    if (key === 'gfn') return GFN_LABEL[value] || value;
-    if (key === 'access') return ACCESS_LABEL[value] || value;
-    if (key === 'playtime') return (PLAYTIME_BUCKETS.find(b => b.id === value) || {}).label || value;
-    if (key === 'flags') return { installed: 'Installed', favorite: 'Favourite', hidden: 'Hidden' }[value] || value;
-    return value;
-  }
-
-  function facetValues(key, rows) {
-    const counts = new Map();
-    for (const game of rows) {
-      for (const v of facetValue(game, key)) {
-        counts.set(v, (counts.get(v) || 0) + 1);
+  function prepare(games) {
+    for (const g of games) {
+      if (!g.id) g.id = 'gp:' + g.name;
+      g.__hay = normalize([g.name, g.sortName, g.series, g.gfnTitle].filter(Boolean).join(' '));
+      g.__gfn = g.gfn || 'na';
+      if (g.needsClaim === undefined) {
+        // Older data files do not carry the flag. GFN only lists an EA Play title
+        // once it is in your EA library, and Game Pass titles run through the Xbox
+        // app - so an EA-only match means it needs claiming.
+        const stores = asArray(g.gfnStores);
+        const own = STORE_CODE[g.store] || 'XBOX';
+        g.needsClaim = g.__gfn === 'yes' && stores.includes('EA_APP') && !stores.includes(own);
+        g.claimVia = g.needsClaim ? 'EA app' : null;
       }
     }
-    const def = FACETS.find(f => f.key === key) || {};
-    const values = [...counts.entries()];
-    const order = def.order || def.values;
-    if (order) {
-      const idx = v => { const i = order.indexOf(v); return i === -1 ? 999 : i; };
-      values.sort((a, b) => idx(a[0]) - idx(b[0]) || a[0].localeCompare(b[0]));
-    } else {
-      values.sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
-    }
-    return def.limit ? values.slice(0, def.limit) : values;
   }
 
-  // ----------------------------------------------------------------- filters
-
-  function matchesFilters(game, skipKey) {
-    if (!game.__showHidden && game.hidden && (!state.facets.flags || !state.facets.flags.has('hidden'))) {
-      return false;
+  function baseRows() {
+    const visible = g => !g.hidden;
+    switch (state.view) {
+      case 'tv': return state.games.filter(g => visible(g) && g.__gfn === 'yes');
+      case 'laptop': return state.games.filter(g => visible(g) && (g.__gfn === 'no' || g.__gfn === 'other'));
+      case 'gamepass': return state.gamePass;
+      default: return state.games.filter(visible);
     }
-
-    for (const { key } of FACETS) {
-      if (key === skipKey) continue;
-      const wanted = state.facets[key];
-      if (!wanted || !wanted.size) continue;
-      const values = facetValue(game, key);
-      if (!values.some(v => wanted.has(v))) return false;
-    }
-
-    if (state.q) {
-      const needle = state.q; // already normalised
-      if (!(game.__hay || '').includes(needle)) return false;
-    }
-    return true;
-  }
-
-  function currentRows() {
-    return state.tab === 'gamepass' ? state.gamePass : state.games;
   }
 
   function filteredRows() {
-    return currentRows().filter(g => matchesFilters(g));
+    let rows = baseRows();
+    const onLibraryView = state.view !== 'gamepass';
+
+    if (onLibraryView && state.genre) rows = rows.filter(g => asArray(g.genres).includes(state.genre));
+    if (onLibraryView && state.store) rows = rows.filter(g => g.store === state.store);
+    if (state.q) rows = rows.filter(g => (g.__hay || '').includes(state.q));
+
+    const dir = 1;
+    if (state.sort === 'playtime') {
+      rows.sort((a, b) => (b.playtime || 0) - (a.playtime || 0));
+    } else if (state.sort === 'recent') {
+      rows.sort((a, b) => String(b.lastPlayed || '').localeCompare(String(a.lastPlayed || '')));
+    } else {
+      rows.sort((a, b) => (a.sortName || a.name).localeCompare(b.sortName || b.name) * dir);
+    }
+
+    // In "Play on the TV", games that need a claim come first - they're the
+    // actionable ones (you can't see them in GFN until you add them).
+    if (state.view === 'tv') {
+      rows.sort((a, b) => Number(!!b.needsClaim) - Number(!!a.needsClaim));
+    }
+    return rows;
   }
 
   // ------------------------------------------------------------------ render
 
-  function prepare(games) {
-    for (const g of games) {
-      if (!g.id) g.id = 'gp:' + g.name;   // Game Pass rows have no Playnite id
-      g.__hay = normalize([g.name, g.sortName, g.series, g.gfnTitle].filter(Boolean).join(' '));
-      g.__gfn = g.gfn || 'na';
+  function gfnBadge(g) {
+    const stores = asArray(g.gfnStores);
+    const label = g.__gfn === 'yes' ? 'GFN' : g.__gfn === 'other' ? 'GFN*' : g.__gfn === 'no' ? '—' : 'n/a';
+    const title = g.__gfn === 'yes'
+      ? `Playable on GeForce NOW via ${stores.join(', ') || 'streaming'}`
+      : g.__gfn === 'other'
+        ? `On GeForce NOW only for ${stores.join(', ')} - not the store you have`
+        : g.__gfn === 'no' ? 'Not on GeForce NOW' : 'This store cannot be streamed';
+    return `<span class="badge b-${g.__gfn}" title="${esc(title)}">${label}</span>`;
+  }
+
+  function syncBadge(g) {
+    if (!g.needsClaim) return '';
+    const via = g.claimVia || 'the launcher';
+    return `<span class="badge b-claim" title="GeForce NOW only lists it once it is in your ${esc(via)} library">not synced</span>`;
+  }
+
+  function storeCell(g) {
+    const store = g.store || (state.view === 'gamepass' ? 'Game Pass' : '');
+    const access = g.access && g.access !== 'owned'
+      ? `<span class="access">${esc(ACCESS_LABEL[g.access] || g.access)}</span>` : '';
+    return `<span class="store">${esc(store)}</span>${access}`;
+  }
+
+  function details(g) {
+    const bits = [];
+    const add = (k, v) => { if (v) bits.push(`<div><span class="k">${k}</span>${v}</div>`); };
+
+    if (g.needsClaim) {
+      add('Heads up', `GeForce NOW only sees this once it is in your ${esc(g.claimVia || 'launcher')} library. Add it there, then it shows up in GFN.`);
     }
-  }
-
-  function gfnCell(game) {
-    const status = game.__gfn;
-    const stores = asArray(game.gfnStores).join(', ');
-    const title = status === 'yes' ? `Playable via ${stores || 'GFN'}`
-      : status === 'other' ? `On GFN only for: ${stores}`
-      : status === 'na' ? 'This store cannot be streamed'
-      : 'Not in the GeForce NOW catalogue';
-    return `<span class="badge gfn-${status}" title="${esc(title)}">${GFN_SHORT[status]} ${esc(GFN_LABEL[status])}</span>`;
-  }
-
-  function rowHtml(game) {
-    const id = esc(game.id);
-    const open = state.expanded.has(game.id);
-    const meta = [
-      game.series ? esc(game.series) : '',
-      asArray(game.genres).slice(0, 3).map(esc).join(', '),
-      asArray(game.developers)[0] ? esc(asArray(game.developers)[0]) : ''
-    ].filter(Boolean).join(' · ');
-
-    let detail = '';
-    if (open) {
-      const bits = [];
-      if (game.gfnTitle && game.gfnTitle !== game.name) bits.push(`<div><span class="k">GFN listing</span> ${esc(game.gfnTitle)}</div>`);
-      const stores = asArray(game.gfnStores);
-      if (stores.length) bits.push(`<div><span class="k">GFN stores</span> ${esc(stores.join(', '))}</div>`);
-      const tags = asArray(game.tags);
-      if (tags.length) bits.push(`<div><span class="k">Tags</span> ${tags.map(esc).join(', ')}</div>`);
-      const feats = asArray(game.features);
-      if (feats.length) bits.push(`<div><span class="k">Features</span> ${feats.map(esc).join(', ')}</div>`);
-      const pubs = asArray(game.publishers);
-      if (pubs.length) bits.push(`<div><span class="k">Publisher</span> ${pubs.map(esc).join(', ')}</div>`);
-      if (game.releaseDate) bits.push(`<div><span class="k">Released</span> ${esc(game.releaseDate)}</div>`);
-      if (game.lastPlayed) bits.push(`<div><span class="k">Last played</span> ${esc(timeAgo(game.lastPlayed))}</div>`);
-      if (game.playCount) bits.push(`<div><span class="k">Sessions</span> ${fmtInt(game.playCount)}</div>`);
-      const scores = [
-        game.criticScore != null ? `critics ${game.criticScore}` : '',
-        game.communityScore != null ? `community ${game.communityScore}` : '',
-        game.userScore != null ? `mine ${game.userScore}` : ''
-      ].filter(Boolean).join(' · ');
-      if (scores) bits.push(`<div><span class="k">Scores</span> ${esc(scores)}</div>`);
-      if (game.sizeMb) bits.push(`<div><span class="k">Size</span> ${(game.sizeMb / 1024).toFixed(1)} GB</div>`);
-      detail = `<tr class="detail"><td colspan="6"><div class="detail-inner">${bits.join('') || '<em>No extra metadata.</em>'}</div></td></tr>`;
+    if (g.__gfn === 'other') {
+      add('GFN stores', esc(asArray(g.gfnStores).join(', ')) + ' - not the one you have');
     }
+    if (g.gfnTitle && g.gfnTitle !== g.name) add('GFN lists it as', esc(g.gfnTitle));
+    add('Genre', esc(asArray(g.genres).join(', ')));
+    add('Developer', esc(asArray(g.developers).join(', ')));
+    add('Publisher', esc(asArray(g.publishers).join(', ')));
+    add('Released', esc(g.releaseDate));
+    add('Played', g.playtime ? `${playtime(g.playtime)}${g.lastPlayed ? ' - last ' + esc(ago(g.lastPlayed)) : ''}` : '');
+    add('Status', esc(g.completion));
+    add('Tags', esc(asArray(g.tags).join(', ')));
 
-    return `<tr class="game${open ? ' is-open' : ''}" data-id="${id}" tabindex="0">
-      <td class="col-name">
-        <span class="name">${esc(game.name)}</span>
-        ${meta ? `<span class="meta">${meta}</span>` : ''}
-        ${game.installed ? '<span class="pill" title="Installed">installed</span>' : ''}
-        ${game.favorite ? '<span class="pill fav" title="Favourite">★</span>' : ''}
-      </td>
-      <td class="col-store"><span class="store">${esc(game.store || '')}</span>${
-        game.access && game.access !== 'owned'
-          ? `<span class="access access-${esc(game.access)}" title="Access, not ownership">${esc(ACCESS_LABEL[game.access] || game.access)}</span>`
-          : ''}</td>
-      <td class="col-gfn">${gfnCell(game)}</td>
-      <td class="col-playtime num">${fmtPlaytime(game.playtime)}</td>
-      <td class="col-completion">${esc(game.completion || '')}</td>
-      <td class="col-year num">${game.year || ''}</td>
-    </tr>${detail}`;
+    return `<li class="detail"><div>${bits.join('') || '<em>No extra details.</em>'}</div></li>`;
   }
 
-  function sortRows(rows) {
-    const dir = state.dir === 'desc' ? -1 : 1;
-    const key = state.sort;
-    return rows.sort((a, b) => {
-      let av, bv;
-      switch (key) {
-        case 'playtime': av = a.playtime || 0; bv = b.playtime || 0; break;
-        case 'year': av = a.year || 0; bv = b.year || 0; break;
-        case 'gfn': av = GFN_ORDER[a.__gfn] ?? 9; bv = GFN_ORDER[b.__gfn] ?? 9; break;
-        case 'completion': av = a.completion || ''; bv = b.completion || ''; break;
-        case 'store': av = a.store || ''; bv = b.store || ''; break;
-        default: av = a.sortName || a.name || ''; bv = b.sortName || b.name || '';
+  function row(g) {
+    const open = state.expanded.has(g.id);
+    const pills = [];
+    if (g.installed) pills.push('<span class="pill">installed</span>');
+    if (g.favorite) pills.push('<span class="pill fav" title="Favourite">★</span>');
+
+    const html = `<li class="game${open ? ' is-open' : ''}" data-id="${esc(g.id)}" tabindex="0">
+      <span class="name">${esc(g.name)}${pills.join('')}</span>
+      <span class="store-cell">${storeCell(g)}</span>
+      <span class="gfn-cell">${gfnBadge(g)}${syncBadge(g)}</span>
+    </li>`;
+    return open ? html + details(g) : html;
+  }
+
+  function renderList() {
+    const rows = filteredRows();
+    const out = [];
+    let lastGroup = null;
+
+    if (state.view === 'tv') {
+      for (const g of rows) {
+        const group = g.needsClaim ? 'claim' : 'ready';
+        if (group !== lastGroup) {
+          lastGroup = group;
+          out.push(`<li class="section">${group === 'claim'
+            ? `Add these in ${esc(rows.find(x => x.needsClaim).claimVia || 'the launcher')} first`
+            : 'Ready to play'}</li>`);
+        }
+        out.push(row(g));
       }
-      if (typeof av === 'number' && typeof bv === 'number') return (av - bv) * dir;
-      return String(av).localeCompare(String(bv)) * dir;
-    });
+    } else {
+      for (const g of rows) out.push(row(g));
+    }
+
+    $('#list').innerHTML = out.join('');
+    $('#empty').hidden = rows.length > 0;
+    $('#count').textContent = `${fmt(rows.length)} ${state.view === 'gamepass' ? 'Game Pass titles' : 'games'}`;
+
+    document.querySelectorAll('.tab').forEach(t =>
+      t.classList.toggle('is-active', t.dataset.view === state.view));
+
+    const libraryView = state.view !== 'gamepass';
+    $('#genre').style.display = libraryView ? '' : 'none';
+    $('#store').style.display = libraryView ? '' : 'none';
+
+    writeHash();
   }
 
-  function renderFilters(rows) {
-    const wrap = $('#filters');
-    const html = FACETS.map(({ key, label }) => {
-      const values = facetValues(key, rows);
-      if (!values.length) return '';
-      const active = state.facets[key] || new Set();
-      const items = values.map(([value, count]) => {
-        const on = active.has(value);
-        return `<label class="opt${on ? ' is-on' : ''}">
-          <input type="checkbox" data-facet="${key}" value="${esc(value)}" ${on ? 'checked' : ''}>
-          <span class="opt-label">${esc(facetLabel(key, value))}</span>
-          <span class="opt-count">${fmtInt(count)}</span>
-        </label>`;
-      }).join('');
-      return `<section class="facet">
-        <h2>${esc(label)}</h2>
-        <div class="opts">${items}</div>
-      </section>`;
-    }).join('');
+  function renderControls() {
+    const genres = new Map();
+    const stores = new Map();
+    for (const g of state.games) {
+      if (g.hidden) continue;
+      for (const genre of asArray(g.genres)) genres.set(genre, (genres.get(genre) || 0) + 1);
+      if (g.store) stores.set(g.store, (stores.get(g.store) || 0) + 1);
+    }
 
-    wrap.innerHTML = html || '';
+    const genreSel = $('#genre');
+    genreSel.innerHTML = '<option value="">All genres</option>' +
+      [...genres.entries()].sort((a, b) => b[1] - a[1]).slice(0, 30)
+        .map(([n, c]) => `<option value="${esc(n)}"${n === state.genre ? ' selected' : ''}>${esc(n)} (${c})</option>`).join('');
+
+    const storeSel = $('#store');
+    storeSel.innerHTML = '<option value="">All stores</option>' +
+      [...stores.entries()].sort((a, b) => b[1] - a[1])
+        .map(([n, c]) => `<option value="${esc(n)}"${n === state.store ? ' selected' : ''}>${esc(n)} (${c})</option>`).join('');
+
+    $('#sort').value = state.sort;
   }
 
-  function renderPresets() {
-    $('#presets').innerHTML = PRESETS.map(p =>
-      `<button class="chip${state.preset === p.id ? ' is-active' : ''}" data-preset="${p.id}">${esc(p.label)}</button>`
-    ).join('');
-  }
-
-  function renderVerdict(rows) {
+  function renderVerdict() {
     const el = $('#verdict');
-    if (!state.q || state.tab !== 'library') { if (el) el.remove(); return; }
+    if (!state.q) { el.innerHTML = ''; return; }
 
-    // best match: exact, then "starts with the query", then shortest name
     const pick = hits =>
       hits.find(g => normalize(g.name) === state.q) ||
       hits.find(g => normalize(g.name).startsWith(state.q + ' ')) ||
       hits.slice().sort((a, b) => a.name.length - b.name.length)[0];
+
     const libHits = state.games.filter(g => (g.__hay || '').includes(state.q));
     const gpHits = state.gamePass.filter(g => (g.__hay || '').includes(state.q));
 
     let text, cls;
     if (libHits.length) {
       const g = pick(libHits);
-      const access = g.access && g.access !== 'owned'
-        ? ` via ${ACCESS_LABEL[g.access] || g.access} (not owned)`
-        : '';
       const where = g.store ? ` on ${g.store}` : '';
+      const access = g.access && g.access !== 'owned' ? ` (${ACCESS_LABEL[g.access] || g.access})` : '';
       const gfn = g.__gfn === 'yes'
-        ? `playable on GeForce NOW (${asArray(g.gfnStores).join(', ') || 'streaming'})`
+        ? (g.needsClaim
+            ? `playable on GeForce NOW - but not synced: add it in ${g.claimVia || 'the launcher'} first`
+            : 'playable on GeForce NOW')
         : g.__gfn === 'other'
           ? `on GeForce NOW only for ${asArray(g.gfnStores).join(', ')}`
-          : g.__gfn === 'na'
-            ? 'this store cannot be streamed'
-            : 'not playable on GeForce NOW';
-
+          : g.__gfn === 'na' ? 'this store cannot be streamed' : 'not playable on GeForce NOW';
       const gpOther = gpHits.filter(x => normalize(x.name) !== normalize(g.name));
-      const extra = gpOther.length
-        ? ` · also in Game Pass: ${gpOther.slice(0, 3).map(x => x.name).join(', ')}`
-        : '';
-      text = `${g.name} — in your library${where}${access} — ${gfn}${extra}`;
-      cls = g.__gfn === 'yes' ? 'ok' : g.__gfn === 'other' || (g.access && g.access !== 'owned') ? 'warn' : 'neutral';
+      const extra = gpOther.length ? ` - also in Game Pass: ${gpOther.slice(0, 2).map(x => x.name).join(', ')}` : '';
+      text = `${g.name} - you have it${where}${access} - ${gfn}${extra}`;
+      cls = g.__gfn === 'yes' && !g.needsClaim ? 'ok' : g.__gfn === 'other' || g.needsClaim ? 'warn' : 'neutral';
     } else if (gpHits.length) {
       const g = pick(gpHits);
-      const gfn = g.gfn === 'yes' ? 'playable on GeForce NOW'
-        : g.gfn === 'other' ? `on GeForce NOW only for ${asArray(g.gfnStores).join(', ')}`
-        : 'not on GeForce NOW';
-      text = `Not in your library — in PC Game Pass: ${g.name} (${gfn})`;
+      const gfn = g.gfn === 'yes'
+        ? (g.needsClaim ? `playable on GFN after adding it in ${g.claimVia}` : 'playable on GeForce NOW')
+        : g.gfn === 'other' ? `on GFN only for ${asArray(g.gfnStores).join(', ')}` : 'not on GeForce NOW';
+      text = `Not in your library - in PC Game Pass: ${g.name} (${gfn})`;
       cls = 'warn';
     } else {
       text = 'Not in your collection, and not in PC Game Pass.';
       cls = 'bad';
     }
 
-    const node = el || document.createElement('div');
-    node.id = 'verdict';
-    node.className = 'verdict ' + cls;
-    node.textContent = text;
-    if (!el) $('.toolbar').after(node);
+    el.className = 'verdict ' + cls;
+    el.textContent = text;
   }
 
   function render() {
-    const rows = sortRows(filteredRows());
-    const total = currentRows().length;
-
-    $('#result-count').textContent =
-      `${fmtInt(rows.length)} of ${fmtInt(total)} ${state.tab === 'gamepass' ? 'Game Pass titles' : 'games'}`;
-
-    $('#rows').innerHTML = rows.map(rowHtml).join('');
-    $('#empty').hidden = rows.length !== 0;
-    renderVerdict(rows);
-
-    document.querySelectorAll('.tab').forEach(t =>
-      t.classList.toggle('is-active', t.dataset.tab === state.tab));
-
-    const activeCount = Object.values(state.facets).reduce((n, s) => n + (s ? s.size : 0), 0);
-    $('#filters-toggle').textContent = activeCount ? `Filters (${activeCount})` : 'Filters';
-
-    writeHash();
-  }
-
-  function renderAll() {
-    renderPresets();
-    renderFilters(currentRows());
-    render();
+    renderVerdict();
+    renderList();
   }
 
   // ------------------------------------------------------------------ events
 
-  function setFacet(key, value, on) {
-    const set = state.facets[key] || (state.facets[key] = new Set());
-    if (on) set.add(value); else set.delete(value);
-    if (!set.size) delete state.facets[key];
-    state.preset = null;
-  }
-
-  function applyPreset(id) {
-    const preset = PRESETS.find(p => p.id === id);
-    if (!preset) return;
-    state.facets = {};
-    state.q = '';
-    $('#q').value = '';
-    const spec = preset.apply();
-    for (const [k, v] of Object.entries(spec)) {
-      if (k === '__tab') state.tab = v;
-      else state.facets[k] = new Set(v);
-    }
-    if (!spec.__tab) state.tab = 'library';
-    state.preset = id;
-    renderAll();
-  }
-
   function bind() {
     $('#q').addEventListener('input', e => {
-      const raw = e.target.value;
-      $('#q-clear').hidden = !raw;
-      state.q = normalize(raw);
-      state.preset = null;
+      state.q = normalize(e.target.value);
       clearTimeout(bind._t);
-      bind._t = setTimeout(render, 90);
-    });
-
-    $('#q-clear').addEventListener('click', () => {
-      $('#q').value = '';
-      $('#q-clear').hidden = true;
-      state.q = '';
-      render();
-      $('#q').focus();
-    });
-
-    $('#filters').addEventListener('change', e => {
-      const input = e.target.closest('input[data-facet]');
-      if (!input) return;
-      setFacet(input.dataset.facet, input.value, input.checked);
-      renderFilters(currentRows());
-      render();
-    });
-
-    $('#presets').addEventListener('click', e => {
-      const chip = e.target.closest('[data-preset]');
-      if (chip) applyPreset(chip.dataset.preset);
+      bind._t = setTimeout(render, 80);
     });
 
     document.querySelector('.tabs').addEventListener('click', e => {
-      const tab = e.target.closest('[data-tab]');
-      if (!tab) return;
-      if (state.tab === tab.dataset.tab) return;
-      state.tab = tab.dataset.tab;
-      state.preset = null;
-      // Facets are per-tab: a "store" filter means nothing on the Game Pass tab.
-      state.facets = {};
-      renderAll();
-    });
-
-    document.querySelector('#games thead').addEventListener('click', e => {
-      const btn = e.target.closest('[data-sort]');
-      if (!btn) return;
-      const key = btn.dataset.sort;
-      if (state.sort === key) state.dir = state.dir === 'asc' ? 'desc' : 'asc';
-      else { state.sort = key; state.dir = 'asc'; }
+      const tab = e.target.closest('[data-view]');
+      if (!tab || tab.dataset.view === state.view) return;
+      state.view = tab.dataset.view;
+      state.genre = '';
+      state.store = '';
+      $('#genre').value = '';
+      $('#store').value = '';
       render();
     });
 
-    $('#rows').addEventListener('click', e => {
-      const tr = e.target.closest('tr.game');
-      if (!tr) return;
-      const id = tr.dataset.id;
-      if (state.expanded.has(id)) state.expanded.delete(id); else state.expanded.add(id);
+    $('#genre').addEventListener('change', e => { state.genre = e.target.value; render(); });
+    $('#store').addEventListener('change', e => { state.store = e.target.value; render(); });
+    $('#sort').addEventListener('change', e => { state.sort = e.target.value; render(); });
+
+    $('#list').addEventListener('click', e => {
+      const li = e.target.closest('li.game');
+      if (!li) return;
+      const id = li.dataset.id;
+      state.expanded.has(id) ? state.expanded.delete(id) : state.expanded.add(id);
       render();
-    });
-
-    $('#filters-toggle').addEventListener('click', () => {
-      document.body.classList.toggle('filters-open');
-    });
-
-    $('#permalink').addEventListener('click', async e => {
-      e.preventDefault();
-      try {
-        await navigator.clipboard.writeText(location.href);
-        e.target.textContent = 'copied!';
-        setTimeout(() => { e.target.textContent = 'link to this view'; }, 1500);
-      } catch {
-        e.target.textContent = location.href;
-      }
     });
 
     document.addEventListener('keydown', e => {
-      if (e.key === '/' && document.activeElement !== $('#q')) {
-        e.preventDefault();
-        $('#q').focus();
-      }
+      if (e.key === '/' && document.activeElement !== $('#q')) { e.preventDefault(); $('#q').focus(); }
       if (e.key === 'Escape' && document.activeElement === $('#q')) {
-        $('#q').value = '';
-        state.q = '';
-        render();
-        $('#q').blur();
+        $('#q').value = ''; state.q = ''; render(); $('#q').blur();
       }
     });
   }
@@ -557,33 +359,32 @@
     if (!res.ok) throw new Error(`data/games.json: HTTP ${res.status}`);
     const data = await res.json();
 
+    state.data = data;
     state.games = data.games || [];
     state.gamePass = data.gamePass || [];
     prepare(state.games);
     prepare(state.gamePass);
-    for (const g of state.gamePass) g.store = 'Game Pass';
 
     readHash();
 
     const s = data.stats || {};
+    const ready = state.games.filter(g => !g.hidden && g.__gfn === 'yes').length;
+    const laptop = state.games.filter(g => !g.hidden && (g.__gfn === 'no' || g.__gfn === 'other')).length;
     $('#summary').textContent =
-      `${fmtInt(state.games.length)} games · ${fmtInt(s.streamable || 0)} cloud-ready · ` +
-      `${fmtInt(s.notStreamable || 0)} laptop-only`;
+      `${fmt(state.games.filter(g => !g.hidden).length)} games - ${fmt(ready)} on the TV - ${fmt(laptop)} laptop only`;
 
-    $('#meta').textContent =
-      `Updated ${timeAgo(data.generatedAt)}` +
-      (data.catalog ? ` · GeForce NOW ${data.catalog.country}, ${fmtInt(data.catalog.titles)} titles` : '');
+    $('#meta').textContent = `Updated ${ago(data.generatedAt)}` +
+      (data.catalog ? ` - GeForce NOW ${data.catalog.country}, ${fmt(data.catalog.titles)} titles` : '');
 
     $('#q').value = state.q;
     bind();
-    renderAll();
-
-    if (!state.q) $('#q').focus();
+    renderControls();
+    render();
   }
 
   boot().catch(err => {
     $('#summary').textContent = 'Could not load data';
-    $('#rows').innerHTML = `<tr><td colspan="6" class="error">${esc(err.message)}</td></tr>`;
+    $('#list').innerHTML = `<li class="empty">${esc(err.message)}</li>`;
     console.error(err);
   });
 })();
