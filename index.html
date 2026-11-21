@@ -18,12 +18,11 @@
   <div class="search-wrap">
     <input id="q" type="search" placeholder="Do I have…" autocomplete="off" spellcheck="false" aria-label="Search games">
   </div>
-  <nav class="tabs" role="tablist">
-    <button class="tab is-active" data-view="all">Everything</button>
-    <button class="tab" data-view="tv">Play on the TV</button>
-    <button class="tab" data-view="laptop">Laptop only</button>
-    <button class="tab" data-view="gamepass">Game Pass</button>
-  </nav>
+  <div class="segments" role="group" aria-label="GeForce NOW availability">
+    <button class="seg is-active" data-gfn="all">All <span class="n"></span></button>
+    <button class="seg" data-gfn="yes">On GFN <span class="n"></span></button>
+    <button class="seg" data-gfn="no">Not on GFN <span class="n"></span></button>
+  </div>
 </header>
 
 <main>

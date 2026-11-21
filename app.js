@@ -79,14 +79,14 @@
     data: null,
     games: [],        // merged: one per title, entries[] are the routes you have
     gamePass: [],     // raw catalogue
-    view: 'all', q: '', genre: '', store: '', sort: 'name',
+    gfn: 'all', q: '', genre: '', store: '', sort: 'name',
     expanded: new Set()
   };
 
   function readHash() {
     const p = new URLSearchParams(location.hash.replace(/^#/, ''));
-    const view = p.get('view');
-    if (['all', 'tv', 'laptop', 'gamepass'].includes(view)) state.view = view;
+    const gfn = p.get('gfn');
+    if (['all', 'yes', 'no'].includes(gfn)) state.gfn = gfn;
     state.q = p.get('q') ? normalize(p.get('q')) : '';
     state.genre = p.get('genre') || '';
     state.store = p.get('store') || '';
@@ -95,7 +95,7 @@
 
   function writeHash() {
     const p = new URLSearchParams();
-    if (state.view !== 'all') p.set('view', state.view);
+    if (state.gfn !== 'all') p.set('gfn', state.gfn);
     if (state.q) p.set('q', state.q);
     if (state.genre) p.set('genre', state.genre);
     if (state.store) p.set('store', state.store);
@@ -192,35 +192,40 @@
 
   // ------------------------------------------------------------------- list
 
-  function baseRows() {
-    const rows = state.games.filter(g => !g.hidden);
-    switch (state.view) {
-      case 'tv': return rows.filter(g => g.gfn === 'yes');
-      // everything that is not playable on the TV - including itch.io/Humble,
-      // which GeForce NOW can never stream
-      case 'laptop': return rows.filter(g => g.gfn !== 'yes');
-      case 'gamepass': return state.gamePass;
-      default: return rows;
-    }
+  function matchesBasics(g) {
+    if (g.hidden) return false;
+    if (state.genre && !(g.genres || []).includes(state.genre)) return false;
+    if (state.store && !(g.stores || [g.store]).includes(state.store)) return false;
+    if (state.q && !g.hay.includes(state.q)) return false;
+    return true;
+  }
+
+  function matchesGfn(g) {
+    if (state.gfn === 'yes') return g.gfn === 'yes';
+    if (state.gfn === 'no') return g.gfn !== 'yes';
+    return true;
+  }
+
+  function sortRows(rows) {
+    if (state.sort === 'playtime') return rows.sort((a, b) => (b.playtime || 0) - (a.playtime || 0));
+    if (state.sort === 'recent') return rows.sort((a, b) => String(b.lastPlayed || '').localeCompare(String(a.lastPlayed || '')));
+    return rows.sort((a, b) => (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' }));
   }
 
   function filteredRows() {
-    let rows = baseRows();
-    const libraryView = state.view !== 'gamepass';
-
-    if (libraryView && state.genre) rows = rows.filter(g => (g.genres || []).includes(state.genre));
-    if (libraryView && state.store) rows = rows.filter(g => (g.stores || [g.store]).includes(state.store));
-    if (state.q) rows = rows.filter(g => (g.__hay || g.hay || '').includes(state.q) || (g.name && normalize(g.name).includes(state.q)));
-
-    if (state.sort === 'playtime') rows = rows.slice().sort((a, b) => (b.playtime || 0) - (a.playtime || 0));
-    else if (state.sort === 'recent') rows = rows.slice().sort((a, b) => String(b.lastPlayed || '').localeCompare(String(a.lastPlayed || '')));
-    else rows = rows.slice().sort((a, b) => (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' }));
-
-    if (state.view === 'tv') {
+    let rows = state.games.filter(g => matchesBasics(g) && matchesGfn(g));
+    sortRows(rows);
+    if (state.gfn === 'yes') {
       const rank = g => (g.sync === 'claim+mark' ? 0 : 1);
       rows = rows.slice().sort((a, b) => rank(a) - rank(b));
     }
     return rows;
+  }
+
+  function segmentCounts() {
+    const base = state.games.filter(matchesBasics);
+    const yes = base.filter(g => g.gfn === 'yes').length;
+    return { all: base.length, yes, no: base.length - yes };
   }
 
   // ------------------------------------------------------------------ render
@@ -243,7 +248,6 @@
   }
 
   function storeCell(g) {
-    if (state.view === 'gamepass') return '<span class="store">Game Pass</span>';
     const parts = asArray(g.stores).map(store => {
       const entry = (g.entries || []).find(e => e.store === store) || {};
       const label = ACCESS_LABEL[entry.access] || entry.access;
@@ -303,17 +307,16 @@
     $('#empty').hidden = rows.length > 0;
 
     if (state.q && window.scrollY > 0) window.scrollTo(0, 0);
-    $('#count').textContent = `${fmt(rows.length)} ${state.view === 'gamepass' ? 'Game Pass titles' : 'games'}`;
+    $('#count').textContent = `${fmt(rows.length)} games`;
 
-    document.querySelectorAll('.tab').forEach(t =>
-      t.classList.toggle('is-active', t.dataset.view === state.view));
-
-    const libraryView = state.view !== 'gamepass';
-    $('#genre').style.display = libraryView ? '' : 'none';
-    $('#store').style.display = libraryView ? '' : 'none';
+    const counts = segmentCounts();
+    document.querySelectorAll('.seg').forEach(seg => {
+      seg.classList.toggle('is-active', seg.dataset.gfn === state.gfn);
+      seg.querySelector('.n').textContent = fmt(counts[seg.dataset.gfn]);
+    });
 
     const hint = $('#hint');
-    if (state.view === 'tv') {
+    if (state.gfn === 'yes') {
       hint.hidden = false;
       hint.innerHTML = 'Steam, Ubisoft, Battle.net, GOG and Xbox sync by themselves. <strong>Epic has no library sync</strong> in GeForce NOW ' +
         '(NVIDIA: "Game library sync - Not supported"), so open the game in GFN and choose <strong>Mark as owned</strong>. ' +
@@ -403,12 +406,10 @@
       bind._t = setTimeout(render, 80);
     });
 
-    document.querySelector('.tabs').addEventListener('click', e => {
-      const tab = e.target.closest('[data-view]');
-      if (!tab || tab.dataset.view === state.view) return;
-      state.view = tab.dataset.view;
-      state.genre = ''; state.store = '';
-      $('#genre').value = ''; $('#store').value = '';
+    document.querySelector('.segments').addEventListener('click', e => {
+      const seg = e.target.closest('[data-gfn]');
+      if (!seg || seg.dataset.gfn === state.gfn) return;
+      state.gfn = seg.dataset.gfn;
       render();
     });
 
