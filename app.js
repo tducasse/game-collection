@@ -301,6 +301,8 @@
     const rows = filteredRows();
     $('#list').innerHTML = rows.map(row).join('');
     $('#empty').hidden = rows.length > 0;
+
+    if (state.q && window.scrollY > 0) window.scrollTo(0, 0);
     $('#count').textContent = `${fmt(rows.length)} ${state.view === 'gamepass' ? 'Game Pass titles' : 'games'}`;
 
     document.querySelectorAll('.tab').forEach(t =>
@@ -332,12 +334,14 @@
       for (const s of g.stores) stores.set(s, (stores.get(s) || 0) + 1);
     }
 
+    const alpha = (a, b) => a[0].localeCompare(b[0], undefined, { sensitivity: 'base' });
+
     $('#genre').innerHTML = '<option value="">All genres</option>' +
-      [...genres.entries()].sort((a, b) => b[1] - a[1]).slice(0, 30)
+      [...genres.entries()].sort(alpha)
         .map(([n, c]) => `<option value="${esc(n)}"${n === state.genre ? ' selected' : ''}>${esc(n)} (${c})</option>`).join('');
 
     $('#store').innerHTML = '<option value="">All stores</option>' +
-      [...stores.entries()].sort((a, b) => b[1] - a[1])
+      [...stores.entries()].sort(alpha)
         .map(([n, c]) => `<option value="${esc(n)}"${n === state.store ? ' selected' : ''}>${esc(n)} (${c})</option>`).join('');
 
     $('#sort').value = state.sort;
