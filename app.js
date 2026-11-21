@@ -98,14 +98,16 @@
       if (!g.id) g.id = 'gp:' + g.name;
       g.__hay = normalize([g.name, g.sortName, g.series, g.gfnTitle].filter(Boolean).join(' '));
       g.__gfn = g.gfn || 'na';
-      if (g.needsClaim === undefined) {
-        // Older data files do not carry the flag. GFN only lists an EA Play title
-        // once it is in your EA library, and Game Pass titles run through the Xbox
-        // app - so an EA-only match means it needs claiming.
+      if (g.sync === undefined) {
+        // Older data files do not carry the flag.
+        //  EA  : GFN only sees it once it is in your EA account
+        //  Epic: GFN does not sync Epic, you mark it as owned
         const stores = asArray(g.gfnStores);
         const own = STORE_CODE[g.store] || 'XBOX';
-        g.needsClaim = g.__gfn === 'yes' && stores.includes('EA_APP') && !stores.includes(own);
-        g.claimVia = g.needsClaim ? 'EA app' : null;
+        if (g.__gfn !== 'yes') { g.sync = null; }
+        else if (!stores.includes(own) && stores.includes('EA_APP')) { g.sync = 'ea-claim'; g.syncVia = 'EA app'; }
+        else if (own === 'EPIC') { g.sync = 'gfn-mark'; g.syncVia = 'GeForce NOW'; }
+        else { g.sync = 'auto'; }
       }
     }
   }
@@ -137,10 +139,10 @@
       rows.sort((a, b) => (a.sortName || a.name).localeCompare(b.sortName || b.name) * dir);
     }
 
-    // In "Play on the TV", games that need a claim come first - they're the
-    // actionable ones (you can't see them in GFN until you add them).
+    // Hard blockers first (EA: not even visible in GFN), Epic hints stay in place.
     if (state.view === 'tv') {
-      rows.sort((a, b) => Number(!!b.needsClaim) - Number(!!a.needsClaim));
+      const rank = g => (g.sync === 'ea-claim' ? 0 : 1);
+      rows.sort((a, b) => rank(a) - rank(b));
     }
     return rows;
   }
@@ -158,10 +160,15 @@
     return `<span class="badge b-${g.__gfn}" title="${esc(title)}">${label}</span>`;
   }
 
+  const SYNC_TEXT = {
+    'ea-claim': { label: 'EA app first', title: 'GeForce NOW only lists it once the game is in your EA library (add it in the EA app).' },
+    'gfn-mark': { label: 'mark in GFN', title: 'GeForce NOW does not sync Epic automatically: open the game in GFN and mark it as owned.' }
+  };
+
   function syncBadge(g) {
-    if (!g.needsClaim) return '';
-    const via = g.claimVia || 'the launcher';
-    return `<span class="badge b-claim" title="GeForce NOW only lists it once it is in your ${esc(via)} library">not synced</span>`;
+    const info = SYNC_TEXT[g.sync];
+    if (!info) return '';
+    return `<span class="badge b-claim" title="${esc(info.title)}">${esc(info.label)}</span>`;
   }
 
   function storeCell(g) {
@@ -175,8 +182,11 @@
     const bits = [];
     const add = (k, v) => { if (v) bits.push(`<div><span class="k">${k}</span>${v}</div>`); };
 
-    if (g.needsClaim) {
-      add('Heads up', `GeForce NOW only sees this once it is in your ${esc(g.claimVia || 'launcher')} library. Add it there, then it shows up in GFN.`);
+    if (g.sync === 'ea-claim') {
+      add('One step', 'Add it in the EA app first - GeForce NOW reads your EA library, so it only appears there afterwards.');
+    }
+    if (g.sync === 'gfn-mark') {
+      add('One step', 'Epic is not synced automatically: find it in GeForce NOW and use "Mark as owned" once.');
     }
     if (g.__gfn === 'other') {
       add('GFN stores', esc(asArray(g.gfnStores).join(', ')) + ' - not the one you have');
@@ -209,23 +219,7 @@
 
   function renderList() {
     const rows = filteredRows();
-    const out = [];
-    let lastGroup = null;
-
-    if (state.view === 'tv') {
-      for (const g of rows) {
-        const group = g.needsClaim ? 'claim' : 'ready';
-        if (group !== lastGroup) {
-          lastGroup = group;
-          out.push(`<li class="section">${group === 'claim'
-            ? `Add these in ${esc(rows.find(x => x.needsClaim).claimVia || 'the launcher')} first`
-            : 'Ready to play'}</li>`);
-        }
-        out.push(row(g));
-      }
-    } else {
-      for (const g of rows) out.push(row(g));
-    }
+    const out = rows.map(row);
 
     $('#list').innerHTML = out.join('');
     $('#empty').hidden = rows.length > 0;
@@ -281,20 +275,22 @@
       const where = g.store ? ` on ${g.store}` : '';
       const access = g.access && g.access !== 'owned' ? ` (${ACCESS_LABEL[g.access] || g.access})` : '';
       const gfn = g.__gfn === 'yes'
-        ? (g.needsClaim
-            ? `playable on GeForce NOW - but not synced: add it in ${g.claimVia || 'the launcher'} first`
-            : 'playable on GeForce NOW')
+        ? (g.sync === 'ea-claim'
+            ? 'playable on GeForce NOW - but add it in the EA app first'
+            : g.sync === 'gfn-mark'
+              ? 'playable on GeForce NOW - mark it as owned once in GFN'
+              : 'playable on GeForce NOW')
         : g.__gfn === 'other'
           ? `on GeForce NOW only for ${asArray(g.gfnStores).join(', ')}`
           : g.__gfn === 'na' ? 'this store cannot be streamed' : 'not playable on GeForce NOW';
       const gpOther = gpHits.filter(x => normalize(x.name) !== normalize(g.name));
       const extra = gpOther.length ? ` - also in Game Pass: ${gpOther.slice(0, 2).map(x => x.name).join(', ')}` : '';
       text = `${g.name} - you have it${where}${access} - ${gfn}${extra}`;
-      cls = g.__gfn === 'yes' && !g.needsClaim ? 'ok' : g.__gfn === 'other' || g.needsClaim ? 'warn' : 'neutral';
+      cls = g.__gfn === 'yes' && g.sync === 'auto' ? 'ok' : g.__gfn === 'other' || g.sync !== 'auto' ? 'warn' : 'neutral';
     } else if (gpHits.length) {
       const g = pick(gpHits);
       const gfn = g.gfn === 'yes'
-        ? (g.needsClaim ? `playable on GFN after adding it in ${g.claimVia}` : 'playable on GeForce NOW')
+        ? (g.sync === 'ea-claim' ? 'playable on GFN after adding it in the EA app' : 'playable on GeForce NOW')
         : g.gfn === 'other' ? `on GFN only for ${asArray(g.gfnStores).join(', ')}` : 'not on GeForce NOW';
       text = `Not in your library - in PC Game Pass: ${g.name} (${gfn})`;
       cls = 'warn';
