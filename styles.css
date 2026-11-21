@@ -258,3 +258,19 @@ footer {
   .controls select { max-width: none; flex: 1 1 30%; }
   .count { width: 100%; margin-left: 0; }
 }
+
+/* hint line above the list */
+.hint {
+  margin: 0 0 .6rem;
+  padding: .5rem .7rem;
+  font-size: .8rem;
+  color: var(--muted);
+  background: var(--panel-2);
+  border-radius: var(--radius);
+}
+
+.store.is-ok { color: var(--ok); }
+.sep { color: var(--muted); }
+
+.routes .k { vertical-align: top; }
+.routes .route { padding: .1rem 0; }

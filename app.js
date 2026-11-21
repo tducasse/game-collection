@@ -1,18 +1,26 @@
 /* My games - static, dependency-free.
  *
  * Data: data/games.json, written by the Playnite "Collection publisher" extension.
- * State: the URL hash, so any view can be bookmarked/shared (phone included).
+ * One row per *game*, not per purchase: a game owned on Steam and available via
+ * Game Pass is one line listing both routes.
+ *
+ * State lives in the URL hash so any view can be bookmarked or opened on a phone.
  */
 (() => {
   'use strict';
 
-  const GFN_ORDER = { yes: 0, other: 1, no: 2, na: 3 };
-  const GFN_LABEL = {
-    yes: 'GeForce NOW',
-    other: 'GFN, other store only',
-    no: 'No GeForce NOW',
-    na: 'Not streamable'
+  // GeForce NOW has 7 store connectors and not all of them sync by themselves.
+  // NVIDIA does not publish per-store behaviour, so the only thing we can state
+  // as a fact is the EA Play case: a Game Pass EA game has no licence in your EA
+  // account until you add it in the EA app - that is blocking, everything else
+  // is "if it does not show up, use Mark as owned".
+  const SYNC_RANK = { auto: 0, mark: 1, 'claim+mark': 2 };
+  const SYNC_BADGE = {
+    'claim+mark': { label: 'EA app first', title: 'A Game Pass EA Play game has no licence in your EA account yet: add it in the EA app, then mark it as owned in GFN.' }
   };
+
+  const GFN_ORDER = { yes: 0, other: 1, no: 2, na: 3 };
+  const GFN_LABEL = { yes: 'playable', other: 'other store', no: 'not on GFN', na: 'not streamable' };
   const ACCESS_LABEL = {
     owned: 'Owned', gamepass: 'Game Pass', eaplay: 'EA Play',
     ubisoftplus: 'Ubisoft+', shared: 'Family share', unknown: 'Unknown'
@@ -65,7 +73,9 @@
   // ------------------------------------------------------------------- state
 
   const state = {
-    data: null, games: [], gamePass: [],
+    data: null,
+    games: [],        // merged: one per title, entries[] are the routes you have
+    gamePass: [],     // raw catalogue
     view: 'all', q: '', genre: '', store: '', sort: 'name',
     expanded: new Set()
   };
@@ -91,58 +101,120 @@
     history.replaceState(null, '', hash ? '#' + hash : location.pathname);
   }
 
-  // ------------------------------------------------------------------- rows
+  // -------------------------------------------------------- merging routes
 
-  function prepare(games) {
-    for (const g of games) {
-      if (!g.id) g.id = 'gp:' + g.name;
-      g.__hay = normalize([g.name, g.sortName, g.series, g.gfnTitle].filter(Boolean).join(' '));
-      g.__gfn = g.gfn || 'na';
-      if (g.sync === undefined) {
-        // Older data files do not carry the flag.
-        //  EA  : GFN only sees it once it is in your EA account
-        //  Epic: GFN does not sync Epic, you mark it as owned
-        const stores = asArray(g.gfnStores);
-        const own = STORE_CODE[g.store] || 'XBOX';
-        if (g.__gfn !== 'yes') { g.sync = null; }
-        else if (!stores.includes(own) && stores.includes('EA_APP')) { g.sync = 'ea-claim'; g.syncVia = 'EA app'; }
-        else if (own === 'EPIC') { g.sync = 'gfn-mark'; g.syncVia = 'GeForce NOW'; }
-        else { g.sync = 'auto'; }
-      }
-    }
+  function routeRank(e) {
+    return (GFN_ORDER[e.gfn] ?? 4) * 10 + (SYNC_RANK[e.sync] ?? 3);
   }
 
+  // Data files written before the `sync` field existed: derive it.
+  function syncOf(raw) {
+    if (raw.sync !== undefined) return raw.sync || null;
+    if (raw.gfn !== 'yes') return null;
+    const stores = asArray(raw.gfnStores);
+    const own = STORE_CODE[raw.store] || 'XBOX';
+    if (!stores.includes(own) && stores.includes('EA_APP')) return 'claim+mark';
+    return stores.includes('STEAM') ? 'auto' : 'mark';
+  }
+
+  function buildMerged(library, gamePass) {
+    const groups = new Map();
+
+    const add = (raw, kind) => {
+      if (!raw) return;
+      const name = raw.name || '';
+      const key = normalize(name);
+      if (!key) return;
+
+      let group = groups.get(key);
+      if (!group) {
+        group = { key, name, entries: [] };
+        groups.set(key, group);
+      }
+
+      group.entries.push({
+        kind,                                   // 'lib' | 'gp'
+        store: raw.store || (kind === 'gp' ? 'Game Pass' : ''),
+        access: raw.access || (kind === 'gp' ? 'gamepass' : 'unknown'),
+        gfn: raw.gfn || 'na',
+        gfnStores: asArray(raw.gfnStores),
+        gfnTitle: raw.gfnTitle || null,
+        sync: syncOf(raw),
+        genres: asArray(raw.genres),
+        playtime: raw.playtime || 0,
+        lastPlayed: raw.lastPlayed || null,
+        installed: !!raw.installed,
+        favorite: !!raw.favorite,
+        hidden: !!raw.hidden,
+        publisher: raw.publisher || null,
+        releaseDate: raw.releaseDate || null,
+        id: raw.id
+      });
+    };
+
+    library.forEach(g => add(g, 'lib'));
+    gamePass.forEach(g => add(g, 'gp'));
+
+    for (const group of groups.values()) {
+      // one route per store, keep the best one (Playnite can hold duplicates)
+      const byStore = new Map();
+      for (const e of group.entries) {
+        const prev = byStore.get(e.store);
+        if (!prev || routeRank(e) < routeRank(prev)) byStore.set(e.store, e);
+      }
+      group.entries = [...byStore.values()].sort((a, b) => routeRank(a) - routeRank(b));
+      group.best = group.entries[0];
+      group.stores = group.entries.map(e => e.store);
+
+      group.gfn = group.best.gfn;
+      group.sync = group.best.gfn === 'yes' ? group.best.sync : null;
+      group.genres = [...new Set(group.entries.flatMap(e => e.genres))];
+      group.playtime = Math.max(...group.entries.map(e => e.playtime || 0));
+      group.lastPlayed = group.entries.map(e => e.lastPlayed).filter(Boolean).sort().pop() || null;
+      group.installed = group.entries.some(e => e.installed);
+      group.favorite = group.entries.some(e => e.favorite);
+      group.hidden = group.entries.every(e => e.hidden);
+      group.publisher = group.entries.map(e => e.publisher).filter(Boolean)[0] || null;
+      group.id = group.best.id;
+
+      group.hay = normalize([
+        group.name,
+        ...group.entries.map(e => e.gfnTitle).filter(Boolean)
+      ].join(' '));
+    }
+
+    return [...groups.values()];
+  }
+
+  // ------------------------------------------------------------------- list
+
   function baseRows() {
-    const visible = g => !g.hidden;
+    const rows = state.games.filter(g => !g.hidden);
     switch (state.view) {
-      case 'tv': return state.games.filter(g => visible(g) && g.__gfn === 'yes');
-      case 'laptop': return state.games.filter(g => visible(g) && (g.__gfn === 'no' || g.__gfn === 'other'));
+      case 'tv': return rows.filter(g => g.gfn === 'yes');
+      // everything that is not playable on the TV - including itch.io/Humble,
+      // which GeForce NOW can never stream
+      case 'laptop': return rows.filter(g => g.gfn !== 'yes');
       case 'gamepass': return state.gamePass;
-      default: return state.games.filter(visible);
+      default: return rows;
     }
   }
 
   function filteredRows() {
     let rows = baseRows();
-    const onLibraryView = state.view !== 'gamepass';
+    const libraryView = state.view !== 'gamepass';
 
-    if (onLibraryView && state.genre) rows = rows.filter(g => asArray(g.genres).includes(state.genre));
-    if (onLibraryView && state.store) rows = rows.filter(g => g.store === state.store);
-    if (state.q) rows = rows.filter(g => (g.__hay || '').includes(state.q));
+    if (libraryView && state.genre) rows = rows.filter(g => (g.genres || []).includes(state.genre));
+    if (libraryView && state.store) rows = rows.filter(g => (g.stores || [g.store]).includes(state.store));
+    if (state.q) rows = rows.filter(g => (g.__hay || g.hay || '').includes(state.q) || (g.name && normalize(g.name).includes(state.q)));
 
-    const dir = 1;
-    if (state.sort === 'playtime') {
-      rows.sort((a, b) => (b.playtime || 0) - (a.playtime || 0));
-    } else if (state.sort === 'recent') {
-      rows.sort((a, b) => String(b.lastPlayed || '').localeCompare(String(a.lastPlayed || '')));
-    } else {
-      rows.sort((a, b) => (a.sortName || a.name).localeCompare(b.sortName || b.name) * dir);
-    }
+    if (state.sort === 'playtime') rows = rows.slice().sort((a, b) => (b.playtime || 0) - (a.playtime || 0));
+    else if (state.sort === 'recent') rows = rows.slice().sort((a, b) => String(b.lastPlayed || '').localeCompare(String(a.lastPlayed || '')));
+    else rows = rows.slice().sort((a, b) => (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' }));
 
-    // Hard blockers first (EA: not even visible in GFN), Epic hints stay in place.
     if (state.view === 'tv') {
-      const rank = g => (g.sync === 'ea-claim' ? 0 : 1);
-      rows.sort((a, b) => rank(a) - rank(b));
+      const rank = g => (g.sync === 'claim+mark' ? 0 : 1);
+      rows = rows.slice().sort((a, b) => rank(a) - rank(b));
     }
     return rows;
   }
@@ -150,55 +222,59 @@
   // ------------------------------------------------------------------ render
 
   function gfnBadge(g) {
+    const status = g.gfn || 'na';
     const stores = asArray(g.gfnStores);
-    const label = g.__gfn === 'yes' ? 'GFN' : g.__gfn === 'other' ? 'GFN*' : g.__gfn === 'no' ? '—' : 'n/a';
-    const title = g.__gfn === 'yes'
+    const label = status === 'yes' ? 'GFN' : status === 'other' ? 'GFN*' : status === 'no' ? '—' : 'n/a';
+    const title = status === 'yes'
       ? `Playable on GeForce NOW via ${stores.join(', ') || 'streaming'}`
-      : g.__gfn === 'other'
+      : status === 'other'
         ? `On GeForce NOW only for ${stores.join(', ')} - not the store you have`
-        : g.__gfn === 'no' ? 'Not on GeForce NOW' : 'This store cannot be streamed';
-    return `<span class="badge b-${g.__gfn}" title="${esc(title)}">${label}</span>`;
+        : status === 'no' ? 'Not on GeForce NOW' : 'This store cannot be streamed';
+    return `<span class="badge b-${status}" title="${esc(title)}">${label}</span>`;
   }
 
-  const SYNC_TEXT = {
-    'ea-claim': { label: 'EA app first', title: 'GeForce NOW only lists it once the game is in your EA library (add it in the EA app).' },
-    'gfn-mark': { label: 'mark in GFN', title: 'GeForce NOW does not sync Epic automatically: open the game in GFN and mark it as owned.' }
-  };
-
   function syncBadge(g) {
-    const info = SYNC_TEXT[g.sync];
-    if (!info) return '';
-    return `<span class="badge b-claim" title="${esc(info.title)}">${esc(info.label)}</span>`;
+    const info = SYNC_BADGE[g.sync];
+    return info ? `<span class="badge b-claim" title="${esc(info.title)}">${esc(info.label)}</span>` : '';
   }
 
   function storeCell(g) {
-    const store = g.store || (state.view === 'gamepass' ? 'Game Pass' : '');
-    const access = g.access && g.access !== 'owned'
-      ? `<span class="access">${esc(ACCESS_LABEL[g.access] || g.access)}</span>` : '';
-    return `<span class="store">${esc(store)}</span>${access}`;
+    if (state.view === 'gamepass') return '<span class="store">Game Pass</span>';
+    const parts = asArray(g.stores).map(store => {
+      const entry = (g.entries || []).find(e => e.store === store) || {};
+      const label = ACCESS_LABEL[entry.access] || entry.access;
+      const access = entry.access && entry.access !== 'owned' && label !== store
+        ? `<span class="access">${esc(label)}</span>` : '';
+      const ok = entry.gfn === 'yes' ? ' is-ok' : '';
+      return `<span class="store${ok}">${esc(store)}${access}</span>`;
+    });
+    return parts.join('<span class="sep"> · </span>');
   }
 
   function details(g) {
     const bits = [];
     const add = (k, v) => { if (v) bits.push(`<div><span class="k">${k}</span>${v}</div>`); };
 
-    if (g.sync === 'ea-claim') {
-      add('One step', 'Add it in the EA app first - GeForce NOW reads your EA library, so it only appears there afterwards.');
+    if ((g.entries || []).length > 1) {
+      const routes = g.entries.map(e => {
+        const where = e.gfn === 'yes' ? `GFN ✓ (${e.gfnStores.join(', ')})`
+          : e.gfn === 'other' ? `GFN only for ${e.gfnStores.join(', ')}`
+            : e.gfn === 'no' ? 'not on GFN' : 'not streamable';
+        return `<div class="route"><strong>${esc(e.store)}</strong> - ${esc(ACCESS_LABEL[e.access] || e.access)} - ${esc(where)}</div>`;
+      }).join('');
+      bits.push(`<div class="routes"><span class="k">Routes</span><div>${routes}</div></div>`);
     }
-    if (g.sync === 'gfn-mark') {
-      add('One step', 'Epic is not synced automatically: find it in GeForce NOW and use "Mark as owned" once.');
+
+    if (g.sync === 'claim+mark') {
+      add('Two steps', '1. Add it in the EA app - that is what creates the licence. 2. In GeForce NOW, open it, choose "Mark as owned" and pick EA.');
+    } else if (g.sync === 'mark') {
+      add('If it is missing', 'Open it in GeForce NOW and choose "Mark as owned" - some store connectors sync by themselves and some do not.');
     }
-    if (g.__gfn === 'other') {
-      add('GFN stores', esc(asArray(g.gfnStores).join(', ')) + ' - not the one you have');
-    }
-    if (g.gfnTitle && g.gfnTitle !== g.name) add('GFN lists it as', esc(g.gfnTitle));
+    if (g.gfn === 'other') add('GFN stores', esc(asArray(g.entries?.[0]?.gfnStores).join(', ')) + ' - not the one you have');
     add('Genre', esc(asArray(g.genres).join(', ')));
-    add('Developer', esc(asArray(g.developers).join(', ')));
-    add('Publisher', esc(asArray(g.publishers).join(', ')));
-    add('Released', esc(g.releaseDate));
+    add('Publisher', esc(g.publisher));
+    add('Released', esc(g.releaseDate || (g.entries || []).map(e => e.releaseDate).filter(Boolean)[0]));
     add('Played', g.playtime ? `${playtime(g.playtime)}${g.lastPlayed ? ' - last ' + esc(ago(g.lastPlayed)) : ''}` : '');
-    add('Status', esc(g.completion));
-    add('Tags', esc(asArray(g.tags).join(', ')));
 
     return `<li class="detail"><div>${bits.join('') || '<em>No extra details.</em>'}</div></li>`;
   }
@@ -219,9 +295,7 @@
 
   function renderList() {
     const rows = filteredRows();
-    const out = rows.map(row);
-
-    $('#list').innerHTML = out.join('');
+    $('#list').innerHTML = rows.map(row).join('');
     $('#empty').hidden = rows.length > 0;
     $('#count').textContent = `${fmt(rows.length)} ${state.view === 'gamepass' ? 'Game Pass titles' : 'games'}`;
 
@@ -232,6 +306,15 @@
     $('#genre').style.display = libraryView ? '' : 'none';
     $('#store').style.display = libraryView ? '' : 'none';
 
+    const hint = $('#hint');
+    if (state.view === 'tv') {
+      hint.hidden = false;
+      hint.innerHTML = 'GeForce NOW has 7 store connectors and not all of them sync by themselves. If a game is not in your GFN library yet, ' +
+        'open it there and choose <strong>Mark as owned</strong>. EA Play games from Game Pass need one more step: add them in the EA app first.';
+    } else {
+      hint.hidden = true;
+    }
+
     writeHash();
   }
 
@@ -240,17 +323,15 @@
     const stores = new Map();
     for (const g of state.games) {
       if (g.hidden) continue;
-      for (const genre of asArray(g.genres)) genres.set(genre, (genres.get(genre) || 0) + 1);
-      if (g.store) stores.set(g.store, (stores.get(g.store) || 0) + 1);
+      for (const genre of g.genres) genres.set(genre, (genres.get(genre) || 0) + 1);
+      for (const s of g.stores) stores.set(s, (stores.get(s) || 0) + 1);
     }
 
-    const genreSel = $('#genre');
-    genreSel.innerHTML = '<option value="">All genres</option>' +
+    $('#genre').innerHTML = '<option value="">All genres</option>' +
       [...genres.entries()].sort((a, b) => b[1] - a[1]).slice(0, 30)
         .map(([n, c]) => `<option value="${esc(n)}"${n === state.genre ? ' selected' : ''}>${esc(n)} (${c})</option>`).join('');
 
-    const storeSel = $('#store');
-    storeSel.innerHTML = '<option value="">All stores</option>' +
+    $('#store').innerHTML = '<option value="">All stores</option>' +
       [...stores.entries()].sort((a, b) => b[1] - a[1])
         .map(([n, c]) => `<option value="${esc(n)}"${n === state.store ? ' selected' : ''}>${esc(n)} (${c})</option>`).join('');
 
@@ -261,46 +342,42 @@
     const el = $('#verdict');
     if (!state.q) { el.innerHTML = ''; return; }
 
-    const pick = hits =>
-      hits.find(g => normalize(g.name) === state.q) ||
-      hits.find(g => normalize(g.name).startsWith(state.q + ' ')) ||
-      hits.slice().sort((a, b) => a.name.length - b.name.length)[0];
-
-    const libHits = state.games.filter(g => (g.__hay || '').includes(state.q));
-    const gpHits = state.gamePass.filter(g => (g.__hay || '').includes(state.q));
-
-    let text, cls;
-    if (libHits.length) {
-      const g = pick(libHits);
-      const where = g.store ? ` on ${g.store}` : '';
-      const access = g.access && g.access !== 'owned' ? ` (${ACCESS_LABEL[g.access] || g.access})` : '';
-      const gfn = g.__gfn === 'yes'
-        ? (g.sync === 'ea-claim'
-            ? 'playable on GeForce NOW - but add it in the EA app first'
-            : g.sync === 'gfn-mark'
-              ? 'playable on GeForce NOW - mark it as owned once in GFN'
-              : 'playable on GeForce NOW')
-        : g.__gfn === 'other'
-          ? `on GeForce NOW only for ${asArray(g.gfnStores).join(', ')}`
-          : g.__gfn === 'na' ? 'this store cannot be streamed' : 'not playable on GeForce NOW';
-      const gpOther = gpHits.filter(x => normalize(x.name) !== normalize(g.name));
-      const extra = gpOther.length ? ` - also in Game Pass: ${gpOther.slice(0, 2).map(x => x.name).join(', ')}` : '';
-      text = `${g.name} - you have it${where}${access} - ${gfn}${extra}`;
-      cls = g.__gfn === 'yes' && g.sync === 'auto' ? 'ok' : g.__gfn === 'other' || g.sync !== 'auto' ? 'warn' : 'neutral';
-    } else if (gpHits.length) {
-      const g = pick(gpHits);
-      const gfn = g.gfn === 'yes'
-        ? (g.sync === 'ea-claim' ? 'playable on GFN after adding it in the EA app' : 'playable on GeForce NOW')
-        : g.gfn === 'other' ? `on GFN only for ${asArray(g.gfnStores).join(', ')}` : 'not on GeForce NOW';
-      text = `Not in your library - in PC Game Pass: ${g.name} (${gfn})`;
-      cls = 'warn';
-    } else {
-      text = 'Not in your collection, and not in PC Game Pass.';
-      cls = 'bad';
+    const hits = state.games.filter(g => g.hay.includes(state.q));
+    if (!hits.length) {
+      el.className = 'verdict bad';
+      el.textContent = 'Not in your collection, and not in PC Game Pass.';
+      return;
     }
 
-    el.className = 'verdict ' + cls;
-    el.textContent = text;
+    const g = hits.find(x => normalize(x.name) === state.q)
+      || hits.find(x => normalize(x.name).startsWith(state.q + ' '))
+      || hits.slice().sort((a, b) => a.name.length - b.name.length)[0];
+
+    const routes = g.entries.map(e => {
+      const label = ACCESS_LABEL[e.access] || e.access;
+      // "Game Pass (Game Pass)" reads badly
+      const acc = e.access && e.access !== 'owned' && label !== e.store ? ` (${label})` : '';
+      return `${e.store}${acc}`;
+    }).join(' + ');
+
+    let tail;
+    if (g.gfn === 'yes') {
+      const via = asArray(g.entries[0].gfnStores).join(', ');
+      tail = g.sync === 'claim+mark'
+        ? `playable on GeForce NOW, but two steps: add it in the EA app, then mark it as owned in GFN`
+        : g.sync === 'mark'
+          ? `playable on GeForce NOW - mark it as owned once in GFN`
+          : `playable on GeForce NOW (${via})`;
+    } else if (g.gfn === 'other') {
+      tail = `not playable on GeForce NOW (GFN has it only for ${asArray(g.entries[0].gfnStores).join(', ')})`;
+    } else if (g.gfn === 'na') {
+      tail = 'not streamable';
+    } else {
+      tail = 'not playable on GeForce NOW';
+    }
+
+    el.className = 'verdict ' + (g.gfn === 'yes' && g.sync === 'auto' ? 'ok' : g.gfn === 'yes' ? 'warn' : 'neutral');
+    el.textContent = `${g.name} - you have it on ${routes} - ${tail}`;
   }
 
   function render() {
@@ -321,10 +398,8 @@
       const tab = e.target.closest('[data-view]');
       if (!tab || tab.dataset.view === state.view) return;
       state.view = tab.dataset.view;
-      state.genre = '';
-      state.store = '';
-      $('#genre').value = '';
-      $('#store').value = '';
+      state.genre = ''; state.store = '';
+      $('#genre').value = ''; $('#store').value = '';
       render();
     });
 
@@ -356,18 +431,18 @@
     const data = await res.json();
 
     state.data = data;
-    state.games = data.games || [];
-    state.gamePass = data.gamePass || [];
-    prepare(state.games);
-    prepare(state.gamePass);
+    state.gamePass = (data.gamePass || []).map(g => ({ ...g, __hay: normalize(g.name) }));
+    state.games = buildMerged(data.games || [], data.gamePass || []);
 
     readHash();
 
-    const s = data.stats || {};
-    const ready = state.games.filter(g => !g.hidden && g.__gfn === 'yes').length;
-    const laptop = state.games.filter(g => !g.hidden && (g.__gfn === 'no' || g.__gfn === 'other')).length;
+    const visible = state.games.filter(g => !g.hidden);
+    const tv = visible.filter(g => g.gfn === 'yes').length;
+    const laptop = visible.filter(g => g.gfn !== 'yes').length;
+    const never = visible.filter(g => g.gfn === 'na').length;
     $('#summary').textContent =
-      `${fmt(state.games.filter(g => !g.hidden).length)} games - ${fmt(ready)} on the TV - ${fmt(laptop)} laptop only`;
+      `${fmt(visible.length)} games - ${fmt(tv)} on the TV - ${fmt(laptop)} laptop only` +
+      (never ? ` (${fmt(never)} from stores GeForce NOW never supports)` : '');
 
     $('#meta').textContent = `Updated ${ago(data.generatedAt)}` +
       (data.catalog ? ` - GeForce NOW ${data.catalog.country}, ${fmt(data.catalog.titles)} titles` : '');
