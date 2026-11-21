@@ -15,8 +15,11 @@
   // account until you add it in the EA app - that is blocking, everything else
   // is "if it does not show up, use Mark as owned".
   const SYNC_RANK = { auto: 0, mark: 1, 'claim+mark': 2 };
+  // From the GFN "Game store accounts" screen: Steam/Ubisoft/Battle.net/GOG/Xbox
+  // report "N games synced"; Epic reports "Game library sync - Not supported".
   const SYNC_BADGE = {
-    'claim+mark': { label: 'EA app first', title: 'A Game Pass EA Play game has no licence in your EA account yet: add it in the EA app, then mark it as owned in GFN.' }
+    'mark': { label: 'mark in GFN', cls: 'b-mark', title: 'Epic has no library sync in GeForce NOW: open the game in GFN and choose Mark as owned.' },
+    'claim+mark': { label: 'EA app first', cls: 'b-claim', title: 'A Game Pass EA Play game has no licence in your EA account yet: add it in the EA app, then mark it as owned in GFN.' }
   };
 
   const GFN_ORDER = { yes: 0, other: 1, no: 2, na: 3 };
@@ -114,7 +117,8 @@
     const stores = asArray(raw.gfnStores);
     const own = STORE_CODE[raw.store] || 'XBOX';
     if (!stores.includes(own) && stores.includes('EA_APP')) return 'claim+mark';
-    return stores.includes('STEAM') ? 'auto' : 'mark';
+    if (raw.store === 'Epic') return 'mark';
+    return 'auto';
   }
 
   function buildMerged(library, gamePass) {
@@ -235,7 +239,7 @@
 
   function syncBadge(g) {
     const info = SYNC_BADGE[g.sync];
-    return info ? `<span class="badge b-claim" title="${esc(info.title)}">${esc(info.label)}</span>` : '';
+    return info ? `<span class="badge ${info.cls}" title="${esc(info.title)}">${esc(info.label)}</span>` : '';
   }
 
   function storeCell(g) {
@@ -309,8 +313,9 @@
     const hint = $('#hint');
     if (state.view === 'tv') {
       hint.hidden = false;
-      hint.innerHTML = 'GeForce NOW has 7 store connectors and not all of them sync by themselves. If a game is not in your GFN library yet, ' +
-        'open it there and choose <strong>Mark as owned</strong>. EA Play games from Game Pass need one more step: add them in the EA app first.';
+      hint.innerHTML = 'Steam, Ubisoft, Battle.net, GOG and Xbox sync by themselves. <strong>Epic has no library sync</strong> in GeForce NOW ' +
+        '(NVIDIA: "Game library sync - Not supported"), so open the game in GFN and choose <strong>Mark as owned</strong>. ' +
+        'EA Play games from Game Pass need the EA app first, then that same mark.';
     } else {
       hint.hidden = true;
     }

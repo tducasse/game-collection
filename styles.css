@@ -274,3 +274,9 @@ footer {
 
 .routes .k { vertical-align: top; }
 .routes .route { padding: .1rem 0; }
+
+.b-mark {
+  color: var(--warn);
+  background: transparent;
+  border: 1px solid var(--warn);
+}
