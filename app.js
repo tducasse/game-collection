@@ -69,12 +69,17 @@
     ));
   }
 
+  const ROMAN = { ii: '2', iii: '3', iv: '4', v: '5', vi: '6', vii: '7', viii: '8', ix: '9', xi: '11', xii: '12' };
+
   function normalize(s) {
-    return String(s ?? '')
+    const words = String(s ?? '')
       .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, ' ')
-      .trim();
+      .trim()
+      .split(' ')
+      .map(w => ROMAN[w] || w);
+    return words.join(' ');
   }
 
   const nf = new Intl.NumberFormat();
@@ -357,10 +362,18 @@
   function renderVerdict(rows) {
     const el = $('#verdict');
     if (!state.q || state.tab !== 'library') { if (el) el.remove(); return; }
-    const games = state.games.filter(g => (g.__hay || '').includes(state.q));
+
+    // best match: exact, then "starts with the query", then shortest name
+    const pick = hits =>
+      hits.find(g => normalize(g.name) === state.q) ||
+      hits.find(g => normalize(g.name).startsWith(state.q + ' ')) ||
+      hits.slice().sort((a, b) => a.name.length - b.name.length)[0];
+    const libHits = state.games.filter(g => (g.__hay || '').includes(state.q));
+    const gpHits = state.gamePass.filter(g => (g.__hay || '').includes(state.q));
+
     let text, cls;
-    if (games.length) {
-      const g = games[0];
+    if (libHits.length) {
+      const g = pick(libHits);
       const access = g.access && g.access !== 'owned'
         ? ` via ${ACCESS_LABEL[g.access] || g.access} (not owned)`
         : '';
@@ -372,15 +385,25 @@
           : g.__gfn === 'na'
             ? 'this store cannot be streamed'
             : 'not playable on GeForce NOW';
-      text = `${g.name} — in your library${where}${access} — ${gfn}`;
+
+      const gpOther = gpHits.filter(x => normalize(x.name) !== normalize(g.name));
+      const extra = gpOther.length
+        ? ` · also in Game Pass: ${gpOther.slice(0, 3).map(x => x.name).join(', ')}`
+        : '';
+      text = `${g.name} — in your library${where}${access} — ${gfn}${extra}`;
       cls = g.__gfn === 'yes' ? 'ok' : g.__gfn === 'other' || (g.access && g.access !== 'owned') ? 'warn' : 'neutral';
+    } else if (gpHits.length) {
+      const g = pick(gpHits);
+      const gfn = g.gfn === 'yes' ? 'playable on GeForce NOW'
+        : g.gfn === 'other' ? `on GeForce NOW only for ${asArray(g.gfnStores).join(', ')}`
+        : 'not on GeForce NOW';
+      text = `Not in your library — in PC Game Pass: ${g.name} (${gfn})`;
+      cls = 'warn';
     } else {
-      const gp = state.gamePass.filter(g => (g.__hay || '').includes(state.q));
-      text = gp.length
-        ? `Not in your library. In PC Game Pass: ${gp[0].name}`
-        : 'Not in your collection.';
-      cls = gp.length ? 'warn' : 'bad';
+      text = 'Not in your collection, and not in PC Game Pass.';
+      cls = 'bad';
     }
+
     const node = el || document.createElement('div');
     node.id = 'verdict';
     node.className = 'verdict ' + cls;
