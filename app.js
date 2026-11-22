@@ -250,6 +250,9 @@
     return { text: 'Not on GFN', cls: 'no' };
   }
 
+  const statusChip = (text, cls, title) =>
+    `<span class="status ${cls}"${title ? ` title="${esc(title)}"` : ''}><i aria-hidden="true"></i>${text}</span>`;
+
   function gfnAction(g) {
     if (g.sync === 'claim+mark') return { text: 'EA app first', cls: 'act' };
     if (g.sync === 'mark') return { text: 'mark in GFN', cls: 'act' };
@@ -259,7 +262,7 @@
   function scoreChip(label, value) {
     if (value == null) return '';
     const band = value >= 85 ? 'good' : value >= 70 ? 'mid' : 'low';
-    return `<span class="score ${band}" title="${label} score out of 100"><span class="score-k">${label}</span>${value}</span>`;
+    return `<span class="score ${band}" title="${label} score out of 100"><span class="score-k">${label}</span><b>${value}</b></span>`;
   }
 
   function card(g) {
@@ -283,6 +286,8 @@
     if (g.lastPlayed) facts.push('last played ' + ago(g.lastPlayed));
     if (g.releaseDate) facts.push(String(g.releaseDate).slice(0, 4));
 
+    const scores = [scoreChip('Critics', g.critic), scoreChip('Community', g.community)].join('');
+
     return `<article class="card" data-id="${esc(g.id)}">
       <div class="card-head">
         <h2 class="title">${esc(g.name)}</h2>
@@ -290,16 +295,21 @@
         ${g.favorite ? '<span class="pill fav" title="Favourite">★</span>' : ''}
         ${link ? `<a class="ext" href="${esc(link)}" target="_blank" rel="noopener" title="Open store page" aria-label="Open store page">↗</a>` : ''}
       </div>
-      <div class="row stores">${stores}</div>
-      <div class="row meta-row">
-        <span class="status ${status.cls}">${status.text}</span>
-        ${action ? `<span class="status act" title="${g.sync === 'claim+mark'
-          ? 'Add it in the EA app, then mark it as owned in GeForce NOW'
-          : 'Epic has no library sync in GeForce NOW: mark it as owned there'}">${action.text}</span>` : ''}
-        ${scoreChip('Critics', g.critic)}
-        ${scoreChip('Community', g.community)}
+
+      <div class="row split">
+        <div class="stores">${stores}</div>
+        ${scores ? `<div class="scores">${scores}</div>` : ''}
       </div>
-      ${facts.length ? `<div class="row facts">${facts.map(esc).join(' · ')}</div>` : ''}
+
+      <div class="row split">
+        <div class="statuses">
+          ${statusChip(status.text, status.cls)}
+          ${action ? statusChip(action.text, 'act', g.sync === 'claim+mark'
+            ? 'Add it in the EA app, then mark it as owned in GeForce NOW'
+            : 'Epic has no library sync in GeForce NOW: mark it as owned there') : ''}
+        </div>
+        ${facts.length ? `<div class="facts">${facts.map(esc).join(' · ')}</div>` : ''}
+      </div>
     </article>`;
   }
 
