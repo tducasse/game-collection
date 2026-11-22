@@ -87,15 +87,19 @@
 
   // Noise words mirror the module's ConvertTo-GfnKey. Used only for the loose
   // "is this title in the Game Pass catalogue?" test; card grouping stays exact.
+  // The extras are catalogue SKU names rather than platform filler: a library
+  // title like "Battlefield V" has to meet "Battlefield™ V Year 2 Edition".
   const NOISE = new Set([
     'the', 'standard', 'deluxe', 'ultimate', 'premium', 'definitive',
     'complete', 'enhanced', 'gold', 'legendary', 'digital', 'anniversary',
     'goty', 'game', 'of', 'year', 'special', 'collector', 'collectors',
     'remastered', 'remaster', 'edition', 'pc', 'windows', 'xbox', 'version',
-    'preview', 'cross', 'gen', 'english', 'us'
+    'preview', 'cross', 'gen', 'english', 'us',
+    'revolution', 'hunter', 'maximum', 'launcher', 'for', 'play', 'ea'
   ]);
 
-  const gpKey = s => normalize(s).split(' ').filter(w => w && !NOISE.has(w)).join(' ');
+  const gpKey = s => normalize(String(s ?? '').replace(/\b(year|season)\s+\d+\b/gi, ' '))
+    .split(' ').filter(w => w && !NOISE.has(w)).join(' ');
 
   const fmt = n => new Intl.NumberFormat().format(n);
   const plural = (n, one, many) => `${fmt(n)} ${n === 1 ? one : many}`;
@@ -240,13 +244,11 @@
       group.best = group.entries[0];
       group.gfn = group.best.gfn;
       group.sync = group.best.gfn === 'yes' ? group.best.sync : null;
-      // "On Game Pass" is a fact about the catalogue, not about the source name.
-      // EA app and Ubisoft Connect licences say nothing on their own: a licence
-      // there is Game Pass only when the title is listed in the catalogue today
-      // (Apex Legends is neither EA Play nor Game Pass, for instance).
-      group.onGP = group.hasGP || group.entries.some(e =>
-        e.access === 'gamepass' &&
-        ((e.launcher !== 'EA' && e.launcher !== 'Ubisoft') || gpKeys.has(gpKey(group.name))));
+      // "On Game Pass" is a fact about the catalogue - not about the source
+      // name and not about `access`. A Ubisoft Connect licence that is not
+      // listed today is just Ubisoft; an EA app copy that left the catalogue is
+      // just EA. Only a title in the catalogue gets the chip.
+      group.onGP = group.hasGP || gpKeys.has(gpKey(group.name));
       group.genres = [...new Set(group.entries.flatMap(e => [...e.genres, ...e.categories]))];
       group.installed = group.entries.some(e => e.installed);
       group.favorite = group.entries.some(e => e.favorite);
@@ -279,8 +281,8 @@
     if (g.hidden) return false;
     if (!ignore.genre && state.genre && !g.genres.includes(state.genre)) return false;
     if (!ignore.stores && state.stores.size && !g.stores.some(s => state.stores.has(s))) return false;
-    if (state.access === 'owned' && !g.owned) return false;
-    if (state.access === 'gp' && !g.onGP) return false;
+    if (!ignore.access && state.access === 'owned' && !g.owned) return false;
+    if (!ignore.access && state.access === 'gp' && !g.onGP) return false;
     if (!ignore.q && state.q && !g.hay.includes(state.q)) return false;
     return true;
   }
@@ -301,6 +303,20 @@
     const base = state.games.filter(g => matchesBasics(g, { q: false }));
     const yes = base.filter(g => g.gfn === 'yes').length;
     return { all: base.length, yes, no: base.length - yes };
+  }
+
+  // "Everything" / "I own it" / "On Game Pass" overlap on purpose (a game you
+  // own can also be in Game Pass), so show the counts in the options - otherwise
+  // 14 owned + 417 on Game Pass vs 417 everything looks like a bug.
+  const ACCESS_OPTION = { all: 'Everything', owned: 'I own it', gp: 'On Game Pass' };
+
+  function accessCounts() {
+    const base = state.games.filter(g => !g.hidden && matchesBasics(g, { access: true }) && matchesGfn(g));
+    return {
+      all: base.length,
+      owned: base.filter(g => g.owned).length,
+      gp: base.filter(g => g.onGP).length
+    };
   }
 
   // ------------------------------------------------------------------ cards
@@ -466,6 +482,11 @@
       seg.querySelector('.n').textContent = fmt(counts[seg.dataset.gfn]);
     });
 
+    const acc = accessCounts();
+    document.querySelectorAll('#access option').forEach(opt => {
+      opt.textContent = `${ACCESS_OPTION[opt.value] || opt.value} (${fmt(acc[opt.value] ?? 0)})`;
+    });
+
     // recovery: matches exist, but the filters hide them
     const note = $('#note');
     const hiddenBy = state.q ? state.games.filter(g => matchesBasics(g, { q: false, genre: false, store: false }) && !matchesGfn(g)) : [];
@@ -519,7 +540,7 @@
       chips.push(`<button class="chip" data-clear-store="${esc(s)}">${esc(s)} <span aria-hidden="true">×</span></button>`);
     }
     if (state.access !== 'all') {
-      chips.push(`<button class="chip" data-clear-access="1">${state.access === 'gp' ? 'On Game Pass' : 'Owned'} <span aria-hidden="true">×</span></button>`);
+      chips.push(`<button class="chip" data-clear-access="1">${ACCESS_OPTION[state.access] || state.access} <span aria-hidden="true">×</span></button>`);
     }
     if (state.genre) {
       chips.push(`<button class="chip" data-clear-genre="1">${esc(state.genre)} <span aria-hidden="true">×</span></button>`);
