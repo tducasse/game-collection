@@ -171,7 +171,19 @@
         const prev = byStore.get(e.store);
         if (!prev || routeRank(e) < routeRank(prev)) byStore.set(e.store, e);
       }
-      group.entries = [...byStore.values()].sort((a, b) => routeRank(a) - routeRank(b));
+      const candidates = [...byStore.values()];
+      // A Game Pass catalogue entry is only a *route* if it beats what you
+      // already own - otherwise it is just "this title is on Game Pass", which
+      // does not help ("Hades: Steam + Game Pass" when neither streams).
+      const libRoutes = candidates.filter(e => e.kind === 'lib').sort((a, b) => routeRank(a) - routeRank(b));
+      const gpRoutes = candidates.filter(e => e.kind === 'gp').sort((a, b) => routeRank(a) - routeRank(b));
+      const bestLib = libRoutes[0] || null;
+      const keep = libRoutes.slice();
+      for (const gp of gpRoutes) {
+        if (!bestLib || routeRank(gp) < routeRank(bestLib)) keep.push(gp);
+      }
+
+      group.entries = keep.sort((a, b) => routeRank(a) - routeRank(b));
       group.best = group.entries[0];
       group.stores = group.entries.map(e => e.store);
 
