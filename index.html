@@ -15,9 +15,9 @@
     <h1>My games</h1>
     <p id="summary" class="summary"></p>
   </div>
-  <div class="search-wrap">
-    <input id="q" type="search" placeholder="Do I have…" autocomplete="off" spellcheck="false" aria-label="Search games">
-  </div>
+
+  <input id="q" type="search" placeholder="Do I have…" autocomplete="off" spellcheck="false" aria-label="Search games">
+
   <div class="segments" role="group" aria-label="GeForce NOW availability">
     <button class="seg is-active" data-gfn="all">All <span class="n"></span></button>
     <button class="seg" data-gfn="yes">On GFN <span class="n"></span></button>
@@ -26,31 +26,22 @@
 </header>
 
 <main>
-  <div id="verdict"></div>
-
-  <div class="controls" id="controls">
+  <div class="toolbar">
     <select id="genre" aria-label="Genre"><option value="">All genres</option></select>
     <select id="store" aria-label="Store"><option value="">All stores</option></select>
-    <span id="count" class="count"></span>
+    <select id="sort" aria-label="Sort by">
+      <option value="name">A–Z</option>
+      <option value="critic">Best critics</option>
+      <option value="community">Best community</option>
+      <option value="playtime">Most played</option>
+      <option value="recent">Recently played</option>
+    </select>
   </div>
 
-  <p id="hint" class="hint" hidden></p>
+  <p id="count" class="count"></p>
+  <p id="note" class="note" hidden></p>
 
-  <div class="table-wrap">
-    <table class="games">
-      <thead>
-        <tr>
-          <th class="col-name"><button data-sort="name">Game</button></th>
-          <th class="col-stores"><button data-sort="store">Stores</button></th>
-          <th class="col-gfn"><button data-sort="gfn">GFN</button></th>
-          <th class="col-score num"><button data-sort="critic">Critics</button></th>
-          <th class="col-score num"><button data-sort="community">Community</button></th>
-          <th class="col-link"></th>
-        </tr>
-      </thead>
-      <tbody id="rows"></tbody>
-    </table>
-  </div>
+  <div id="cards" class="cards"></div>
   <p id="empty" class="empty" hidden>Nothing here.</p>
 </main>
 
