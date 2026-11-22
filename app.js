@@ -71,7 +71,9 @@
     if (['all', 'yes', 'no'].includes(gfn)) state.gfn = gfn;
     state.q = p.get('q') ? normalize(p.get('q')) : '';
     state.genre = p.get('genre') || '';
-    state.store = p.get('store') || '';
+    state.stores = new Set((p.get('stores') || '').split(',').filter(Boolean));
+    const access = p.get('access');
+    state.access = ['owned', 'gp'].includes(access) ? access : 'all';
     if (SORTS[p.get('sort')]) state.sort = p.get('sort');
     else state.sort = 'community';
   }
@@ -81,7 +83,8 @@
     if (state.gfn !== 'all') p.set('gfn', state.gfn);
     if (state.q) p.set('q', state.q);
     if (state.genre) p.set('genre', state.genre);
-    if (state.store) p.set('store', state.store);
+    if (state.stores.size) p.set('stores', [...state.stores].join(','));
+    if (state.access !== 'all') p.set('access', state.access);
     if (state.sort !== 'community') p.set('sort', state.sort);
     const hash = p.toString();
     history.replaceState(null, '', hash ? '#' + hash : location.pathname);
@@ -118,9 +121,10 @@
         groups.set(key, group);
       }
 
+      const rawStore = raw.store || (kind === 'gp' ? 'Xbox' : '');
       group.entries.push({
         kind,
-        store: raw.store || (kind === 'gp' ? 'Game Pass' : ''),
+        store: rawStore === 'Xbox Game Pass' ? 'Xbox' : rawStore,
         access: raw.access || (kind === 'gp' ? 'gamepass' : 'unknown'),
         gfn: raw.gfn || 'na',
         gfnStores: asArray(raw.gfnStores),
@@ -144,6 +148,10 @@
     gamePass.forEach(g => add(g, 'gp'));
 
     for (const group of groups.values()) {
+      // entitlement flags, before losing routes get dropped
+      group.hasGP = group.entries.some(e => e.kind === 'gp');
+      group.owned = group.entries.some(e => e.kind === 'lib' && e.access === 'owned');
+
       const byStore = new Map();
       for (const e of group.entries) {
         const prev = byStore.get(e.store);
@@ -195,7 +203,9 @@
   function matchesBasics(g, ignore = {}) {
     if (g.hidden) return false;
     if (!ignore.genre && state.genre && !g.genres.includes(state.genre)) return false;
-    if (!ignore.store && state.store && !g.stores.includes(state.store)) return false;
+    if (!ignore.stores && state.stores.size && !g.stores.some(s => state.stores.has(s))) return false;
+    if (state.access === 'owned' && !g.owned) return false;
+    if (state.access === 'gp' && !g.hasGP) return false;
     if (!ignore.q && state.q && !g.hay.includes(state.q)) return false;
     return true;
   }
@@ -391,14 +401,43 @@
       [...genres.entries()].sort(alpha)
         .map(([n, c]) => `<option value="${esc(n)}"${n === state.genre ? ' selected' : ''}>${esc(n)} (${c})</option>`).join('');
 
-    $('#store').innerHTML = '<option value="">All stores</option>' +
-      [...stores.entries()].sort(alpha)
-        .map(([n, c]) => `<option value="${esc(n)}"${n === state.store ? ' selected' : ''}>${esc(n)} (${c})</option>`).join('');
+    $('#stores-list').innerHTML = [...stores.entries()].sort(alpha).map(([name, count]) => {
+      const on = state.stores.has(name);
+      return `<label class="opt">
+        <input type="checkbox" value="${esc(name)}" ${on ? 'checked' : ''}>
+        <span class="opt-name">${esc(name)}</span>
+        <span class="opt-count">${fmt(count)}</span>
+      </label>`;
+    }).join('');
 
-    $('#sort').value = state.sort;
+    syncFilterUI();
   }
 
-  // ------------------------------------------------------------------ events
+  function syncFilterUI() {
+    const btn = $('#stores-btn');
+    btn.classList.toggle('is-on', state.stores.size > 0);
+    btn.querySelector('.menu-count').textContent = state.stores.size ? `(${state.stores.size})` : '';
+    $('#access').value = state.access;
+    renderChips();
+  }
+
+  function renderChips() {
+    const chips = [];
+    for (const s of [...state.stores].sort((a, b) => a.localeCompare(b))) {
+      chips.push(`<button class="chip" data-clear-store="${esc(s)}">${esc(s)} <span aria-hidden="true">×</span></button>`);
+    }
+    if (state.access !== 'all') {
+      chips.push(`<button class="chip" data-clear-access="1">${state.access === 'gp' ? 'On Game Pass' : 'Owned'} <span aria-hidden="true">×</span></button>`);
+    }
+    if (state.genre) {
+      chips.push(`<button class="chip" data-clear-genre="1">${esc(state.genre)} <span aria-hidden="true">×</span></button>`);
+    }
+    const el = $('#chips');
+    el.hidden = chips.length === 0;
+    el.innerHTML = chips.length
+      ? chips.join('') + '<button class="chip chip-clear" data-clear-all="1">Clear all</button>'
+      : '';
+  }
 
   function bind() {
     $('#q').addEventListener('input', e => {
@@ -414,8 +453,52 @@
       render();
     });
 
-    $('#genre').addEventListener('change', e => { state.genre = e.target.value; render(); });
-    $('#store').addEventListener('change', e => { state.store = e.target.value; render(); });
+    $('#genre').addEventListener('change', e => { state.genre = e.target.value; syncFilterUI(); render(); });
+    $('#access').addEventListener('change', e => { state.access = e.target.value; syncFilterUI(); render(); });
+
+    const pop = $('.menu-pop');
+    const menuBtn = $('#stores-btn');
+    const closeMenu = () => { pop.hidden = true; menuBtn.setAttribute('aria-expanded', 'false'); };
+
+    menuBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      pop.hidden = !pop.hidden;
+      menuBtn.setAttribute('aria-expanded', String(!pop.hidden));
+    });
+
+    pop.addEventListener('click', e => {
+      e.stopPropagation();
+      const action = e.target.closest('[data-stores]');
+      if (action) {
+        const every = [...pop.querySelectorAll('input[type=checkbox]')].map(i => i.value);
+        state.stores = new Set(action.dataset.stores === 'all' ? every : []);
+        for (const box of pop.querySelectorAll('input[type=checkbox]')) {
+          box.checked = state.stores.has(box.value);
+        }
+        syncFilterUI();
+        render();
+        return;
+      }
+      const box = e.target.closest('input[type=checkbox]');
+      if (box) {
+        box.checked ? state.stores.add(box.value) : state.stores.delete(box.value);
+        syncFilterUI();
+        render();
+      }
+    });
+
+    document.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+    $('#chips').addEventListener('click', e => {
+      const chip = e.target.closest('button');
+      if (!chip) return;
+      if (chip.dataset.clearStore !== undefined) state.stores.delete(chip.dataset.clearStore);
+      else if (chip.dataset.clearAccess) state.access = 'all';
+      else if (chip.dataset.clearGenre) state.genre = '';
+      else if (chip.dataset.clearAll) { state.stores = new Set(); state.access = 'all'; state.genre = ''; }
+      renderControls(); render();
+    });
     $('#sort').addEventListener('change', e => { state.sort = e.target.value; render(); });
 
     document.addEventListener('keydown', e => {
