@@ -48,12 +48,11 @@
       </div>
     </div>
 
-    <select id="access" aria-label="Access" aria-describedby="access-hint">
+    <select id="access" aria-label="Access" aria-describedby="access-note">
       <option value="all">Everything</option>
       <option value="owned">Owned only</option>
       <option value="gp">Game Pass only</option>
     </select>
-    <span id="access-hint" class="sr-only"></span>
 
     <select id="sort" aria-label="Sort by">
       <option value="community">Best community</option>
@@ -64,6 +63,7 @@
     <span id="count" class="count" aria-live="polite"></span>
   </div>
 
+  <p id="access-note" class="hint" aria-live="polite" hidden></p>
   <p id="chips" class="chips" hidden></p>
   <p id="note" class="note" role="status" hidden></p>
 

@@ -585,12 +585,16 @@
     document.querySelectorAll('#access option').forEach(opt => {
       opt.textContent = `${ACCESS_OPTION[opt.value] || opt.value} (${fmt(acc[opt.value] ?? 0)})`;
     });
-    // The two narrow views do not add up to Everything: say where the rest is,
-    // for screen readers through aria-describedby and for mice through title.
-    const hint = `${fmt(acc.both)} games are both owned and in Game Pass, ${fmt(acc.neither)} ` +
-      'are neither; those appear under Everything only';
-    $('#access').title = hint;
-    $('#access-hint').textContent = hint;
+    // The two narrow views do not add up to Everything. Say the remainder out
+    // loud, with a leading "+" so the arithmetic is visible at a glance.
+    const rest = [];
+    if (acc.both) rest.push(`+${fmt(acc.both)} owned and in Game Pass`);
+    if (acc.neither) rest.push(`+${fmt(acc.neither)} not in Game Pass`);
+    const hint = $('#access-note');
+    hint.hidden = rest.length === 0;
+    hint.textContent = rest.length
+      ? `${rest.join(' · ')} \u2014 only under Everything`
+      : '';
 
     // recovery: matches exist, but the filters hide them
     const note = $('#note');

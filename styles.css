@@ -91,7 +91,7 @@ body {
   border-bottom: 1px solid var(--hairline);
 }
 
-.top-inner, #q, .segments, .toolbar, .count, .chips, .note, .cards, .empty, footer {
+.top-inner, #q, .segments, .toolbar, .count, .hint, .chips, .note, .cards, .empty, footer {
   max-width: 1120px;
   margin-left: auto;
   margin-right: auto;
@@ -232,6 +232,13 @@ h1 {
   color: var(--muted);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
+}
+
+.hint {
+  margin-top: .5rem;   /* keep the auto side margins that centre it */
+  font-size: .78rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
 }
 
 .note {
