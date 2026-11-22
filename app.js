@@ -315,7 +315,9 @@
     return {
       all: base.length,
       owned: base.filter(g => g.owned && !g.onGP).length,
-      gp: base.filter(g => g.onGP && !g.owned).length
+      gp: base.filter(g => g.onGP && !g.owned).length,
+      both: base.filter(g => g.owned && g.onGP).length,
+      neither: base.filter(g => !g.owned && !g.onGP).length
     };
   }
 
@@ -486,6 +488,10 @@
     document.querySelectorAll('#access option').forEach(opt => {
       opt.textContent = `${ACCESS_OPTION[opt.value] || opt.value} (${fmt(acc[opt.value] ?? 0)})`;
     });
+    // The two narrow views do not add up to Everything: say where the rest is.
+    const sel = $('#access');
+    sel.title = `${fmt(acc.both)} owned and in Game Pass, ${fmt(acc.neither)} neither ` +
+      '- both appear under Everything only';
 
     // recovery: matches exist, but the filters hide them
     const note = $('#note');
