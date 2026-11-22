@@ -360,7 +360,9 @@
               : ' \u2014 launches in the Xbox app';
       return `<span class="access gp" title="Included with Game Pass${esc(via)}">Game Pass</span>`;
     }
-    const e = g.entries.find(x => x.access && x.access !== 'owned' && x.access !== 'gamepass');
+    // `owned` and `unknown` (the source cannot say why you have it) add nothing.
+    const e = g.entries.find(x => x.access && x.access !== 'owned' &&
+      x.access !== 'gamepass' && x.access !== 'unknown');
     if (!e) return '';
     const label = ACCESS_LABEL[e.access] || e.access;
     return `<span class="access" title="${esc(label)}">${esc(label)}</span>`;
