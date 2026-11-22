@@ -96,7 +96,7 @@
     'goty', 'game', 'of', 'year', 'special', 'collector', 'collectors',
     'remastered', 'remaster', 'edition', 'pc', 'windows', 'xbox', 'version',
     'preview', 'cross', 'gen', 'english', 'us',
-    'revolution', 'hunter', 'maximum', 'launcher', 'for', 'play', 'ea'
+    'revolution', 'hunter', 'maximum', 'launcher', 'play', 'ea'
   ]);
 
   // The Microsoft Store sometimes renames a product ("NEW MONOPOLY"), or carries
@@ -110,9 +110,15 @@
     ['new monopoly', 'monopoly']
   ]);
 
+  // Mirrors the module's ConvertTo-GroupKeyRaw: a trailing "for Windows"/"for PC"
+  // is store filler, not part of a title.
   const gpKey = s => {
-    const key = normalize(String(s ?? '').replace(/\b(year|season)\s+\d+\b/gi, ' '))
-      .split(' ').filter(w => w && !NOISE.has(w)).join(' ');
+    const cleaned = String(s ?? '')
+      .replace(/\s+for\s+(windows|pc)\b.*$/i, ' ')
+      .replace(/\b(year|season)\s+\d+\b/gi, ' ')
+      .replace(/\(\s*(19|20)\d\d\s*\)/g, ' ')
+      .replace(/\b(19|20)\d\d\s+edition\b/gi, ' ');
+    const key = normalize(cleaned).split(' ').filter(w => w && !NOISE.has(w)).join(' ');
     return TITLE_ALIAS.get(key) || key;
   };
 
@@ -231,7 +237,9 @@
       if (!raw) return;
       // Editions and store suffixes (™, "(PC)", "Gold Edition", "Year 2") must
       // not split one game into two cards; the Playnite name is what is shown.
-      const key = gpKey(raw.name || '');
+      // The publisher writes `group` (identity decided once, with groups.json
+      // pins); gpKey keeps data written before that field existed working.
+      const key = raw.group || gpKey(raw.name || '');
       if (!key) return;
 
       let group = groups.get(key);
