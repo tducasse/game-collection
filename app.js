@@ -281,8 +281,8 @@
     if (g.hidden) return false;
     if (!ignore.genre && state.genre && !g.genres.includes(state.genre)) return false;
     if (!ignore.stores && state.stores.size && !g.stores.some(s => state.stores.has(s))) return false;
-    if (!ignore.access && state.access === 'owned' && !g.owned) return false;
-    if (!ignore.access && state.access === 'gp' && !g.onGP) return false;
+    if (!ignore.access && state.access === 'owned' && !(g.owned && !g.onGP)) return false;
+    if (!ignore.access && state.access === 'gp' && !(g.onGP && !g.owned)) return false;
     if (!ignore.q && state.q && !g.hay.includes(state.q)) return false;
     return true;
   }
@@ -305,17 +305,17 @@
     return { all: base.length, yes, no: base.length - yes };
   }
 
-  // "Everything" / "I own it" / "On Game Pass" overlap on purpose (a game you
-  // own can also be in Game Pass), so show the counts in the options - otherwise
-  // 14 owned + 417 on Game Pass vs 417 everything looks like a bug.
-  const ACCESS_OPTION = { all: 'Everything', owned: 'I own it', gp: 'On Game Pass' };
+  // Three disjoint views: everything, only-what-I-own, only-what-Game-Pass-adds.
+  // A game that is both owned and in Game Pass belongs to neither of the narrow
+  // two - it is already "mine", and it is not something Game Pass adds.
+  const ACCESS_OPTION = { all: 'Everything', owned: 'Owned only', gp: 'Game Pass only' };
 
   function accessCounts() {
     const base = state.games.filter(g => !g.hidden && matchesBasics(g, { access: true }) && matchesGfn(g));
     return {
       all: base.length,
-      owned: base.filter(g => g.owned).length,
-      gp: base.filter(g => g.onGP).length
+      owned: base.filter(g => g.owned && !g.onGP).length,
+      gp: base.filter(g => g.onGP && !g.owned).length
     };
   }
 
