@@ -79,7 +79,7 @@
     data: null,
     games: [],        // merged: one per title, entries[] are the routes you have
     gamePass: [],     // raw catalogue
-    gfn: 'all', q: '', genre: '', store: '', sort: 'name',
+    gfn: 'all', q: '', genre: '', store: '', sort: 'name', dir: 'asc',
     expanded: new Set()
   };
 
@@ -91,6 +91,7 @@
     state.genre = p.get('genre') || '';
     state.store = p.get('store') || '';
     state.sort = p.get('sort') || 'name';
+    state.dir = p.get('dir') === 'desc' ? 'desc' : 'asc';
   }
 
   function writeHash() {
@@ -100,6 +101,7 @@
     if (state.genre) p.set('genre', state.genre);
     if (state.store) p.set('store', state.store);
     if (state.sort !== 'name') p.set('sort', state.sort);
+    if (state.dir !== 'asc') p.set('dir', 'desc');
     const hash = p.toString();
     history.replaceState(null, '', hash ? '#' + hash : location.pathname);
   }
@@ -152,7 +154,10 @@
         hidden: !!raw.hidden,
         publisher: raw.publisher || null,
         releaseDate: raw.releaseDate || null,
-        id: raw.id
+        id: raw.id,
+        critic: raw.criticScore ?? null,
+        community: raw.communityScore ?? null,
+        links: asArray(raw.links)
       });
     };
 
@@ -179,6 +184,9 @@
       group.favorite = group.entries.some(e => e.favorite);
       group.hidden = group.entries.every(e => e.hidden);
       group.publisher = group.entries.map(e => e.publisher).filter(Boolean)[0] || null;
+      group.critic = group.entries.map(e => e.critic).find(v => v != null) ?? null;
+      group.community = group.entries.map(e => e.community).find(v => v != null) ?? null;
+      group.links = group.entries.map(e => e.links).find(v => v && v.length) || [];
       group.id = group.best.id;
 
       group.hay = normalize([
@@ -190,12 +198,21 @@
     return [...groups.values()];
   }
 
-  // ------------------------------------------------------------------- list
+  // -------------------------------------------------------------------- list
+
+  const SORT_VALUE = {
+    name: g => (g.name || '').toLowerCase(),
+    store: g => (g.stores || []).join(' ').toLowerCase(),
+    gfn: g => GFN_ORDER[g.gfn] ?? 9,
+    critic: g => (g.critic == null ? -1 : g.critic),
+    community: g => (g.community == null ? -1 : g.community)
+  };
+  const NUMERIC = new Set(['critic', 'community', 'gfn']);
 
   function matchesBasics(g) {
     if (g.hidden) return false;
     if (state.genre && !(g.genres || []).includes(state.genre)) return false;
-    if (state.store && !(g.stores || [g.store]).includes(state.store)) return false;
+    if (state.store && !(g.stores || []).includes(state.store)) return false;
     if (state.q && !g.hay.includes(state.q)) return false;
     return true;
   }
@@ -206,15 +223,17 @@
     return true;
   }
 
-  function sortRows(rows) {
-    if (state.sort === 'playtime') return rows.sort((a, b) => (b.playtime || 0) - (a.playtime || 0));
-    if (state.sort === 'recent') return rows.sort((a, b) => String(b.lastPlayed || '').localeCompare(String(a.lastPlayed || '')));
-    return rows.sort((a, b) => (a.name || '').localeCompare(b.name || '', undefined, { sensitivity: 'base' }));
-  }
-
   function filteredRows() {
     let rows = state.games.filter(g => matchesBasics(g) && matchesGfn(g));
-    sortRows(rows);
+
+    const key = SORT_VALUE[state.sort] || SORT_VALUE.name;
+    const dir = state.dir === 'desc' ? -1 : 1;
+    rows = rows.slice().sort((a, b) => {
+      const av = key(a), bv = key(b);
+      if (typeof av === 'number' && typeof bv === 'number') return (av - bv) * dir;
+      return String(av).localeCompare(String(bv)) * dir;
+    });
+
     if (state.gfn === 'yes') {
       const rank = g => (g.sync === 'claim+mark' ? 0 : 1);
       rows = rows.slice().sort((a, b) => rank(a) - rank(b));
@@ -230,9 +249,24 @@
 
   // ------------------------------------------------------------------ render
 
+  const LINK_NAMES = {
+    Steam: ['steam'], 'itch.io': ['itch'], GOG: ['gog'],
+    Epic: ['epic games store', 'epic'], 'Ubisoft Connect': ['ubisoft store', 'uplay'],
+    Xbox: ['xbox'], 'EA app': ['ea app', 'origin'], 'Battle.net': ['battle.net']
+  };
+
+  function storeLink(g) {
+    const links = asArray(g.links);
+    if (!links.length) return null;
+    const wanted = LINK_NAMES[(g.entries[0] || {}).store] || [];
+    const hit = links.find(l => wanted.includes(String(l.name || '').toLowerCase()))
+      || links.find(l => String(l.name || '').toLowerCase() === 'official website');
+    return hit ? hit.url : null;
+  }
+
   function gfnBadge(g) {
     const status = g.gfn || 'na';
-    const stores = asArray(g.gfnStores);
+    const stores = asArray(g.entries[0]?.gfnStores);
     const label = status === 'yes' ? 'GFN' : status === 'other' ? 'GFN*' : status === 'no' ? '—' : 'n/a';
     const title = status === 'yes'
       ? `Playable on GeForce NOW via ${stores.join(', ') || 'streaming'}`
@@ -248,71 +282,56 @@
   }
 
   function storeCell(g) {
-    const parts = asArray(g.stores).map(store => {
+    return asArray(g.stores).map(store => {
       const entry = (g.entries || []).find(e => e.store === store) || {};
       const label = ACCESS_LABEL[entry.access] || entry.access;
       const access = entry.access && entry.access !== 'owned' && label !== store
         ? `<span class="access">${esc(label)}</span>` : '';
       const ok = entry.gfn === 'yes' ? ' is-ok' : '';
-      return `<span class="store${ok}">${esc(store)}${access}</span>`;
-    });
-    return parts.join('<span class="sep"> · </span>');
-  }
-
-  function details(g) {
-    const bits = [];
-    const add = (k, v) => { if (v) bits.push(`<div><span class="k">${k}</span>${v}</div>`); };
-
-    if ((g.entries || []).length > 1) {
-      const routes = g.entries.map(e => {
-        const where = e.gfn === 'yes' ? `GFN ✓ (${e.gfnStores.join(', ')})`
-          : e.gfn === 'other' ? `GFN only for ${e.gfnStores.join(', ')}`
-            : e.gfn === 'no' ? 'not on GFN' : 'not streamable';
-        return `<div class="route"><strong>${esc(e.store)}</strong> - ${esc(ACCESS_LABEL[e.access] || e.access)} - ${esc(where)}</div>`;
-      }).join('');
-      bits.push(`<div class="routes"><span class="k">Routes</span><div>${routes}</div></div>`);
-    }
-
-    if (g.sync === 'claim+mark') {
-      add('Two steps', '1. Add it in the EA app - that is what creates the licence. 2. In GeForce NOW, open it, choose "Mark as owned" and pick EA.');
-    } else if (g.sync === 'mark') {
-      add('If it is missing', 'Open it in GeForce NOW and choose "Mark as owned" - some store connectors sync by themselves and some do not.');
-    }
-    if (g.gfn === 'other') add('GFN stores', esc(asArray(g.entries?.[0]?.gfnStores).join(', ')) + ' - not the one you have');
-    add('Genre', esc(asArray(g.genres).join(', ')));
-    add('Publisher', esc(g.publisher));
-    add('Released', esc(g.releaseDate || (g.entries || []).map(e => e.releaseDate).filter(Boolean)[0]));
-    add('Played', g.playtime ? `${playtime(g.playtime)}${g.lastPlayed ? ' - last ' + esc(ago(g.lastPlayed)) : ''}` : '');
-
-    return `<li class="detail"><div>${bits.join('') || '<em>No extra details.</em>'}</div></li>`;
+      const title = entry.gfn === 'yes' ? `Playable on GFN via ${asArray(entry.gfnStores).join(', ')}`
+        : entry.gfn === 'other' ? 'On GFN for another store only'
+          : entry.gfn === 'no' ? 'Not on GFN' : 'Not streamable';
+      return `<span class="store${ok}" title="${esc(title)}">${esc(store)}${access}</span>`;
+    }).join('<span class="sep"> · </span>');
   }
 
   function row(g) {
-    const open = state.expanded.has(g.id);
     const pills = [];
     if (g.installed) pills.push('<span class="pill">installed</span>');
     if (g.favorite) pills.push('<span class="pill fav" title="Favourite">★</span>');
+    const link = storeLink(g);
 
-    const html = `<li class="game${open ? ' is-open' : ''}" data-id="${esc(g.id)}" tabindex="0">
-      <span class="name">${esc(g.name)}${pills.join('')}</span>
-      <span class="store-cell">${storeCell(g)}</span>
-      <span class="gfn-cell">${gfnBadge(g)}${syncBadge(g)}</span>
-    </li>`;
-    return open ? html + details(g) : html;
+    return `<tr class="game">
+      <td class="col-name"><span class="name">${esc(g.name)}</span>${pills.join('')}</td>
+      <td class="col-stores">${storeCell(g)}</td>
+      <td class="col-gfn">${gfnBadge(g)}${syncBadge(g)}</td>
+      <td class="col-score num">${g.critic == null ? '<span class="dim">–</span>' : g.critic}</td>
+      <td class="col-score num">${g.community == null ? '<span class="dim">–</span>' : g.community}</td>
+      <td class="col-link">${link ? `<a href="${esc(link)}" target="_blank" rel="noopener" title="Open store page">↗</a>` : ''}</td>
+    </tr>`;
+  }
+
+  function sortIndicator(key) {
+    if (state.sort !== key) return '';
+    return state.dir === 'desc' ? '▼' : '▲';
   }
 
   function renderList() {
     const rows = filteredRows();
-    $('#list').innerHTML = rows.map(row).join('');
+    $('#rows').innerHTML = rows.map(row).join('');
     $('#empty').hidden = rows.length > 0;
-
-    if (state.q && window.scrollY > 0) window.scrollTo(0, 0);
     $('#count').textContent = `${fmt(rows.length)} games`;
 
     const counts = segmentCounts();
     document.querySelectorAll('.seg').forEach(seg => {
       seg.classList.toggle('is-active', seg.dataset.gfn === state.gfn);
       seg.querySelector('.n').textContent = fmt(counts[seg.dataset.gfn]);
+    });
+
+    document.querySelectorAll('th button[data-sort]').forEach(btn => {
+      const key = btn.dataset.sort;
+      btn.classList.toggle('sorted', state.sort === key);
+      btn.dataset.ind = sortIndicator(key);
     });
 
     const hint = $('#hint');
@@ -325,6 +344,7 @@
       hint.hidden = true;
     }
 
+    if (state.q && window.scrollY > 0) window.scrollTo(0, 0);
     writeHash();
   }
 
@@ -336,7 +356,6 @@
       for (const genre of g.genres) genres.set(genre, (genres.get(genre) || 0) + 1);
       for (const s of g.stores) stores.set(s, (stores.get(s) || 0) + 1);
     }
-
     const alpha = (a, b) => a[0].localeCompare(b[0], undefined, { sensitivity: 'base' });
 
     $('#genre').innerHTML = '<option value="">All genres</option>' +
@@ -346,8 +365,6 @@
     $('#store').innerHTML = '<option value="">All stores</option>' +
       [...stores.entries()].sort(alpha)
         .map(([n, c]) => `<option value="${esc(n)}"${n === state.store ? ' selected' : ''}>${esc(n)} (${c})</option>`).join('');
-
-    $('#sort').value = state.sort;
   }
 
   function renderVerdict() {
@@ -367,7 +384,6 @@
 
     const routes = g.entries.map(e => {
       const label = ACCESS_LABEL[e.access] || e.access;
-      // "Game Pass (Game Pass)" reads badly
       const acc = e.access && e.access !== 'owned' && label !== e.store ? ` (${label})` : '';
       return `${e.store}${acc}`;
     }).join(' + ');
@@ -376,9 +392,9 @@
     if (g.gfn === 'yes') {
       const via = asArray(g.entries[0].gfnStores).join(', ');
       tail = g.sync === 'claim+mark'
-        ? `playable on GeForce NOW, but two steps: add it in the EA app, then mark it as owned in GFN`
+        ? 'playable on GeForce NOW, but two steps: add it in the EA app, then mark it as owned in GFN'
         : g.sync === 'mark'
-          ? `playable on GeForce NOW - mark it as owned once in GFN`
+          ? 'playable on GeForce NOW - mark it as owned once in GFN'
           : `playable on GeForce NOW (${via})`;
     } else if (g.gfn === 'other') {
       tail = `not playable on GeForce NOW (GFN has it only for ${asArray(g.entries[0].gfnStores).join(', ')})`;
@@ -415,13 +431,18 @@
 
     $('#genre').addEventListener('change', e => { state.genre = e.target.value; render(); });
     $('#store').addEventListener('change', e => { state.store = e.target.value; render(); });
-    $('#sort').addEventListener('change', e => { state.sort = e.target.value; render(); });
 
-    $('#list').addEventListener('click', e => {
-      const li = e.target.closest('li.game');
-      if (!li) return;
-      const id = li.dataset.id;
-      state.expanded.has(id) ? state.expanded.delete(id) : state.expanded.add(id);
+    document.querySelector('table.games thead').addEventListener('click', e => {
+      const btn = e.target.closest('button[data-sort]');
+      if (!btn) return;
+      const key = btn.dataset.sort;
+      if (state.sort === key) {
+        state.dir = state.dir === 'asc' ? 'desc' : 'asc';
+      } else {
+        state.sort = key;
+        // numbers are more useful high-first, text A-Z
+        state.dir = NUMERIC.has(key) ? 'desc' : 'asc';
+      }
       render();
     });
 

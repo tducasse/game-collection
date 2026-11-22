@@ -31,16 +31,26 @@
   <div class="controls" id="controls">
     <select id="genre" aria-label="Genre"><option value="">All genres</option></select>
     <select id="store" aria-label="Store"><option value="">All stores</option></select>
-    <select id="sort" aria-label="Sort">
-      <option value="name">A–Z</option>
-      <option value="recent">Recently played</option>
-      <option value="playtime">Most played</option>
-    </select>
     <span id="count" class="count"></span>
   </div>
 
   <p id="hint" class="hint" hidden></p>
-  <ul id="list" class="list"></ul>
+
+  <div class="table-wrap">
+    <table class="games">
+      <thead>
+        <tr>
+          <th class="col-name"><button data-sort="name">Game</button></th>
+          <th class="col-stores"><button data-sort="store">Stores</button></th>
+          <th class="col-gfn"><button data-sort="gfn">GFN</button></th>
+          <th class="col-score num"><button data-sort="critic">Critics</button></th>
+          <th class="col-score num"><button data-sort="community">Community</button></th>
+          <th class="col-link"></th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
   <p id="empty" class="empty" hidden>Nothing here.</p>
 </main>
 
