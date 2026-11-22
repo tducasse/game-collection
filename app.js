@@ -101,6 +101,25 @@
   const gpKey = s => normalize(String(s ?? '').replace(/\b(year|season)\s+\d+\b/gi, ' '))
     .split(' ').filter(w => w && !NOISE.has(w)).join(' ');
 
+  // Playnite/IGDB and the Microsoft Store name the same genre differently; one
+  // filter should not list "Role-playing (RPG)", "Role playing" and "RPG".
+  const GENRE_ALIAS = new Map([
+    ['Role-playing (RPG)', 'RPG'], ['Role playing', 'RPG'],
+    ['Simulator', 'Simulation'],
+    ['Platform', 'Platformer'],
+    ['Sport', 'Sports'],
+    ['Action', 'Action & adventure'],
+    ['Puzzle & trivia', 'Puzzle'],
+    ['Quiz/Trivia', 'Puzzle'],
+    ['Racing & flying', 'Racing'],
+    ['Card & Board Game', 'Card & board'],
+    ['Multi-player Online Battle Arena', 'MOBA'],
+    // store taxonomy noise, not genres: drop
+    ['Other', null], ['Utilities', null], ['Tools', null], ['Remaster', null],
+    ['Free To Play', null]
+  ]);
+  const genreOf = (name) => (GENRE_ALIAS.has(name) ? GENRE_ALIAS.get(name) : name);
+
   const fmt = n => new Intl.NumberFormat().format(n);
   const plural = (n, one, many) => `${fmt(n)} ${n === 1 ? one : many}`;
 
@@ -119,7 +138,8 @@
 
   const state = {
     games: [], gamePass: [], meta: null,
-    gfn: 'all', q: '', genre: '', store: '', sort: 'name',
+    gfn: 'all', q: '', qRaw: '', genre: '', sort: 'community',
+    stores: new Set(), access: 'all',
     shown: 0, list: []
   };
 
@@ -129,7 +149,8 @@
     const p = new URLSearchParams(location.hash.replace(/^#/, ''));
     const gfn = p.get('gfn');
     if (['all', 'yes', 'no'].includes(gfn)) state.gfn = gfn;
-    state.q = p.get('q') ? normalize(p.get('q')) : '';
+    state.qRaw = p.get('q') || '';
+    state.q = normalize(state.qRaw);
     state.genre = p.get('genre') || '';
     state.stores = new Set((p.get('stores') || '').split(',').filter(Boolean));
     const access = p.get('access');
@@ -138,19 +159,32 @@
     else state.sort = 'community';
   }
 
-  function writeHash() {
+  // Every filter lives in the hash so a view can be bookmarked or sent to a
+  // phone. Discrete changes push a history entry (Back undoes them); typing
+  // only replaces, so a search does not bury the Back button.
+  function writeHash(mode = 'replace') {
     const p = new URLSearchParams();
     if (state.gfn !== 'all') p.set('gfn', state.gfn);
-    if (state.q) p.set('q', state.q);
+    if (state.qRaw) p.set('q', state.qRaw);
     if (state.genre) p.set('genre', state.genre);
     if (state.stores.size) p.set('stores', [...state.stores].join(','));
     if (state.access !== 'all') p.set('access', state.access);
     if (state.sort !== 'community') p.set('sort', state.sort);
     const hash = p.toString();
-    history.replaceState(null, '', hash ? '#' + hash : location.pathname);
+    const url = hash ? '#' + hash : location.pathname;
+    if (url === location.pathname + location.hash) return;
+    if (mode === 'push') history.pushState(null, '', url);
+    else history.replaceState(null, '', url);
   }
 
   // --------------------------------------------------------- merging routes
+
+  // Playnite's Xbox plugin uses 9998-12-30 for "release date unknown"; a year
+  // that far out must not render or win the "Newest" sort.
+  function saneYear(iso) {
+    const year = Number(String(iso || '').slice(0, 4));
+    return year >= 1970 && year <= new Date().getFullYear() + 1;
+  }
 
   function routeRank(e) {
     return (GFN_RANK[e.gfn] ?? 4) * 10 + (SYNC_RANK[e.sync] ?? 3);
@@ -209,6 +243,7 @@
         releaseDate: raw.releaseDate || null,
         publisher: raw.publisher || null,
         categories: asArray(raw.genres),
+        gameId: raw.gameId || null,
         id: raw.id
       });
     };
@@ -249,15 +284,23 @@
       // listed today is just Ubisoft; an EA app copy that left the catalogue is
       // just EA. Only a title in the catalogue gets the chip.
       group.onGP = group.hasGP || gpKeys.has(gpKey(group.name));
-      group.genres = [...new Set(group.entries.flatMap(e => [...e.genres, ...e.categories]))];
+      group.genres = [...new Set(group.entries
+        .flatMap(e => [...e.genres, ...e.categories])
+        .map(genreOf)
+        .filter(Boolean))];
       group.installed = group.entries.some(e => e.installed);
       group.favorite = group.entries.some(e => e.favorite);
-      group.hidden = group.entries.every(e => e.hidden);
+      // Hidden in Playnite means hidden here too: a Game Pass catalogue row
+      // must not resurrect a game you hid in your own library.
+      const libEntries = group.entries.filter(e => e.kind === 'lib');
+      group.hidden = libEntries.length
+        ? libEntries.every(e => e.hidden)
+        : group.entries.every(e => e.hidden);
       group.critic = group.entries.map(e => e.critic).find(v => v != null) ?? null;
       group.community = group.entries.map(e => e.community).find(v => v != null) ?? null;
       group.links = group.entries.map(e => e.links).find(v => v && v.length) || [];
       group.publisher = group.entries.map(e => e.publisher).find(Boolean) || null;
-      group.releaseDate = group.entries.map(e => e.releaseDate).find(Boolean) || null;
+      group.releaseDate = group.entries.map(e => e.releaseDate).find(saneYear) || null;
       group.id = group.best.id;
       group.stores = [...new Set(group.entries.map(e => e.launcher))];
       group.hay = normalize([group.name, ...group.entries.map(e => e.gfnTitle).filter(Boolean)].join(' '));
@@ -277,13 +320,23 @@
     year: (a, b) => String(b.releaseDate || '').localeCompare(String(a.releaseDate || '')) || byName(a, b)
   };
 
+  // Every word has to be somewhere in the title: "witcher blood" finds
+  // "The Witcher 3: Wild Hunt - Blood and Wine", "elt" finds "Elden Ring".
+  function matchesQuery(g) {
+    if (!state.q) return true;
+    for (const token of state.q.split(' ')) {
+      if (token && !g.hay.includes(token)) return false;
+    }
+    return true;
+  }
+
   function matchesBasics(g, ignore = {}) {
     if (g.hidden) return false;
     if (!ignore.genre && state.genre && !g.genres.includes(state.genre)) return false;
     if (!ignore.stores && state.stores.size && !g.stores.some(s => state.stores.has(s))) return false;
     if (!ignore.access && state.access === 'owned' && !(g.owned && !g.onGP)) return false;
     if (!ignore.access && state.access === 'gp' && !(g.onGP && !g.owned)) return false;
-    if (!ignore.q && state.q && !g.hay.includes(state.q)) return false;
+    if (!ignore.q && !matchesQuery(g)) return false;
     return true;
   }
 
@@ -337,6 +390,9 @@
         || links.find(l => String(l.name || '').toLowerCase() === 'official website');
       if (hit) return hit.url;
     }
+    // Playnite has no store link for some titles; a Steam app id is enough.
+    const steam = g.entries.find(e => e.store === 'Steam' && /^\d+$/.test(String(e.gameId || '')));
+    if (steam) return `https://store.steampowered.com/app/${steam.gameId}`;
     // Game Pass titles only have the Microsoft product id - that is enough for a
     // working store page on phone and desktop.
     const gp = g.entries.find(e => e.kind === 'gp' && e.id);
@@ -389,7 +445,7 @@
   function card(g) {
     const status = gfnStatus(g);
     const action = gfnAction(g);
-    const link = storeLink(g);
+    const href = storeLink(g);
 
     const stores = g.entries.map(e => {
       const ok = e.gfn === 'yes' ? ' is-ok' : '';
@@ -400,17 +456,17 @@
     }).join('') + accessChip(g);
 
     const facts = [];
-    if (g.releaseDate) facts.push(String(g.releaseDate).slice(0, 4));
+    if (saneYear(g.releaseDate)) facts.push(String(g.releaseDate).slice(0, 4));
 
     const scores = [scoreChip('Critics', g.critic), scoreChip('Community', g.community)].join('');
 
-    const href = storeLink(g);
     const open = href
-      ? `<a class="card" href="${esc(href)}" target="_blank" rel="noopener">`
+      ? `<a class="card" href="${esc(href)}" target="_blank" rel="noopener noreferrer">`
       : '<article class="card">';
+    const closing = href ? '<span class="sr-only">Opens the store page in a new tab.</span></a>' : '</article>';
 
     return `${open}
-      <h2 class="title">${esc(g.name)}</h2>
+      <h2 class="title">${esc(g.name)}${href ? '<span class="ext" aria-hidden="true">↗</span>' : ''}</h2>
 
       <div class="row split">
         <div class="stores">${stores}</div>
@@ -430,7 +486,7 @@
           ${g.favorite ? '<span class="pill fav" title="Favourite">★</span>' : ''}
         </div>
       </div>
-    ${href ? '</a>' : '</article>'}`;
+    ${closing}`;
   }
 
   // ----------------------------------------------------------------- render
@@ -465,22 +521,31 @@
     if (sentinel) { observer.disconnect(); observer.observe(sentinel); }
   }
 
-  function render() {
+  function render(hashMode = 'replace') {
+    const total = state.games.filter(g => !g.hidden).length;
     state.list = filteredRows();
     state.shown = 0;
     $('#cards').innerHTML = '';
     renderMore();
     watchSentinel();
 
-    $('#count').textContent = state.list.length === state.games.filter(g => !g.hidden).length
+    $('#count').textContent = state.list.length === total
       ? plural(state.list.length, 'game', 'games')
-      : `${fmt(state.list.length)} of ${fmt(state.games.filter(g => !g.hidden).length)} games`;
+      : `${fmt(state.list.length)} of ${fmt(total)} games`;
 
+    const filtering = !!(state.qRaw || state.stores.size || state.genre ||
+      state.access !== 'all' || state.gfn !== 'all');
     $('#empty').hidden = state.list.length > 0;
+    $('#empty-msg').textContent = filtering
+      ? 'Nothing matches these filters.'
+      : 'Nothing here yet - the library file is empty.';
+    $('#empty-clear').hidden = !filtering;
 
     const counts = segmentCounts();
     document.querySelectorAll('.seg').forEach(seg => {
-      seg.classList.toggle('is-active', seg.dataset.gfn === state.gfn);
+      const on = seg.dataset.gfn === state.gfn;
+      seg.classList.toggle('is-active', on);
+      seg.setAttribute('aria-pressed', String(on));
       seg.querySelector('.n').textContent = fmt(counts[seg.dataset.gfn]);
     });
 
@@ -488,10 +553,12 @@
     document.querySelectorAll('#access option').forEach(opt => {
       opt.textContent = `${ACCESS_OPTION[opt.value] || opt.value} (${fmt(acc[opt.value] ?? 0)})`;
     });
-    // The two narrow views do not add up to Everything: say where the rest is.
-    const sel = $('#access');
-    sel.title = `${fmt(acc.both)} owned and in Game Pass, ${fmt(acc.neither)} neither ` +
-      '- both appear under Everything only';
+    // The two narrow views do not add up to Everything: say where the rest is,
+    // for screen readers through aria-describedby and for mice through title.
+    const hint = `${fmt(acc.both)} games are both owned and in Game Pass, ${fmt(acc.neither)} ` +
+      'are neither; those appear under Everything only';
+    $('#access').title = hint;
+    $('#access-hint').textContent = hint;
 
     // recovery: matches exist, but the filters hide them
     const note = $('#note');
@@ -503,7 +570,8 @@
       note.hidden = true;
     }
 
-    writeHash();
+    renderChips();
+    writeHash(hashMode);
   }
 
   function renderControls() {
@@ -542,6 +610,9 @@
 
   function renderChips() {
     const chips = [];
+    if (state.qRaw) {
+      chips.push(`<button class="chip" data-clear-q="1">“${esc(state.qRaw)}” <span aria-hidden="true">×</span></button>`);
+    }
     for (const s of [...state.stores].sort((a, b) => a.localeCompare(b))) {
       chips.push(`<button class="chip" data-clear-store="${esc(s)}">${esc(s)} <span aria-hidden="true">×</span></button>`);
     }
@@ -558,9 +629,31 @@
       : '';
   }
 
+  function clearAll() {
+    state.q = '';
+    state.qRaw = '';
+    state.stores = new Set();
+    state.access = 'all';
+    state.genre = '';
+    $('#q').value = '';
+  }
+
+  // Push the state back into the controls (Back/Forward, chips, Clear all).
+  function applyStateToInputs() {
+    $('#q').value = state.qRaw;
+    $('#genre').value = state.genre;
+    $('#access').value = state.access;
+    $('#sort').value = state.sort;
+    for (const box of document.querySelectorAll('#stores-list input[type=checkbox]')) {
+      box.checked = state.stores.has(box.value);
+    }
+    syncFilterUI();
+  }
+
   function bind() {
     $('#q').addEventListener('input', e => {
-      state.q = normalize(e.target.value);
+      state.qRaw = e.target.value;
+      state.q = normalize(state.qRaw);
       clearTimeout(bind._t);
       bind._t = setTimeout(() => { render(); if (window.scrollY > 0) window.scrollTo(0, 0); }, 90);
     });
@@ -569,11 +662,12 @@
       const seg = e.target.closest('[data-gfn]');
       if (!seg || seg.dataset.gfn === state.gfn) return;
       state.gfn = seg.dataset.gfn;
-      render();
+      render('push');
     });
 
-    $('#genre').addEventListener('change', e => { state.genre = e.target.value; syncFilterUI(); render(); });
-    $('#access').addEventListener('change', e => { state.access = e.target.value; syncFilterUI(); render(); });
+    $('#genre').addEventListener('change', e => { state.genre = e.target.value; syncFilterUI(); render('push'); });
+    $('#access').addEventListener('change', e => { state.access = e.target.value; syncFilterUI(); render('push'); });
+    $('#sort').addEventListener('change', e => { state.sort = e.target.value; render('push'); });
 
     const pop = $('.menu-pop');
     const menuBtn = $('#stores-btn');
@@ -585,6 +679,10 @@
       menuBtn.setAttribute('aria-expanded', String(!pop.hidden));
     });
 
+    // The popover is anchored to a control that scrolls away; close it instead
+    // of letting it float with no button above it.
+    window.addEventListener('scroll', () => { if (!pop.hidden) closeMenu(); }, { passive: true });
+
     pop.addEventListener('click', e => {
       e.stopPropagation();
       const action = e.target.closest('[data-stores]');
@@ -595,19 +693,25 @@
           box.checked = state.stores.has(box.value);
         }
         syncFilterUI();
-        render();
+        render('push');
         return;
       }
       const box = e.target.closest('input[type=checkbox]');
       if (box) {
         box.checked ? state.stores.add(box.value) : state.stores.delete(box.value);
         syncFilterUI();
-        render();
+        render('push');
       }
     });
 
     document.addEventListener('click', closeMenu);
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+    document.addEventListener('keydown', e => {
+      if (e.key !== 'Escape') return;
+      if (!pop.hidden) {
+        closeMenu();
+        menuBtn.focus();
+      }
+    });
 
     $('#chips').addEventListener('click', e => {
       const chip = e.target.closest('button');
@@ -615,15 +719,27 @@
       if (chip.dataset.clearStore !== undefined) state.stores.delete(chip.dataset.clearStore);
       else if (chip.dataset.clearAccess) state.access = 'all';
       else if (chip.dataset.clearGenre) state.genre = '';
-      else if (chip.dataset.clearAll) { state.stores = new Set(); state.access = 'all'; state.genre = ''; }
-      renderControls(); render();
+      else if (chip.dataset.clearQ) { state.q = ''; state.qRaw = ''; $('#q').value = ''; }
+      else if (chip.dataset.clearAll) clearAll();
+      renderControls();
+      render('push');
     });
-    $('#sort').addEventListener('change', e => { state.sort = e.target.value; render(); });
+
+    $('#empty-clear').addEventListener('click', () => {
+      clearAll();
+      renderControls();
+      render('push');
+    });
+
+    // Back/Forward (pushState) and hand-edited hashes both land here.
+    const fromHash = () => { readHash(); applyStateToInputs(); render(); };
+    window.addEventListener('popstate', fromHash);
+    window.addEventListener('hashchange', fromHash);
 
     document.addEventListener('keydown', e => {
       if (e.key === '/' && document.activeElement !== $('#q')) { e.preventDefault(); $('#q').focus(); }
       if (e.key === 'Escape' && document.activeElement === $('#q')) {
-        $('#q').value = ''; state.q = ''; render(); $('#q').blur();
+        $('#q').value = ''; state.q = ''; state.qRaw = ''; render(); $('#q').blur();
       }
     });
   }
@@ -650,15 +766,16 @@
       (data.catalog ? ` · GeForce NOW ${data.catalog.country}, ${fmt(data.catalog.titles)} titles` : '') +
       (never ? ` · ${fmt(never)} from stores GFN never supports` : '');
 
-    $('#q').value = state.q;
     bind();
     renderControls();
+    applyStateToInputs();
     render();
   }
 
   boot().catch(err => {
     $('#summary').textContent = 'Could not load data';
-    $('#empty').textContent = err.message;
+    $('#empty-msg').textContent = `${err.message} - reload to try again.`;
+    $('#empty-clear').hidden = true;
     $('#empty').hidden = false;
     console.error(err);
   });

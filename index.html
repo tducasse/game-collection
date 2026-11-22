@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>My games</title>
 <meta name="description" content="Everything I can play, and whether it works on GeForce NOW.">
+<meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0c0d0f" media="(prefers-color-scheme: dark)">
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
 </head>
@@ -13,15 +15,16 @@
 <header class="top">
   <div class="top-inner">
     <h1>My games</h1>
-    <p id="summary" class="summary"></p>
+    <p id="summary" class="summary">Loading…</p>
   </div>
 
-  <input id="q" type="search" placeholder="Do I have…" autocomplete="off" spellcheck="false" aria-label="Search games">
+  <input id="q" type="search" placeholder="Do I have…" autocomplete="off" autocapitalize="none"
+         spellcheck="false" enterkeyhint="search" aria-label="Search games by title">
 
   <div class="segments" role="group" aria-label="GeForce NOW availability">
-    <button class="seg is-active" data-gfn="all">All <span class="n"></span></button>
-    <button class="seg" data-gfn="yes">On GFN <span class="n"></span></button>
-    <button class="seg" data-gfn="no">Not on GFN <span class="n"></span></button>
+    <button class="seg is-active" data-gfn="all" aria-pressed="true">All <span class="n"></span></button>
+    <button class="seg" data-gfn="yes" aria-pressed="false">On GFN <span class="n"></span></button>
+    <button class="seg" data-gfn="no" aria-pressed="false">Not on GFN <span class="n"></span></button>
   </div>
 </header>
 
@@ -30,37 +33,46 @@
     <select id="genre" aria-label="Genre"><option value="">All genres</option></select>
 
     <div class="menu" id="stores">
-      <button class="menu-btn" id="stores-btn" aria-haspopup="true" aria-expanded="false">
-        Stores <span class="menu-count"></span>
+      <button class="menu-btn" id="stores-btn" type="button" aria-haspopup="true"
+              aria-expanded="false" aria-controls="stores-list">
+        <span class="menu-label">Stores</span>
+        <span class="menu-count"></span>
+        <span class="caret" aria-hidden="true"></span>
       </button>
       <div class="menu-pop" hidden>
         <div class="menu-head">
           <button type="button" data-stores="all">All</button>
-          <button type="button" data-stores="none">None</button>
+          <button type="button" data-stores="none">Clear</button>
         </div>
         <div class="menu-list" id="stores-list"></div>
       </div>
     </div>
 
-    <select id="access" aria-label="Access">
+    <select id="access" aria-label="Access" aria-describedby="access-hint">
       <option value="all">Everything</option>
       <option value="owned">Owned only</option>
       <option value="gp">Game Pass only</option>
     </select>
+    <span id="access-hint" class="sr-only"></span>
+
     <select id="sort" aria-label="Sort by">
       <option value="community">Best community</option>
       <option value="critic">Best critics</option>
       <option value="name">A–Z</option>
       <option value="year">Newest</option>
     </select>
-    <span id="count" class="count"></span>
+    <span id="count" class="count" aria-live="polite"></span>
   </div>
 
   <p id="chips" class="chips" hidden></p>
-  <p id="note" class="note" hidden></p>
+  <p id="note" class="note" role="status" hidden></p>
 
   <div id="cards" class="cards"></div>
-  <p id="empty" class="empty" hidden>Nothing here.</p>
+
+  <div id="empty" class="empty" hidden>
+    <p id="empty-msg">Nothing here.</p>
+    <button type="button" id="empty-clear" class="chip" hidden>Clear all filters</button>
+  </div>
 </main>
 
 <footer>
