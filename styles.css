@@ -247,10 +247,15 @@ h1 {
   background: var(--surface);
   border: 1px solid var(--hairline);
   border-radius: var(--r-card);
+  color: inherit;
+  text-decoration: none;
   transition: border-color .12s ease, background .12s ease;
 }
 
-.card:hover { border-color: var(--hairline-strong); }
+a.card { cursor: pointer; }
+a.card:hover { border-color: var(--hairline-strong); background: color-mix(in srgb, var(--surface) 88%, var(--surface-2)); }
+a.card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+a.card:hover .ext { color: var(--accent); }
 
 .card-head {
   display: flex;
@@ -275,10 +280,8 @@ h1 {
   font-size: .95rem;
   line-height: 1.3;
   color: var(--muted);
-  text-decoration: none;
   border-radius: 5px;
 }
-.ext:hover { color: var(--accent); }
 
 .row {
   display: flex;

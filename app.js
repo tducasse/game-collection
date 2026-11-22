@@ -44,13 +44,6 @@
   const fmt = n => new Intl.NumberFormat().format(n);
   const plural = (n, one, many) => `${fmt(n)} ${n === 1 ? one : many}`;
 
-  function playtime(minutes) {
-    if (!minutes) return '';
-    if (minutes < 60) return minutes + ' min';
-    const h = minutes / 60;
-    return (h < 10 ? h.toFixed(1) : Math.round(h)) + ' h';
-  }
-
   function ago(iso) {
     if (!iso) return '';
     const days = Math.floor((Date.now() - new Date(iso).getTime()) / 86400000);
@@ -80,6 +73,7 @@
     state.genre = p.get('genre') || '';
     state.store = p.get('store') || '';
     if (SORTS[p.get('sort')]) state.sort = p.get('sort');
+    else state.sort = 'community';
   }
 
   function writeHash() {
@@ -88,7 +82,7 @@
     if (state.q) p.set('q', state.q);
     if (state.genre) p.set('genre', state.genre);
     if (state.store) p.set('store', state.store);
-    if (state.sort !== 'name') p.set('sort', state.sort);
+    if (state.sort !== 'community') p.set('sort', state.sort);
     const hash = p.toString();
     history.replaceState(null, '', hash ? '#' + hash : location.pathname);
   }
@@ -133,8 +127,6 @@
         gfnTitle: raw.gfnTitle || null,
         sync: syncOf(raw),
         genres: asArray(raw.genres),
-        playtime: raw.playtime || 0,
-        lastPlayed: raw.lastPlayed || null,
         installed: !!raw.installed,
         favorite: !!raw.favorite,
         hidden: !!raw.hidden,
@@ -143,6 +135,7 @@
         links: asArray(raw.links),
         releaseDate: raw.releaseDate || null,
         publisher: raw.publisher || null,
+        categories: asArray(raw.genres),
         id: raw.id
       });
     };
@@ -171,9 +164,7 @@
       group.best = group.entries[0];
       group.gfn = group.best.gfn;
       group.sync = group.best.gfn === 'yes' ? group.best.sync : null;
-      group.genres = [...new Set(group.entries.flatMap(e => e.genres))];
-      group.playtime = Math.max(...group.entries.map(e => e.playtime || 0));
-      group.lastPlayed = group.entries.map(e => e.lastPlayed).filter(Boolean).sort().pop() || null;
+      group.genres = [...new Set(group.entries.flatMap(e => [...e.genres, ...e.categories]))];
       group.installed = group.entries.some(e => e.installed);
       group.favorite = group.entries.some(e => e.favorite);
       group.hidden = group.entries.every(e => e.hidden);
@@ -192,12 +183,13 @@
 
   // ---------------------------------------------------------------- filters
 
+  const byName = (a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' });
+
   const SORTS = {
-    name: (a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }),
-    critic: (a, b) => (b.critic ?? -1) - (a.critic ?? -1),
-    community: (a, b) => (b.community ?? -1) - (a.community ?? -1),
-    playtime: (a, b) => (b.playtime || 0) - (a.playtime || 0),
-    recent: (a, b) => String(b.lastPlayed || '').localeCompare(String(a.lastPlayed || ''))
+    name: byName,
+    critic: (a, b) => (b.critic ?? -1) - (a.critic ?? -1) || byName(a, b),
+    community: (a, b) => (b.community ?? -1) - (a.community ?? -1) || byName(a, b),
+    year: (a, b) => String(b.releaseDate || '').localeCompare(String(a.releaseDate || '')) || byName(a, b)
   };
 
   function matchesBasics(g, ignore = {}) {
@@ -236,11 +228,17 @@
 
   function storeLink(g) {
     const links = asArray(g.links);
-    if (!links.length) return null;
-    const wanted = LINK_NAMES[(g.entries[0] || {}).store] || [];
-    const hit = links.find(l => wanted.includes(String(l.name || '').toLowerCase()))
-      || links.find(l => String(l.name || '').toLowerCase() === 'official website');
-    return hit ? hit.url : null;
+    if (links.length) {
+      const wanted = LINK_NAMES[(g.entries[0] || {}).store] || [];
+      const hit = links.find(l => wanted.includes(String(l.name || '').toLowerCase()))
+        || links.find(l => String(l.name || '').toLowerCase() === 'official website');
+      if (hit) return hit.url;
+    }
+    // Game Pass titles only have the Microsoft product id - that is enough for a
+    // working store page on phone and desktop.
+    const gp = g.entries.find(e => e.kind === 'gp' && e.id);
+    if (gp) return `https://apps.microsoft.com/detail/${encodeURIComponent(gp.id)}`;
+    return null;
   }
 
   function gfnStatus(g) {
@@ -282,18 +280,21 @@
     }).join('');
 
     const facts = [];
-    if (g.playtime) facts.push(playtime(g.playtime));
-    if (g.lastPlayed) facts.push('last played ' + ago(g.lastPlayed));
     if (g.releaseDate) facts.push(String(g.releaseDate).slice(0, 4));
 
     const scores = [scoreChip('Critics', g.critic), scoreChip('Community', g.community)].join('');
 
-    return `<article class="card" data-id="${esc(g.id)}">
+    const href = storeLink(g);
+    const open = href
+      ? `<a class="card" href="${esc(href)}" target="_blank" rel="noopener">`
+      : '<article class="card">';
+
+    return `${open}
       <div class="card-head">
         <h2 class="title">${esc(g.name)}</h2>
         ${g.installed ? '<span class="pill">installed</span>' : ''}
         ${g.favorite ? '<span class="pill fav" title="Favourite">★</span>' : ''}
-        ${link ? `<a class="ext" href="${esc(link)}" target="_blank" rel="noopener" title="Open store page" aria-label="Open store page">↗</a>` : ''}
+        ${href ? '<span class="ext" aria-hidden="true">↗</span>' : ''}
       </div>
 
       <div class="row split">
@@ -310,7 +311,7 @@
         </div>
         ${facts.length ? `<div class="facts">${facts.map(esc).join(' · ')}</div>` : ''}
       </div>
-    </article>`;
+    ${href ? '</a>' : '</article>'}`;
   }
 
   // ----------------------------------------------------------------- render
