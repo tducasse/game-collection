@@ -275,16 +275,6 @@ a.card:hover { border-color: var(--hairline-strong); background: color-mix(in sr
 a.card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 a.card:hover .title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
 
-/* the card is a link to the store: say so quietly, on touch too */
-.ext {
-  margin-left: .35rem;
-  font-size: .78em;
-  font-weight: 400;
-  color: var(--muted);
-}
-
-a.card:hover .ext, a.card:focus-visible .ext { color: var(--accent); }
-
 .title {
   margin: 0;
   font-size: 1.005rem;

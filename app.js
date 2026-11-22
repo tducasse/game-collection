@@ -78,6 +78,7 @@
     return String(s ?? '')
       .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
       .toLowerCase()
+      .replace(/&/g, ' and ')
       .replace(/[^a-z0-9]+/g, ' ')
       .trim()
       .split(' ')
@@ -98,8 +99,22 @@
     'revolution', 'hunter', 'maximum', 'launcher', 'for', 'play', 'ea'
   ]);
 
-  const gpKey = s => normalize(String(s ?? '').replace(/\b(year|season)\s+\d+\b/gi, ' '))
-    .split(' ').filter(w => w && !NOISE.has(w)).join(' ');
+  // The Microsoft Store sometimes renames a product ("NEW MONOPOLY"), or carries
+  // the subtitle Playnite drops ("Valiant Hearts: The Great War"), or a SKU word
+  // that is not a genre of edition ("- Standalone", "- Elite Edition"). No fuzzy
+  // rule separates those safely, so they are listed. Keys are post-normalisation.
+  const TITLE_ALIAS = new Map([
+    ['assassin s creed freedom cry standalone', 'assassin s creed freedom cry'],
+    ['tom clancy s rainbow six siege elite', 'tom clancy s rainbow six siege'],
+    ['valiant hearts great war', 'valiant hearts'],
+    ['new monopoly', 'monopoly']
+  ]);
+
+  const gpKey = s => {
+    const key = normalize(String(s ?? '').replace(/\b(year|season)\s+\d+\b/gi, ' '))
+      .split(' ').filter(w => w && !NOISE.has(w)).join(' ');
+    return TITLE_ALIAS.get(key) || key;
+  };
 
   // Playnite/IGDB and the Microsoft Store name the same genre differently; one
   // filter should not list "Role-playing (RPG)", "Role playing" and "RPG".
@@ -214,18 +229,22 @@
 
     const add = (raw, kind) => {
       if (!raw) return;
-      const key = normalize(raw.name || '');
+      // Editions and store suffixes (™, "(PC)", "Gold Edition", "Year 2") must
+      // not split one game into two cards; the Playnite name is what is shown.
+      const key = gpKey(raw.name || '');
       if (!key) return;
 
       let group = groups.get(key);
       if (!group) {
-        group = { key, name: raw.name, entries: [] };
+        group = { key, name: raw.name, names: new Set(), entries: [] };
         groups.set(key, group);
       }
+      if (raw.name) group.names.add(raw.name);
 
       const rawStore = raw.store || (kind === 'gp' ? 'Xbox' : '');
       group.entries.push({
         kind,
+        name: raw.name || null,
         store: rawStore === 'Xbox Game Pass' ? 'Xbox' : rawStore,
         launcher: launcherOf(raw, kind),
         access: raw.access || (kind === 'gp' ? 'gamepass' : 'unknown'),
@@ -303,7 +322,12 @@
       group.releaseDate = group.entries.map(e => e.releaseDate).find(saneYear) || null;
       group.id = group.best.id;
       group.stores = [...new Set(group.entries.map(e => e.launcher))];
-      group.hay = normalize([group.name, ...group.entries.map(e => e.gfnTitle).filter(Boolean)].join(' '));
+      // Every name the title is filed under, including routes that were dropped,
+      // so "For Honor Standard" finds "For Honor".
+      group.hay = normalize([
+        ...group.names,
+        ...group.entries.map(e => e.gfnTitle).filter(Boolean)
+      ].join(' '));
     }
 
     return [...groups.values()];
@@ -466,7 +490,7 @@
     const closing = href ? '<span class="sr-only">Opens the store page in a new tab.</span></a>' : '</article>';
 
     return `${open}
-      <h2 class="title">${esc(g.name)}${href ? '<span class="ext" aria-hidden="true">↗</span>' : ''}</h2>
+      <h2 class="title">${esc(g.name)}</h2>
 
       <div class="row split">
         <div class="stores">${stores}</div>
