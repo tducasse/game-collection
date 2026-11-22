@@ -571,6 +571,7 @@
     $('#count').textContent = state.list.length === total
       ? plural(state.list.length, 'game', 'games')
       : `${fmt(state.list.length)} of ${fmt(total)} games`;
+    $('#export').disabled = state.list.length === 0;
 
     const filtering = !!(state.qRaw || state.stores.size || state.genre ||
       state.access !== 'all' || state.gfn !== 'all');
@@ -700,6 +701,28 @@
       state.q = normalize(state.qRaw);
       clearTimeout(bind._t);
       bind._t = setTimeout(() => { render(); if (window.scrollY > 0) window.scrollTo(0, 0); }, 90);
+    });
+
+    // Copy the names of everything currently listed (all filters applied, in the
+    // current sort order) - the whole list, not just the cards rendered so far.
+    const exportBtn = $('#export');
+    exportBtn.addEventListener('click', async () => {
+      const text = state.list.map(g => g.name).join('\n');
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
+        // older browsers / non-secure contexts
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.cssText = 'position:fixed;opacity:0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+      }
+      exportBtn.textContent = `Copied ${fmt(state.list.length)}`;
+      clearTimeout(exportBtn._t);
+      exportBtn._t = setTimeout(() => { exportBtn.textContent = 'Copy list'; }, 1500);
     });
 
     document.querySelector('.segments').addEventListener('click', e => {
