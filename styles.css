@@ -305,14 +305,25 @@ a.card:hover .title { text-decoration: underline; text-decoration-thickness: 1px
   background: var(--accent-soft);
 }
 
+/* access: an independent fact (Game Pass, family share), so its own chip */
 .access {
-  padding: 0 .25rem;
-  font-size: .63rem;
+  display: inline-flex;
+  align-items: center;
+  padding: .1rem .45rem;
+  font-size: .68rem;
   letter-spacing: .03em;
   text-transform: uppercase;
-  color: var(--muted);
-  border-left: 1px solid currentColor;
-  opacity: .85;
+  color: var(--ink-2);
+  background: var(--surface-2);
+  border: 1px solid var(--hairline-strong);
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.access.gp {
+  font-weight: 600;
+  color: var(--ink);
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--hairline-strong));
 }
 
 /* status: a dot and words; no filled badges */

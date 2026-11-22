@@ -22,6 +22,50 @@
     ubisoftplus: 'Ubisoft+', shared: 'Family share', unknown: 'Unknown'
   };
 
+  /* Where a game actually launches - not which shop the licence came from.
+   * Game Pass hands some titles to another launcher: the Microsoft Store build
+   * of an EA Play or Ubisoft title is a thin stub that starts the EA app or
+   * Ubisoft Connect. The pipeline writes `launcher`; older data is derived
+   * from the store, the store package id and the publisher, in that order. */
+  const SOURCE_LAUNCHER = {
+    Steam: 'Steam', 'Steam Family Sharing': 'Steam', Epic: 'Epic', GOG: 'GOG',
+    'itch.io': 'itch', Humble: 'Humble', 'Battle.net': 'Battle.net',
+    'Riot Games': 'Riot', 'EA app': 'EA', Origin: 'EA',
+    'Ubisoft Connect': 'Ubisoft', Xbox: 'Xbox', 'Xbox Game Pass': 'Xbox'
+  };
+
+  // Playnite game ids of Microsoft Store titles name the real package:
+  // "Origin.OFR..."/"OFB-EAST:..." is an EA app offer, "Ubisoft.PC..." a
+  // Ubisoft Connect one.
+  const PACKAGE_LAUNCHER = [
+    [/^(origin|ofb)[.:-]/i, 'EA'],
+    [/^electronicarts/i, 'EA'],
+    [/^ubisoft[.\-]/i, 'Ubisoft'],
+    [/^blizzard/i, 'Battle.net'],
+    [/^riot/i, 'Riot']
+  ];
+
+  const PUBLISHER_LAUNCHER = [
+    [/electronic arts|\bea\b/i, 'EA'],
+    [/ubisoft/i, 'Ubisoft'],
+    [/blizzard/i, 'Battle.net'],
+    [/riot games/i, 'Riot']
+  ];
+
+  function launcherOf(raw, kind) {
+    if (raw.launcher) return raw.launcher;
+    const store = raw.store || '';
+    const msStore = kind === 'gp' || store === 'Xbox' || store === 'Xbox Game Pass';
+    if (msStore) {
+      const pkg = String(raw.gameId || '');
+      for (const [re, name] of PACKAGE_LAUNCHER) if (re.test(pkg)) return name;
+      const pub = [raw.publisher, ...asArray(raw.publishers)].filter(Boolean).join(' | ');
+      for (const [re, name] of PUBLISHER_LAUNCHER) if (re.test(pub)) return name;
+      return 'Xbox';
+    }
+    return SOURCE_LAUNCHER[store] || store || 'Unknown';
+  }
+
   const $ = sel => document.querySelector(sel);
   const asArray = v => (v == null ? [] : Array.isArray(v) ? v : [v]);
 
@@ -40,6 +84,18 @@
       .map(w => ROMAN[w] || w)
       .join(' ');
   }
+
+  // Noise words mirror the module's ConvertTo-GfnKey. Used only for the loose
+  // "is this title in the Game Pass catalogue?" test; card grouping stays exact.
+  const NOISE = new Set([
+    'the', 'standard', 'deluxe', 'ultimate', 'premium', 'definitive',
+    'complete', 'enhanced', 'gold', 'legendary', 'digital', 'anniversary',
+    'goty', 'game', 'of', 'year', 'special', 'collector', 'collectors',
+    'remastered', 'remaster', 'edition', 'pc', 'windows', 'xbox', 'version',
+    'preview', 'cross', 'gen', 'english', 'us'
+  ]);
+
+  const gpKey = s => normalize(s).split(' ').filter(w => w && !NOISE.has(w)).join(' ');
 
   const fmt = n => new Intl.NumberFormat().format(n);
   const plural = (n, one, many) => `${fmt(n)} ${n === 1 ? one : many}`;
@@ -110,6 +166,14 @@
   function buildMerged(library, gamePass) {
     const groups = new Map();
 
+    // Loose keys of everything in the Game Pass catalogue: a library licence
+    // only counts as Game Pass if the title is actually in it.
+    const gpKeys = new Set();
+    for (const p of gamePass) {
+      const k = gpKey(p.name);
+      if (k) gpKeys.add(k);
+    }
+
     const add = (raw, kind) => {
       if (!raw) return;
       const key = normalize(raw.name || '');
@@ -125,6 +189,7 @@
       group.entries.push({
         kind,
         store: rawStore === 'Xbox Game Pass' ? 'Xbox' : rawStore,
+        launcher: launcherOf(raw, kind),
         access: raw.access || (kind === 'gp' ? 'gamepass' : 'unknown'),
         gfn: raw.gfn || 'na',
         gfnStores: asArray(raw.gfnStores),
@@ -152,14 +217,17 @@
       group.hasGP = group.entries.some(e => e.kind === 'gp');
       group.owned = group.entries.some(e => e.kind === 'lib' && e.access === 'owned');
 
-      const byStore = new Map();
+      // One chip per launcher, not per store name: a Steam copy and a Game
+      // Pass copy of the same title run in different launchers, but an EA app
+      // copy and its Game Pass twin run in the same one.
+      const byLauncher = new Map();
       for (const e of group.entries) {
-        const prev = byStore.get(e.store);
-        if (!prev || routeRank(e) < routeRank(prev)) byStore.set(e.store, e);
+        const prev = byLauncher.get(e.launcher);
+        if (!prev || routeRank(e) < routeRank(prev)) byLauncher.set(e.launcher, e);
       }
 
       // A Game Pass entry only counts as a route if it beats what you own.
-      const candidates = [...byStore.values()];
+      const candidates = [...byLauncher.values()];
       const libRoutes = candidates.filter(e => e.kind === 'lib').sort((a, b) => routeRank(a) - routeRank(b));
       const gpRoutes = candidates.filter(e => e.kind === 'gp').sort((a, b) => routeRank(a) - routeRank(b));
       const bestLib = libRoutes[0] || null;
@@ -172,6 +240,13 @@
       group.best = group.entries[0];
       group.gfn = group.best.gfn;
       group.sync = group.best.gfn === 'yes' ? group.best.sync : null;
+      // "On Game Pass" is a fact about the catalogue, not about the source name.
+      // EA app and Ubisoft Connect licences say nothing on their own: a licence
+      // there is Game Pass only when the title is listed in the catalogue today
+      // (Apex Legends is neither EA Play nor Game Pass, for instance).
+      group.onGP = group.hasGP || group.entries.some(e =>
+        e.access === 'gamepass' &&
+        ((e.launcher !== 'EA' && e.launcher !== 'Ubisoft') || gpKeys.has(gpKey(group.name))));
       group.genres = [...new Set(group.entries.flatMap(e => [...e.genres, ...e.categories]))];
       group.installed = group.entries.some(e => e.installed);
       group.favorite = group.entries.some(e => e.favorite);
@@ -182,7 +257,7 @@
       group.publisher = group.entries.map(e => e.publisher).find(Boolean) || null;
       group.releaseDate = group.entries.map(e => e.releaseDate).find(Boolean) || null;
       group.id = group.best.id;
-      group.stores = group.entries.map(e => e.store);
+      group.stores = [...new Set(group.entries.map(e => e.launcher))];
       group.hay = normalize([group.name, ...group.entries.map(e => e.gfnTitle).filter(Boolean)].join(' '));
     }
 
@@ -205,7 +280,7 @@
     if (!ignore.genre && state.genre && !g.genres.includes(state.genre)) return false;
     if (!ignore.stores && state.stores.size && !g.stores.some(s => state.stores.has(s))) return false;
     if (state.access === 'owned' && !g.owned) return false;
-    if (state.access === 'gp' && !g.hasGP) return false;
+    if (state.access === 'gp' && !g.onGP) return false;
     if (!ignore.q && state.q && !g.hay.includes(state.q)) return false;
     return true;
   }
@@ -273,21 +348,36 @@
     return `<span class="score ${band}" title="${label} score out of 100"><span class="score-k">${label}</span><b>${value}</b></span>`;
   }
 
+  // Game Pass is a second, independent fact: it says nothing about where the
+  // game launches from (EA, Ubisoft, Xbox, ...), only that it is included.
+  function accessChip(g) {
+    if (g.onGP) {
+      const e = g.entries.find(x => x.access === 'gamepass') || g.best;
+      const via = !e ? ''
+        : e.launcher === 'EA' ? ' \u2014 EA Play title, launches in the EA app'
+          : e.launcher === 'Ubisoft' ? ' \u2014 launches in Ubisoft Connect'
+            : e.launcher === 'Battle.net' ? ' \u2014 launches in Battle.net'
+              : ' \u2014 launches in the Xbox app';
+      return `<span class="access gp" title="Included with Game Pass${esc(via)}">Game Pass</span>`;
+    }
+    const e = g.entries.find(x => x.access && x.access !== 'owned' && x.access !== 'gamepass');
+    if (!e) return '';
+    const label = ACCESS_LABEL[e.access] || e.access;
+    return `<span class="access" title="${esc(label)}">${esc(label)}</span>`;
+  }
+
   function card(g) {
     const status = gfnStatus(g);
     const action = gfnAction(g);
     const link = storeLink(g);
 
     const stores = g.entries.map(e => {
-      const label = ACCESS_LABEL[e.access] || e.access;
-      const access = e.access && e.access !== 'owned' && label !== e.store
-        ? `<span class="access">${esc(label)}</span>` : '';
       const ok = e.gfn === 'yes' ? ' is-ok' : '';
       const title = e.gfn === 'yes' ? `Playable on GFN via ${asArray(e.gfnStores).join(', ')}`
         : e.gfn === 'other' ? 'On GeForce NOW for another store only'
           : e.gfn === 'no' ? 'Not on GeForce NOW' : 'Not streamable';
-      return `<span class="store${ok}" title="${esc(title)}">${esc(e.store)}${access}</span>`;
-    }).join('');
+      return `<span class="store${ok}" title="${esc(title)}">${esc(e.launcher)}</span>`;
+    }).join('') + accessChip(g);
 
     const facts = [];
     if (g.releaseDate) facts.push(String(g.releaseDate).slice(0, 4));
