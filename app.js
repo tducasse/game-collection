@@ -290,12 +290,7 @@
       : '<article class="card">';
 
     return `${open}
-      <div class="card-head">
-        <h2 class="title">${esc(g.name)}</h2>
-        ${g.installed ? '<span class="pill">installed</span>' : ''}
-        ${g.favorite ? '<span class="pill fav" title="Favourite">★</span>' : ''}
-        ${href ? '<span class="ext" aria-hidden="true">↗</span>' : ''}
-      </div>
+      <h2 class="title">${esc(g.name)}</h2>
 
       <div class="row split">
         <div class="stores">${stores}</div>
@@ -309,7 +304,11 @@
             ? 'Add it in the EA app, then mark it as owned in GeForce NOW'
             : 'Epic has no library sync in GeForce NOW: mark it as owned there') : ''}
         </div>
-        ${facts.length ? `<div class="facts">${facts.map(esc).join(' · ')}</div>` : ''}
+        <div class="facts">
+          ${facts.map(esc).join(' · ')}
+          ${g.installed ? '<span class="pill">installed</span>' : ''}
+          ${g.favorite ? '<span class="pill fav" title="Favourite">★</span>' : ''}
+        </div>
       </div>
     ${href ? '</a>' : '</article>'}`;
   }

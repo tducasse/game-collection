@@ -234,7 +234,8 @@ h1 {
 
 .cards {
   display: grid;
-  grid-template-columns: 1fr;
+  /* minmax(0, …) or a nowrap chip inside a card widens the whole track */
+  grid-template-columns: minmax(0, 1fr);
   gap: .5rem;
   padding: .8rem 0 2.5rem;
 }
@@ -242,6 +243,7 @@ h1 {
 .card {
   display: flex;
   flex-direction: column;
+  min-width: 0;
   gap: .42rem;
   padding: .72rem .8rem;
   background: var(--surface);
@@ -255,32 +257,15 @@ h1 {
 a.card { cursor: pointer; }
 a.card:hover { border-color: var(--hairline-strong); background: color-mix(in srgb, var(--surface) 88%, var(--surface-2)); }
 a.card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-a.card:hover .ext { color: var(--accent); }
-
-.card-head {
-  display: flex;
-  align-items: baseline;
-  gap: .4rem;
-  flex-wrap: wrap;
-}
+a.card:hover .title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
 
 .title {
-  flex: 1 1 auto;
   margin: 0;
   font-size: 1.005rem;
   font-weight: 620;
   line-height: 1.32;
   letter-spacing: -0.011em;
   word-break: break-word;
-}
-
-.ext {
-  flex: 0 0 auto;
-  padding: 0 .2rem;
-  font-size: .95rem;
-  line-height: 1.3;
-  color: var(--muted);
-  border-radius: 5px;
 }
 
 .row {
@@ -295,7 +280,7 @@ a.card:hover .ext { color: var(--accent); }
   gap: .4rem .6rem;
 }
 
-.stores, .scores, .statuses { display: flex; align-items: center; gap: .3rem; flex-wrap: wrap; }
+.stores, .scores, .statuses { display: flex; align-items: center; gap: .3rem; flex-wrap: wrap; min-width: 0; }
 .scores, .facts { margin-left: auto; }
 
 .spacer { flex: 1 1 auto; }
@@ -404,10 +389,15 @@ a.card:hover .ext { color: var(--accent); }
 .pill.fav { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 45%, transparent); }
 
 .facts {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
   font-size: .75rem;
   color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
+
+.facts:empty { display: none; }
 
 .empty {
   padding: 2.5rem 0;
@@ -432,8 +422,16 @@ footer {
   .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
-@media (max-width: 420px) {
+/* phones: stack the controls, drop the counts, never overflow sideways */
+@media (max-width: 520px) {
+  .seg { padding: .32rem .3rem; font-size: .8rem; min-width: 0; }
   .seg .n { display: none; }
-  .toolbar select { flex: 1 1 45%; }
-  .count { margin-left: 0; }
+  .toolbar { gap: .4rem; }
+  .toolbar select { flex: 1 1 100%; max-width: none; }
+  .count { margin: 0; width: 100%; }
+  .row.split { gap: .3rem .5rem; }
+  .scores, .facts { margin-left: 0; }
+  .card { padding: .65rem .7rem; }
 }
+
+html, body { overflow-x: hidden; }
