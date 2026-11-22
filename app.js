@@ -281,7 +281,19 @@
     for (const group of groups.values()) {
       // entitlement flags, before losing routes get dropped
       group.hasGP = group.entries.some(e => e.kind === 'gp');
-      group.owned = group.entries.some(e => e.kind === 'lib' && e.access === 'owned');
+      // "On Game Pass" is a fact about the catalogue, not about the source name
+      // or the access field: only a title in the catalogue gets the label.
+      group.onGP = group.hasGP || gpKeys.has(gpKey(group.name));
+
+      // "Mine" = a licence in one of your accounts that is NOT a Game Pass
+      // entitlement. A Ubisoft Connect or EA app row whose access is "gamepass"
+      // and whose title is in the catalogue is Game Pass, not ownership - that is
+      // the whole reason it is in the library. The same row for a title that is
+      // *not* in the catalogue is a licence you hold some other way (bought, or
+      // another subscription), so it counts as yours: there is no third state,
+      // and Everything always equals mine + Game Pass.
+      group.mine = group.entries.some(e =>
+        e.kind === 'lib' && !(e.access === 'gamepass' && group.onGP));
 
       // One chip per launcher, not per store name: a Steam copy and a Game
       // Pass copy of the same title run in different launchers, but an EA app
@@ -306,11 +318,6 @@
       group.best = group.entries[0];
       group.gfn = group.best.gfn;
       group.sync = group.best.gfn === 'yes' ? group.best.sync : null;
-      // "On Game Pass" is a fact about the catalogue - not about the source
-      // name and not about `access`. A Ubisoft Connect licence that is not
-      // listed today is just Ubisoft; an EA app copy that left the catalogue is
-      // just EA. Only a title in the catalogue gets the chip.
-      group.onGP = group.hasGP || gpKeys.has(gpKey(group.name));
       group.genres = [...new Set(group.entries
         .flatMap(e => [...e.genres, ...e.categories])
         .map(genreOf)
@@ -366,8 +373,8 @@
     if (g.hidden) return false;
     if (!ignore.genre && state.genre && !g.genres.includes(state.genre)) return false;
     if (!ignore.stores && state.stores.size && !g.stores.some(s => state.stores.has(s))) return false;
-    if (!ignore.access && state.access === 'owned' && !(g.owned && !g.onGP)) return false;
-    if (!ignore.access && state.access === 'gp' && !(g.onGP && !g.owned)) return false;
+    if (!ignore.access && state.access === 'owned' && !(g.mine && !g.onGP)) return false;
+    if (!ignore.access && state.access === 'gp' && !(g.onGP && !g.mine)) return false;
     if (!ignore.q && !matchesQuery(g)) return false;
     return true;
   }
@@ -399,10 +406,10 @@
     const base = state.games.filter(g => !g.hidden && matchesBasics(g, { access: true }) && matchesGfn(g));
     return {
       all: base.length,
-      owned: base.filter(g => g.owned && !g.onGP).length,
-      gp: base.filter(g => g.onGP && !g.owned).length,
-      both: base.filter(g => g.owned && g.onGP).length,
-      neither: base.filter(g => !g.owned && !g.onGP).length
+      owned: base.filter(g => g.mine && !g.onGP).length,
+      gp: base.filter(g => g.onGP && !g.mine).length,
+      both: base.filter(g => g.mine && g.onGP).length,
+      neither: base.filter(g => !g.mine && !g.onGP).length
     };
   }
 
@@ -585,11 +592,12 @@
     document.querySelectorAll('#access option').forEach(opt => {
       opt.textContent = `${ACCESS_OPTION[opt.value] || opt.value} (${fmt(acc[opt.value] ?? 0)})`;
     });
-    // The two narrow views do not add up to Everything. Say the remainder out
-    // loud, with a leading "+" so the arithmetic is visible at a glance.
+    // Everything = mine + Game Pass, so the only thing the two narrow views leave
+    // out is what is both. Say it out loud, with a leading "+", so the arithmetic
+    // is visible at a glance (nothing else can be missing).
     const rest = [];
-    if (acc.both) rest.push(`+${fmt(acc.both)} owned and in Game Pass`);
-    if (acc.neither) rest.push(`+${fmt(acc.neither)} not in Game Pass`);
+    if (acc.both) rest.push(`+${fmt(acc.both)} you own that ${acc.both === 1 ? 'is' : 'are'} in Game Pass`);
+    if (acc.neither) rest.push(`+${fmt(acc.neither)} with no licence and not in Game Pass`);
     const hint = $('#access-note');
     hint.hidden = rest.length === 0;
     hint.textContent = rest.length
