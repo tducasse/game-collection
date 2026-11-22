@@ -170,6 +170,8 @@ main { max-width: 820px; margin: 0 auto; padding: .75rem 1rem 2rem; }
 
 table.games {
   width: 100%;
+  max-width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   font-size: .88rem;
 }
@@ -212,10 +214,16 @@ table.games {
 
 .games td { padding: .45rem .6rem; vertical-align: middle; }
 
-.col-name { width: 40%; }
-.col-score { width: 5.5rem; }
-.col-link { width: 2rem; }
-.col-gfn { width: 12rem; }
+.col-name { /* takes the remaining width */ }
+.col-stores { width: 22%; }
+.col-score { width: 5.2rem; }
+.col-link { width: 2.2rem; }
+.col-gfn { width: 13rem; }
+
+.games td, .games th { overflow: hidden; }
+.col-name, .col-stores { white-space: nowrap; text-overflow: ellipsis; }
+.col-name .name, .col-stores .store { display: inline-block; max-width: 100%; overflow: hidden;
+  text-overflow: ellipsis; vertical-align: bottom; }
 
 .name { font-weight: 500; }
 
